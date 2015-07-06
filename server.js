@@ -8,13 +8,19 @@ exports.done = false;
 /* ----------------------------------------- */
 
 var http = require("http");
+var url = require("url");
 
-function start() {
+function start(route) {
     function onRequest(request, response) {
-      console.log("Request received:"+ request.url);
-      response.writeHead(200, {"Content-Type": "text/plain"});
-      response.write("Hello World");
-      response.end();
+        var pathname = url.parse(request.url).pathname;
+        console.log('[' + __filename + ']' + "{export: onRequest}: Request for " + pathname + " received.");
+        
+        route(pathname);
+
+
+        response.writeHead(200, { "Content-Type": "text/plain" });
+        response.write("Hello World");
+        response.end();
     }
 
     http.createServer(onRequest).listen(8888);

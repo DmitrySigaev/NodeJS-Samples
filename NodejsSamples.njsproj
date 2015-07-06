@@ -19,6 +19,7 @@
     <Content Include="README.md" />
     <Compile Include="helloworld.js" />
     <Compile Include="index.js" />
+    <Compile Include="router.js" />
     <Compile Include="server.js" />
   </ItemGroup>
   <ItemGroup />

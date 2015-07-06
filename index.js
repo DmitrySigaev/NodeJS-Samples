@@ -22,10 +22,12 @@ exports.done = false;
 
 /* declaration of modules  */
 var server = require("./server");
+var router = require("./router");
+
 
 console.log('[' +__filename + ']' + ": modules initialization");
 /* initialization of modules */
-server.start();
+server.start(router.route);
 
 /* ----------------------------------------- */
 
