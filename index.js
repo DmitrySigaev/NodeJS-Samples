@@ -23,11 +23,19 @@ exports.done = false;
 /* declaration of modules  */
 var server = require("./server");
 var router = require("./router");
+var requests_h = require("./requests_h");
+
 
 
 console.log('[' +__filename + ']' + ": modules initialization");
 /* initialization of modules */
-server.start(router.route);
+var handle = {};
+
+handle["/"] = requests_h.start;
+handle["/start"] = requests_h.start;
+handle["/upload"] = requests_h.upload;
+
+server.start(router.route, handle);
 
 /* ----------------------------------------- */
 

@@ -1,4 +1,4 @@
-/* start of file ->*/
+﻿/* start of file ->*/
 ls = __filename.lastIndexOf('/');
 rs = __filename.lastIndexOf('\\');
 __filename = __filename.substring((((ls >= 0)? ls + 1: 0) | ((rs >= 0)? rs + 1: 0)), __filename.length);
@@ -8,16 +8,16 @@ exports.done = false;
 /* ----------------------------------------- */
 
 
-function route(handle, pathname) {
-    console.log('[' + __filename + ']' + "{export}: About to route a request for " + pathname);
-    if (typeof handle[pathname] === 'function') {
-          handle[pathname]();
-    } else {
-           console.log('[' + __filename + ']' + "{export}: No request handler found for " + pathname);
-    }
+function start() {
+    console.log('[' + __filename + ']' + "{export}:Request handler \'start\' was called.");
 }
 
-exports.route = route;
+function upload() {
+    console.log('[' + __filename + ']' + "{export}:Request handler 'upload' was called.");
+}
+
+exports.start = start;
+exports.upload = upload;
 
 
 /* ----------------------------------------- */
