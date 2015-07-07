@@ -13,14 +13,10 @@ var url = require("url");
 function start(route, handle) {
     function onRequest(request, response) {
         var pathname = url.parse(request.url).pathname;
-        console.log('[' + __filename + ']' + "{export: onRequest}: Request for " + pathname + " received.");
-        
-        route(handle, pathname);
-
-
+        console.log('[' + __filename + ']' + "{export: onRequest:start}: Request for " + pathname + " received.");
         response.writeHead(200, { "Content-Type": "text/plain" });
-        response.write("Hello World");
-        response.end();
+        route(handle, pathname, response);
+        console.log('[' + __filename + ']' + "{export: onRequest:end}: Request for " + pathname + " end.");
     }
 
     http.createServer(onRequest).listen(8888);

@@ -8,12 +8,15 @@ exports.done = false;
 /* ----------------------------------------- */
 
 
-function route(handle, pathname) {
+function route(handle, pathname, response) {
     console.log('[' + __filename + ']' + "{export}: About to route a request for " + pathname);
     if (typeof handle[pathname] === 'function') {
-          handle[pathname]();
+        handle[pathname](response);
     } else {
-           console.log('[' + __filename + ']' + "{export}: No request handler found for " + pathname);
+        console.log('[' + __filename + ']' + "{export}: No request handler found for " + pathname);
+        response.writeHead(404, { "Content-Type": "text/plain" });
+        response.write("404 Not found");
+        response.end();
     }
 }
 
