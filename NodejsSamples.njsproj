@@ -19,7 +19,7 @@
     <Content Include="README.md" />
     <Compile Include="helloworld.js" />
     <Compile Include="index.js" />
-    <Compile Include="node-indigo.js" />
+    <Compile Include="indigo.js" />
     <Compile Include="requests_h.js" />
     <Compile Include="router.js" />
     <Compile Include="server.js" />

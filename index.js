@@ -21,11 +21,13 @@ exports.done = false;
 /* ----------------------------------------- */
 
 /* declaration of modules  */
+var ind = require("./indigo");
 var server = require("./server");
 var router = require("./router");
 var requests_h = require("./requests_h");
 
 
+console.log('[' + __filename + ']' + "indigo ver:" + ind.indigo().version());
 
 console.log('[' +__filename + ']' + ": modules initialization");
 /* initialization of modules */

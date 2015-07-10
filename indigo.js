@@ -7,6 +7,27 @@ exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
 
+IndigoObject = function (d, id, parent) {
+    if (!(this instanceof IndigoObject)) {
+        return new IndigoObject(d, id);
+    }
+    this.id = id;
+    this.d = d;
+}
+
+function Indigo() {
+    if (!(this instanceof Indigo)) {
+        return new Indigo();
+    }
+    this.version = function () { return "0.1.0"; }
+ 
+    qword = "ulonglong";
+    if (process.platform == "win32") {
+        qword = "uint64";
+    }
+}
+      
+exports.indigo = Indigo;
 
 /* ----------------------------------------- */
 
