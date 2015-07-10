@@ -6,13 +6,15 @@ console.log('['+__filename +']'+ ": starting");
 exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
+var ffi = require('ffi');
 
 IndigoObject = function (d, id, parent) {
     if (!(this instanceof IndigoObject)) {
-        return new IndigoObject(d, id);
+        return new IndigoObject(d, id, parent);
     }
     this.id = id;
     this.d = d;
+    this.parent = parent;
 }
 
 function Indigo() {
