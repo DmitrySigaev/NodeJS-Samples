@@ -21,7 +21,16 @@ function Indigo() {
     if (!(this instanceof Indigo)) {
         return new Indigo();
     }
-    this.version = function () { return "0.1.0"; }
+    
+    var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo';
+    this._lib = ffi.Library(libpath, {
+        "indigoVersion": ["string", []]
+    });
+    
+
+    this.version = function () {
+        return "Node (" + process.version + "); Indigo (" + this._lib.indigoVersion() + ");";
+    }
  
     qword = "ulonglong";
     if (process.platform == "win32") {
