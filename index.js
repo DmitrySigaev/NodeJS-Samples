@@ -19,15 +19,21 @@ exports.done = false;
 /* start of file <- */
 
 /* ----------------------------------------- */
+/* todo
+var cluster = require('cluster');
+var numCPUs = require('os').cpus().length;
+*/
 
 /* declaration of modules  */
 var ind = require("./indigo");
+var inc = require("./indigo_inchi");
 var server = require("./server");
 var router = require("./router");
 var requests_h = require("./requests_h");
 
 
 console.log('[' + __filename + ']' + "Version:" + ind.indigo().version());
+console.log('[' + __filename + ']' + "Version Inchi:" + inc.inchi(ind.indigo()).version());
 
 console.log('[' +__filename + ']' + ": modules initialization");
 /* initialization of modules */
