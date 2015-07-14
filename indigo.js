@@ -40,6 +40,8 @@ function Indigo() {
 
     this._sid = this._lib.indigoAllocSessionId();
     this._setSessionId = function () { this._lib.indigoSetSessionId(this._sid) };
+    this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + res + ']') } return result; }
+    this._checkResultString = function (result) { console.log(result); return result; }
 }
       
 exports.indigo = Indigo;

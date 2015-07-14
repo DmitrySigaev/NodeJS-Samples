@@ -28,21 +28,64 @@ function IndigoInchi(indigo) {
         /* function */
         if (indigo.name == "Indigo") {
             this.indigo = indigo();
-        }
-        /* object */
-        if (indigo instanceof Object) {
-            this.indigo = indigo;
+        } else {
+            /* object */
+            if (indigo instanceof Object) {
+                this.indigo = indigo;
+            }
         }
     }
     var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo-inchi';
     this._lib = ffi.Library(libpath, {
-        "indigoInchiVersion": ["string", []]
+        "indigoInchiVersion": ["string", []],
+        "indigoInchiResetOptions": ["int", []], 
+        "indigoInchiLoadMolecule": ["int", ["string"]],
+        "indigoInchiGetInchi": ["string", ["int"]],
+        "indigoInchiGetInchiKey": ["string", ["string"]],
+        "indigoInchiGetWarning": ["string", []],
+        "indigoInchiGetLog": ["string", []],
+        "indigoInchiGetAuxInfo": [" string", []]
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
     this.version = function () {
         this.indigo._setSessionId();
         return this._lib.indigoInchiVersion();
+    }
+    this.resetOptions = function () {
+        this.indigo._setSessionId();
+        this.indigo._checkResult(this._lib.indigoInchiResetOptions());
+    }
+    this.loadMolecule = function (inchi) {
+        this.indigo._setSessionId();
+        res = this.indigo._checkResult(this._lib.indigoInchiLoadMolecule(inchi));
+        if (res == 0)
+            return null;
+        return this.indigo.IndigoObject(this.indigo, res)
+    }
+
+    this.getInchi = function (molecule) {
+        this.indigo._setSessionId();
+        return this.indigo._checkResultString(this._lib.indigoInchiGetInchi(molecule.id));
+    }
+    
+    this.getInchiKey = function (inchi) {
+        this.indigo._setSessionId()
+        return this.indigo._checkResultString(this._lib.indigoInchiGetInchiKey(inchi));
+    }
+    this.getWarning = function () {
+        this.indigo._setSessionId();
+        return this.indigo._checkResultString(this._lib.indigoInchiGetWarning());
+    }
+    
+    this.getLog = function () {
+        this.indigo._setSessionId();
+        return this.indigo._checkResultString(this._lib.indigoInchiGetLog());
+    }
+
+    this.getAuxInfo = function () {
+        this.indigo._setSessionId();
+        return this.indigo._checkResultString(this._lib.indigoInchiGetAuxInfo());
     }
 }
 

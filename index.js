@@ -33,7 +33,11 @@ var requests_h = require("./requests_h");
 
 
 console.log('[' + __filename + ']' + "Version:" + ind.indigo().version());
-console.log('[' + __filename + ']' + "Version Inchi:" + inc.inchi(ind.indigo()).version());
+Inchi = inc.inchi(ind.indigo);
+console.log('[' + __filename + ']' + "Inchi.version:" + Inchi.version());
+console.log('[' + __filename + ']' + "Inchi.getWarning:" + Inchi.getWarning());
+console.log('[' + __filename + ']' + "Inchi.getLog:" + Inchi.getLog());
+console.log('[' + __filename + ']' + "Inchi.getAuxInfo:" + Inchi.getAuxInfo());
 
 console.log('[' +__filename + ']' + ": modules initialization");
 /* initialization of modules */
