@@ -21,6 +21,7 @@
     <Compile Include="index.js" />
     <Compile Include="indigo.js" />
     <Compile Include="indigo_inchi.js" />
+    <Compile Include="indigo_renderer.js" />
     <Compile Include="requests_h.js" />
     <Compile Include="router.js" />
     <Compile Include="server.js" />

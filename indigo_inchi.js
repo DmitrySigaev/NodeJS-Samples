@@ -8,18 +8,13 @@ exports.done = false;
 /* ----------------------------------------- */
 
 var ffi = require('ffi');
-var ind = require('./indigo');
 
 function IndigoInchi(indigo) {
     if (!(this instanceof IndigoInchi)) {
         return new IndigoInchi(indigo);
     }
     
-    qword = "ulonglong";
-    if (process.platform == "win32") {
-        qword = "uint64";
 
-    }
     if (indigo.done == true) {
         /* module*/
         this.indigo = indigo.indigo();
