@@ -28,6 +28,7 @@ var numCPUs = require('os').cpus().length;
 var ind = require("./indigo");
 var inc = require("./indigo_inchi");
 var ren = require("./indigo_renderer");
+var bin = require("./bingo");
 var server = require("./server");
 var router = require("./router");
 var requests_h = require("./requests_h");
@@ -41,6 +42,10 @@ console.log('[' + __filename + ']' + "Inchi.getLog:" + Inchi.getLog());
 console.log('[' + __filename + ']' + "Inchi.getAuxInfo:" + Inchi.getAuxInfo());
 
 Render = ren.renderer(ind.indigo);
+
+Bingo = bin.bingo(ind.indigo);
+console.log('[' + __filename + ']' + "Bingo.version:" + Bingo.version());
+
 
 console.log('[' +__filename + ']' + ": modules initialization");
 /* initialization of modules */
