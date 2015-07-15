@@ -25,6 +25,11 @@ IndigoObject = function (d, id, parent) {
         this.id = -1;
     }
 
+    this.molfile = function (filename) {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoMolfile(this.id));
+    }
+
 }
 
 function Indigo() {
@@ -43,7 +48,10 @@ function Indigo() {
         "indigoAllocSessionId": [qword, []],
         "indigoSetSessionId": ["void", [qword]],
         "indigoWriteBuffer": ["int", []],
-        "indigoFree":["int", ["int"]]
+        "indigoFree": ["int", ["int"]],
+        "indigoIterateSDFile": ["int", ["string"]],
+        "indigoMolfile": ["string", ["int"]],
+        "indigoNext": ["int", ["int"]]
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -54,7 +62,7 @@ function Indigo() {
 
     this._sid = this._lib.indigoAllocSessionId();
     this._setSessionId = function () { this._lib.indigoSetSessionId(this._sid) };
-    this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + res + ']') } return result; }
+    this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result; }
     this._checkResultString = function (result) { console.log(result); return result; }
     this.writeBuffer = function () {
         this._setSessionId();
@@ -71,9 +79,10 @@ function Indigo() {
     this.next = function () {
         this._setSessionId();
         newobj = this._checkResult(this._lib.indigoNext(this.id))
-        return newobj !== 0 ?
-               { value: IndigoObject(this, newobj), done: false } :
-               { done: true };
+        if (newobj !== 0) {
+            this.id = newobj;
+            return { value: IndigoObject(this, newobj), done: false }
+        } else { return { done: true }; }
     }
 
 
