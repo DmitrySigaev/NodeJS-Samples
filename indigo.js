@@ -61,6 +61,21 @@ function Indigo() {
         id = this._checkResult(this._lib.indigoWriteBuffer());
         return IndigoObject(this, id);
     }
+    this.writeBuffer = function (self) { this._setSessionId(); id = this._checkResult(this._lib.indigoWriteBuffer()); return IndigoObject(id) }
+    this.iterateSDFile = function (filename) {
+        this._setSessionId();
+        this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));
+        return this;
+    }
+    
+    this.next = function () {
+        this._setSessionId();
+        newobj = this._checkResult(this._lib.indigoNext(this.id))
+        return newobj !== 0 ?
+               { value: IndigoObject(this, newobj), done: false } :
+               { done: true };
+    }
+
 
 }
       
