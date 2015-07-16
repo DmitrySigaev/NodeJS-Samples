@@ -7,6 +7,14 @@ exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
 var ffi = require('ffi');
+var ref = require('ref');
+var ArrayType = require('ref-array')
+var c_int = ref.types.int;
+var c_float = ref.types.float;
+var IntArray = ArrayType('int');
+var FloatArray = ArrayType('float');
+
+
 
 IndigoObject = function (d, id, parent) {
     if (!(this instanceof IndigoObject)) {
@@ -41,6 +49,9 @@ function Indigo() {
     if (process.platform == "win32") {
         qword = "uint64";
     }
+    
+    int_ptr = ref.refType('int');
+    float_ptr = ref.refType('float');
         
     var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo';
     this._lib = ffi.Library(libpath, {
@@ -50,8 +61,47 @@ function Indigo() {
         "indigoWriteBuffer": ["int", []],
         "indigoFree": ["int", ["int"]],
         "indigoIterateSDFile": ["int", ["string"]],
+        "indigoSaveMolfileToFile": ["int", ["string"]], 
         "indigoMolfile": ["string", ["int"]],
-        "indigoNext": ["int", ["int"]]
+        "indigoNext": ["int", ["int"]],
+        "indigoOneBitsList": ["string", ["int"]],
+        "indigoSaveMDLCT": ["int", ["int", "int"]],
+        "indigoGetLastError": ["string", []],
+        "indigoSetXYZ": ["int", ["int", "float", "float", "float"]],
+        "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
+        "indigoLayout": ["int", ["int"]],
+        "indigoAromatize": ["int", ["int"]],
+        "indigoDearomatize": ["int", ["int"]],
+        "indigoFoldHydrogens": ["int", ["int"]],
+        "indigoUnfoldHydrogens": ["int", ["int"]],
+        "indigoClearProperties": ["int", ["int"]],
+        "indigoTell": ["int", ["int"]],
+        "indigoCount": ["int", ["int"]],
+        "indigoClear": ["int", ["int"]],
+        "indigoRdfHeader": ["int", ["int"]],
+        "indigoCmlHeader": ["int", ["int"]],
+        "indigoCmlFooter": ["int", ["int"]],
+        "indigoIterateArray": ["int", ["int"]],
+        "indigoUnignoreAllAtoms": ["int", ["int"]],
+        "indigoHighlightedTarget": ["int", ["int"]],
+        "indigoAllScaffolds": ["int", ["int"]],
+        "indigoDecomposedMoleculeScaffold": ["int", ["int"]],
+        "indigoIterateDecomposedMolecules": ["int", ["int"]],
+        "indigoDecomposedMoleculeHighlighted": ["int", ["int"]],
+        "indigoDecomposedMoleculeWithRGroups": ["int", ["int"]],
+        "indigoIterateDecompositions": ["int", ["int"]],
+        "indigoExpandAbbreviations": ["int", ["int"]],
+        "indigoDbgInternalType": ["int", ["int"]],
+        "indigoSmiles": ["string", ["int"]], 
+        "indigoName": ["string", ["int"]], 
+        "indigoCheckBadValence": ["string", ["int"]], 
+        "indigoCheckAmbiguousH": ["string", ["int"]], 
+        "indigoRawData": ["string", ["int"]], 
+        "indigoToString": ["string", ["int"]],
+        "indigoLoadReactionFromString": ["int", ["string"]], 
+        "indigoLoadQueryReactionFromString": ["int", ["string"]], 
+        "indigoLoadMoleculeFromString": ["int", ["string"]],
+        "indigoLoadQueryMoleculeFromString": ["int", ["string"]]
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
