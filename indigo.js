@@ -38,6 +38,38 @@ IndigoObject = function (d, id, parent) {
         return d._checkResultString(d._lib.indigoMolfile(this.id));
     }
 
+    this.saveMolfile = function (filename) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSaveMolfileToFile(this.id, filename));
+    }
+
+    this.grossFormula = function () {
+        d._setSessionId();
+        gfid = d._checkResult(d._lib.indigoGrossFormula(id));
+        gf = d.IndigoObject(d, gfid);
+        return d._checkResultString(d._lib.indigoToString(gf.id));
+    }
+    
+    this.toString = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoToString(id));
+    }
+    
+    this.oneBitsList = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoOneBitsList(id));
+    }
+    this.mdlct = function () {
+        d._setSessionId();
+        buf = d.writeBuffer();
+        d._checkResult(d._lib.indigoSaveMDLCT(id, buf.id));
+        return buf.toBuffer();
+    }
+    
+    this.layout = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoLayout(id));
+    }
 }
 
 function Indigo() {
