@@ -91,6 +91,31 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoUnfoldHydrogens(id));
     }
 
+    this.clearProperties = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoClearProperties(id));
+    }
+    
+    this.tell = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoTell(id));
+    }
+    
+    this.count = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCount(id));
+    }
+    
+    this.clear = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoClear(id));
+    }
+    
+    this.rdfHeader = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoRdfHeader(id));
+    }
+
 }
 
 function Indigo() {
