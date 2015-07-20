@@ -172,6 +172,26 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeWithRGroups(id)));
     }
 
+    this.iterateDecompositions = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDecompositions(id)));
+    }
+    
+    this.expandAbbreviations = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoExpandAbbreviations(id));
+    }
+    
+    this.dbgInternalType = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoDbgInternalType(id));
+    }
+    
+    this.smiles = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoSmiles(id));
+    }
+
 }
 
 function Indigo() {
