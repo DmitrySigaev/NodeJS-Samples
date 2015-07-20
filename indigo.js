@@ -150,6 +150,27 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoHighlightedTarget(id)));
     }
 
+    this.allScaffolds = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoAllScaffolds(id)));
+    }
+    
+    this.decomposedMoleculeScaffold = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeScaffold(id)));
+    }
+    this.iterateDecomposedMolecules = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDecomposedMolecules(id)));
+    }
+    this.decomposedMoleculeHighlighted = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeHighlighted(id)));
+    }
+    this.decomposedMoleculeWithRGroups = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeWithRGroups(id)));
+    }
 
 }
 
