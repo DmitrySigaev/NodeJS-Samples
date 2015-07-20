@@ -70,6 +70,27 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
     }
+
+    this.aromatize = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAromatize(id));
+    }
+
+    this.dearomatize = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoDearomatize(id));
+    }
+    
+    this.foldHydrogens = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoFoldHydrogens(id));
+    }
+    
+    this.unfoldHydrogens = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoUnfoldHydrogens(id));
+    }
+
 }
 
 function Indigo() {
