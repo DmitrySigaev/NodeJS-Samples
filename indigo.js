@@ -112,6 +112,21 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoClose(this.id));
     }
+    
+    this._next = function () {
+        d._setSessionId();
+        newobj = d._checkResult(d._lib.indigoNext(this.id));
+        if (newobj == 0)
+            return null;
+        else
+            return d.IndigoObject(d, newobj, this)
+
+    }
+
+    this.hasNext = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoHasNext(this.id));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -265,6 +280,7 @@ function Indigo() {
         "indigoSaveMolfileToFile": ["int", ["string"]], 
         "indigoMolfile": ["string", ["int"]],
         "indigoNext": ["int", ["int"]],
+        "indigoHasNext": ["int", ["int"]],
         "indigoClone": ["int", ["int"]],
         "indigoClose": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
