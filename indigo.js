@@ -103,6 +103,16 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoAddStereocenter(this.id, type, v1, v2, v3, v4));
     }
     
+    this.clone = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoClone(this.id)));
+    }
+    
+    this.close = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoClose(this.id));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -255,6 +265,8 @@ function Indigo() {
         "indigoSaveMolfileToFile": ["int", ["string"]], 
         "indigoMolfile": ["string", ["int"]],
         "indigoNext": ["int", ["int"]],
+        "indigoClone": ["int", ["int"]],
+        "indigoClose": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoSaveMDLCT": ["int", ["int", "int"]],
         "indigoGetLastError": ["string", []],
