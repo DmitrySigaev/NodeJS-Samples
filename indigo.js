@@ -127,6 +127,16 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoHasNext(this.id));
     }
+    
+    this.index = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoIndex(this.id));
+    }
+    
+    this.remove = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoRemove(this.id));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -283,6 +293,8 @@ function Indigo() {
         "indigoHasNext": ["int", ["int"]],
         "indigoClone": ["int", ["int"]],
         "indigoClose": ["int", ["int"]],
+        "indigoIndex": ["int", ["int"]],
+        "indigoRemove": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoSaveMDLCT": ["int", ["int", "int"]],
         "indigoGetLastError": ["string", []],
