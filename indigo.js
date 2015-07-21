@@ -59,11 +59,48 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResultString(d._lib.indigoOneBitsList(id));
     }
+    
     this.mdlct = function () {
         d._setSessionId();
         buf = d.writeBuffer();
         d._checkResult(d._lib.indigoSaveMDLCT(id, buf.id));
         return buf.toBuffer();
+    }
+    
+    this.xyz = function () {
+        d._setSessionId();
+        xyz = d._lib.indigoXYZ(id)
+        if (xyz == null)
+            throw new Error(d._lib.indigoGetLastError());
+        return [xyz[0], xyz[1], xyz[2]];
+    }
+    
+    this.setXYZ = function (x, y, z) {
+        d._setSessionId();
+        d._checkResult(d._lib.indigoSetXYZ(id, x, y, z))
+    }
+    
+    this.alignAtoms = function (atom_ids, desired_xyz) {
+        d._setSessionId();
+        if (atom_ids.length * 3 != desired_xyz.length)
+            throw new Error("alignAtoms(): desired_xyz[] must be exactly 3 times bigger than atom_ids[]");
+        
+        atoms = new IntArray(atom_ids.length);
+        for (i = 0; i < atom_ids.length; i++) {
+            atoms[i] = atom_ids[i];
+        }
+        xyz = new FloatArray(desired_xyz.length);
+        for (i = 0; i < desired_xyz.length; i++)
+            xyz[i] = desired_xyz[i];
+        return d._checkResultFloat(d._lib.indigoAlignAtoms(id, atoms.length, atoms, xyz));
+    }
+    
+    this.addStereocenter = function (type, v1, v2, v3, v4) {
+        if (v4 === undefined) {
+            v4 = -1;
+        }
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAddStereocenter(this.id, type, v1, v2, v3, v4));
     }
     
     this.layout = function () {
@@ -192,33 +229,6 @@ IndigoObject = function (d, id, parent) {
         return d._checkResultString(d._lib.indigoSmiles(id));
     }
 
-    this.xyz = function () {
-        d._setSessionId();
-        xyz = d._lib.indigoXYZ(id)
-        if (xyz == null)
-            throw new Error(d._lib.indigoGetLastError());
-        return [xyz[0], xyz[1], xyz[2]];
-    }
-    this.setXYZ = function (x, y, z) {
-        d._setSessionId();
-        d._checkResult(d._lib.indigoSetXYZ(id, x, y, z))
-    }
-    
-    this.alignAtoms = function (atom_ids, desired_xyz) {
-        d._setSessionId();
-        if (atom_ids.length * 3 != desired_xyz.length)
-            throw new Error("alignAtoms(): desired_xyz[] must be exactly 3 times bigger than atom_ids[]");
-        
-        atoms = new IntArray(atom_ids.length);
-        for (i = 0; i < atom_ids.length; i++) {
-            atoms[i] = atom_ids[i];
-        }
-        xyz = new FloatArray(desired_xyz.length);
-        for (i = 0; i < desired_xyz.length; i++)
-            xyz[i] = desired_xyz[i];
-        return d._checkResultFloat(d._lib.indigoAlignAtoms(id, atoms.length, atoms, xyz));
-    }
-
 }
 
 function Indigo() {
@@ -284,7 +294,9 @@ function Indigo() {
         "indigoLoadReactionFromString": ["int", ["string"]], 
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
         "indigoLoadMoleculeFromString": ["int", ["string"]],
-        "indigoLoadQueryMoleculeFromString": ["int", ["string"]]
+        "indigoLoadQueryMoleculeFromString": ["int", ["string"]],
+        "indigoAddStereocenter":["int",["int","int", "int", "int","int", "int"]]
+
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
