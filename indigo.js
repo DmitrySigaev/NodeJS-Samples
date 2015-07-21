@@ -33,16 +33,6 @@ IndigoObject = function (d, id, parent) {
         this.id = -1;
     }
 
-    this.molfile = function (filename) {
-        d._setSessionId();
-        return d._checkResultString(d._lib.indigoMolfile(this.id));
-    }
-
-    this.saveMolfile = function (filename) {
-        d._setSessionId();
-        return d._checkResult(d._lib.indigoSaveMolfileToFile(this.id, filename));
-    }
-
     this.grossFormula = function () {
         d._setSessionId();
         gfid = d._checkResult(d._lib.indigoGrossFormula(id));
@@ -137,7 +127,27 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoRemove(this.id));
     }
+    
+    this.saveMolfile = function (filename) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSaveMolfileToFile(this.id, filename));
+    }
 
+    this.molfile = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoMolfile(this.id));
+    }
+    
+    this.saveCml = function (filename) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSaveCmlToFile(this.id, filename));
+    }
+    
+    this.cml = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoCml(this.id));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -287,14 +297,16 @@ function Indigo() {
         "indigoWriteBuffer": ["int", []],
         "indigoFree": ["int", ["int"]],
         "indigoIterateSDFile": ["int", ["string"]],
-        "indigoSaveMolfileToFile": ["int", ["string"]], 
-        "indigoMolfile": ["string", ["int"]],
         "indigoNext": ["int", ["int"]],
         "indigoHasNext": ["int", ["int"]],
         "indigoClone": ["int", ["int"]],
         "indigoClose": ["int", ["int"]],
         "indigoIndex": ["int", ["int"]],
         "indigoRemove": ["int", ["int"]],
+        "indigoSaveMolfileToFile": ["int", ["string"]], 
+        "indigoMolfile": ["string", ["int"]],
+        "indigoSaveCmlToFile": ["int", ["string"]], 
+        "indigoCml": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoSaveMDLCT": ["int", ["int", "int"]],
         "indigoGetLastError": ["string", []],
