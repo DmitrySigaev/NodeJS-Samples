@@ -224,7 +224,7 @@ IndigoObject = function (d, id, parent) {
     
     this.optimize = function (options) {
         d._setSessionId();
-        if (options === undefined) {
+        if (options === undefined || options === null) {
             options = '';
         }
         return d._checkResult(d._lib.indigoOptimize(this.id, options));
@@ -232,7 +232,7 @@ IndigoObject = function (d, id, parent) {
     
     this.normalize = function (options) {
         d._setSessionId();
-        if (options === undefined) {
+        if (options === undefined || options === null) {
             options = '';
         }
         return d._checkResult(d._lib.indigoNormalize(this.id, options));
