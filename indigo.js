@@ -187,6 +187,31 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoCountMolecules(this.id));
     }
     
+    this.getMolecule = function (index) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetMolecule(this.id, index)));
+    }
+    
+    this.iterateReactants = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateReactants(this.id)));
+    }
+    
+    this.iterateProducts = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateProducts(this.id)));
+    }
+    
+    this.iterateCatalysts = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateCatalysts(this.id)));
+    }
+    
+    this.iterateMolecules = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMolecules(this.id)));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -354,6 +379,11 @@ function Indigo() {
         "indigoCountProducts": ["int", ["int"]],
         "indigoCountCatalysts": ["int", ["int"]],
         "indigoCountMolecules": ["int", ["int"]],
+        "indigoGetMolecule": ["int", ["int", "int"]],
+        "indigoIterateReactants": ["int", ["int"]],
+        "indigoIterateProducts": ["int", ["int"]],
+        "indigoIterateCatalysts": ["int", ["int"]],
+        "indigoIterateMolecules": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
