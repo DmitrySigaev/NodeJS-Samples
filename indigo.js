@@ -221,7 +221,22 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResultString(d._lib.indigoRxnfile(this.id));
     }
-
+    
+    this.optimize = function (options) {
+        d._setSessionId();
+        if (options === undefined) {
+            options = '';
+        }
+        return d._checkResult(d._lib.indigoOptimize(this.id, options));
+    }
+    
+    this.normalize = function (options) {
+        d._setSessionId();
+        if (options === undefined) {
+            options = '';
+        }
+        return d._checkResult(d._lib.indigoNormalize(this.id, options));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -397,6 +412,8 @@ function Indigo() {
         "indigoIterateMolecules": ["int", ["int"]],
         "indigoSaveRxnfileToFile": ["int", ["string"]], 
         "indigoRxnfile": ["string", ["int"]],
+        "indigoOptimize": ["int", ["int", "string"]], 
+        "indigoNormalize": ["int", ["int", "string"]], 
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
