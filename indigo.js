@@ -158,6 +158,15 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoAddReactant(this.id, molecule.id));
     }
     
+    this.addProduct = function (molecule) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAddProduct(this.id, molecule.id));
+    }
+    this.addCatalyst = function (molecule) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAddCatalyst(this.id, molecule.id));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -319,6 +328,8 @@ function Indigo() {
         "indigoCml": ["string", ["int"]],
         "indigoSaveMDLCT": ["int", ["int", "int"]],
         "indigoAddReactant": ["int", ["int", "int"]],
+        "indigoAddProduct": ["int", ["int", "int"]],
+        "indigoAddCatalyst": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
