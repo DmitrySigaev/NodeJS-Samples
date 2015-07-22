@@ -211,6 +211,17 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMolecules(this.id)));
     }
+    
+    this.saveRxnfile = function (filename) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSaveRxnfileToFile(this.id, filename));
+    }
+    
+    this.rxnfile = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoRxnfile(this.id));
+    }
+
 
     this.layout = function () {
         d._setSessionId();
@@ -384,6 +395,8 @@ function Indigo() {
         "indigoIterateProducts": ["int", ["int"]],
         "indigoIterateCatalysts": ["int", ["int"]],
         "indigoIterateMolecules": ["int", ["int"]],
+        "indigoSaveRxnfileToFile": ["int", ["string"]], 
+        "indigoRxnfile": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
