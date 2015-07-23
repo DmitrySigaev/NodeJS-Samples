@@ -10,6 +10,7 @@ var ffi = require('ffi');
 var ref = require('ref');
 var ArrayType = require('ref-array')
 var c_int = ref.types.int;
+var int_ptr = ref.refType('int');
 var c_float = ref.types.float;
 var IntArray = ArrayType('int');
 var FloatArray = ArrayType('float');
@@ -266,6 +267,37 @@ IndigoObject = function (d, id, parent) {
         }
         return d._checkResult(d._lib.indigoSetAtomMappingNumber(this.id, reaction_atom.id, number));
     }
+    
+    this.reactingCenter = function (reaction_bond, number) {
+        d._setSessionId();
+        if (reaction_bond === undefined || reaction_bond === null) {
+            return 0;
+        }
+        var value = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        res = d._checkResult(d._lib.indigoGetReactingCenter(this.id, reaction_bond.id, value));
+        if (res === null)
+            return null;
+        else
+            return value.deref();
+    }
+    
+    this.setReactingCenter = function (reaction_bond, rc) {
+        d._setSessionId();
+        if (reaction_bond === undefined || reaction_bond === null) {
+            return 0;
+        }
+        return d._checkResult(d._lib.indigoSetReactingCenter(this.id, reaction_bond.id, rc));
+    }
+    
+    this.clearAAM = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoClearAAM(this.id));
+    }
+    
+    this.correctReactingCenters = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCorrectReactingCenters(this.id));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -447,6 +479,10 @@ function Indigo() {
         "indigoAutomap": ["int", ["int", "string"]], 
         "indigoGetAtomMappingNumber": ["int", ["int", "int"]],
         "indigoSetAtomMappingNumber": ["int", ["int", "int", "int"]],
+        "indigoGetReactingCenter": ["int", ["int", "int", int_ptr]],
+        "indigoSetReactingCenter": ["int", ["int", "int", "int"]],
+        "indigoClearAAM": ["int", ["int"]],
+        "indigoCorrectReactingCenters": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
