@@ -237,6 +237,35 @@ IndigoObject = function (d, id, parent) {
         }
         return d._checkResult(d._lib.indigoNormalize(this.id, options));
     }
+    
+    this.standardize = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoStandardize(this.id));
+    }
+    
+    this.automap = function (mode) {
+        d._setSessionId();
+        if (mode === undefined || mode === null) {
+            mode = '';
+        }
+        return d._checkResult(d._lib.indigoAutomap(this.id, mode));
+    }
+    
+    this.atomMappingNumber = function (reaction_atom) {
+        d._setSessionId();
+        if (reaction_atom === undefined || reaction_atom === null) {
+            return 0;
+        }
+        return d._checkResult(d._lib.indigoGetAtomMappingNumber(this.id, reaction_atom.id));
+    }
+    
+    this.setAtomMappingNumber = function (reaction_atom, number) {
+        d._setSessionId();
+        if (reaction_atom === undefined || reaction_atom === null) {
+            return 0;
+        }
+        return d._checkResult(d._lib.indigoSetAtomMappingNumber(this.id, reaction_atom.id, number));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -414,6 +443,10 @@ function Indigo() {
         "indigoRxnfile": ["string", ["int"]],
         "indigoOptimize": ["int", ["int", "string"]], 
         "indigoNormalize": ["int", ["int", "string"]], 
+        "indigoStandardize": ["int", ["int"]],
+        "indigoAutomap": ["int", ["int", "string"]], 
+        "indigoGetAtomMappingNumber": ["int", ["int", "int"]],
+        "indigoSetAtomMappingNumber": ["int", ["int", "int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
