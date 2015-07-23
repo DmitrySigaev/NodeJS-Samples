@@ -329,6 +329,21 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRGroups(this.id)));
     }
     
+    this.isPseudoatom = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIsPseudoatom(this.id)));
+    }
+    
+    this.isRSite = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIsRSite(this.id)));
+    }
+    
+    this.stereocenterType = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoStereocenterType(this.id)));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -519,6 +534,9 @@ function Indigo() {
         "indigoIterateStereocenters": ["int", ["int"]],
         "indigoIterateAlleneCenters": ["int", ["int"]],
         "indigoIterateRGroups": ["int", ["int"]],
+        "indigoIsPseudoatom": ["int", ["int"]],
+        "indigoIsRSite": ["int", ["int"]],
+        "indigoStereocenterType": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
