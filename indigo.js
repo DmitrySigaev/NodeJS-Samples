@@ -298,6 +298,26 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoCorrectReactingCenters(this.id));
     }
+    
+    this.iterateAtoms = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateAtoms(this.id)));
+    }
+    
+    this.iteratePseudoatoms = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIteratePseudoatoms(this.id)));
+    }
+
+    this.iterateRSites = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRSites(this.id)));
+    }
+    
+    this.iterateStereocenters = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateStereocenters(this.id)));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -483,6 +503,10 @@ function Indigo() {
         "indigoSetReactingCenter": ["int", ["int", "int", "int"]],
         "indigoClearAAM": ["int", ["int"]],
         "indigoCorrectReactingCenters": ["int", ["int"]],
+        "indigoIterateAtoms": ["int", ["int"]],
+        "indigoIteratePseudoatoms": ["int", ["int"]],
+        "indigoIterateRSites": ["int", ["int"]],
+        "indigoIterateStereocenters": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
