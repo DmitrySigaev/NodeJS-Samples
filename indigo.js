@@ -331,22 +331,22 @@ IndigoObject = function (d, id, parent) {
     
     this.isPseudoatom = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIsPseudoatom(this.id)));
+        return d._checkResult(d._lib.indigoIsPseudoatom(this.id));
     }
     
     this.isRSite = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIsRSite(this.id)));
+        return d._checkResult(d._lib.indigoIsRSite(this.id));
     }
     
     this.stereocenterType = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoStereocenterType(this.id)));
+        return d._checkResult(d._lib.indigoStereocenterType(this.id));
     }
     
     this.stereocenterGroup = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoStereocenterGroup(this.id)));
+        return d._checkResult(d._lib.indigoStereocenterGroup(this.id));
     }
 
     this.setStereocenterGroup = function (group) {
@@ -361,9 +361,29 @@ IndigoObject = function (d, id, parent) {
     
     this.validateChirality = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoValidateChirality(this.id)));
+        return d._checkResult(d._lib.indigoValidateChirality(this.id));
     }
     
+    this.singleAllowedRGroup = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSingleAllowedRGroup(this.id));
+    }
+    
+    this.iterateRGroupFragments = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRGroupFragments(this.id)));
+    }
+    
+    this.countAttachmentPoints = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountAttachmentPoints(this.id));
+    }
+    
+    this.iterateAttachmentPoints = function (order) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateAttachmentPoints(this.id, order)));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -561,6 +581,11 @@ function Indigo() {
         "indigoSetStereocenterGroup": ["int", ["int", "int"]],
         "indigoChangeStereocenterType": ["int", ["int", "int"]],
         "indigoValidateChirality": ["int", ["int"]],
+        "indigoSingleAllowedRGroup": ["int", ["int"]],
+        "indigoAddStereocenter": ["int", ["int", "int", "int", "int", "int", "int"]],
+        "indigoIterateRGroupFragments": ["int", ["int"]],
+        "indigoCountAttachmentPoints": ["int", ["int"]],
+        "indigoIterateAttachmentPoints": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
@@ -599,9 +624,7 @@ function Indigo() {
         "indigoLoadReactionFromString": ["int", ["string"]], 
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
         "indigoLoadMoleculeFromString": ["int", ["string"]],
-        "indigoLoadQueryMoleculeFromString": ["int", ["string"]],
-        "indigoAddStereocenter":["int",["int","int", "int", "int","int", "int"]]
-
+        "indigoLoadQueryMoleculeFromString": ["int", ["string"]]
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
