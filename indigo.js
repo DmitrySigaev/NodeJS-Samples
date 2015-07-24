@@ -383,6 +383,26 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateAttachmentPoints(this.id, order)));
     }
+    
+    this.symbol = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoSymbol(this.id));
+    }
+    
+    this.degree = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoDegree(this.id));
+    }
+    
+    this.charge = function () {
+        d._setSessionId();
+        var value = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        res = d._checkResult(d._lib.indigoGetCharge(this.id, value));
+        if (res === null)
+            return null;
+        else
+            return value.deref();
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -586,6 +606,9 @@ function Indigo() {
         "indigoIterateRGroupFragments": ["int", ["int"]],
         "indigoCountAttachmentPoints": ["int", ["int"]],
         "indigoIterateAttachmentPoints": ["int", ["int", "int"]],
+        "indigoSymbol": ["int", ["int"]],
+        "indigoDegree": ["int", ["int"]],
+        "indigoGetCharge": ["int", ["int", int_ptr]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
