@@ -403,6 +403,21 @@ IndigoObject = function (d, id, parent) {
         else
             return value.deref();
     }
+    
+    this.getExplicitValence = function () {
+        d._setSessionId();
+        var value = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        res = d._checkResult(d._lib.indigoGetExplicitValence(this.id, value));
+        if (res === null)
+            return null;
+        else
+            return value.deref();
+    }
+    
+    this.setExplicitValence = function (valence) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetExplicitValence(this.id, valence));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -609,6 +624,8 @@ function Indigo() {
         "indigoSymbol": ["int", ["int"]],
         "indigoDegree": ["int", ["int"]],
         "indigoGetCharge": ["int", ["int", int_ptr]],
+        "indigoGetExplicitValence": ["int", ["int", int_ptr]],
+        "indigoSetExplicitValence": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
