@@ -344,6 +344,26 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoStereocenterType(this.id)));
     }
     
+    this.stereocenterGroup = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoStereocenterGroup(this.id)));
+    }
+
+    this.setStereocenterGroup = function (group) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetStereocenterGroup(this.id, group));
+    }
+    
+    this.changeStereocenterType = function (type) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoChangeStereocenterType(this.id, type));
+    }
+    
+    this.validateChirality = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoValidateChirality(this.id)));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -537,6 +557,10 @@ function Indigo() {
         "indigoIsPseudoatom": ["int", ["int"]],
         "indigoIsRSite": ["int", ["int"]],
         "indigoStereocenterType": ["int", ["int"]],
+        "indigoStereocenterGroup": ["int", ["int"]],
+        "indigoSetStereocenterGroup": ["int", ["int", "int"]],
+        "indigoChangeStereocenterType": ["int", ["int", "int"]],
+        "indigoValidateChirality": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
