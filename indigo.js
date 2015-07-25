@@ -418,6 +418,16 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoSetExplicitValence(this.id, valence));
     }
+    
+    this.radicalElectrons = function () {
+        d._setSessionId();
+        var value = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        res = d._checkResult(d._lib.indigoGetRadicalElectrons(this.id, value));
+        if (res === null)
+            return null;
+        else
+            return value.deref();
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -626,6 +636,7 @@ function Indigo() {
         "indigoGetCharge": ["int", ["int", int_ptr]],
         "indigoGetExplicitValence": ["int", ["int", int_ptr]],
         "indigoSetExplicitValence": ["int", ["int", "int"]],
+        "indigoGetRadicalElectrons": ["int", ["int", int_ptr]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
