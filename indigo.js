@@ -459,6 +459,21 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoValence(this.id));
     }
     
+    this.countHydrogens = function () {
+        d._setSessionId();
+        var value = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        res = d._checkResult(d._lib.indigoCountHydrogens(this.id, value));
+        if (res === null)
+            return null;
+        else
+            return value.deref();
+    }
+    
+    this.countImplicitHydrogens = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountImplicitHydrogens(this.id));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -672,6 +687,8 @@ function Indigo() {
         "indigoAtomicNumber": ["int", ["int"]],
         "indigoIsotope": ["int", ["int"]],
         "indigoValence": ["int", ["int"]],
+        "indigoCountHydrogens": ["int", ["int", int_ptr]],
+        "indigoCountImplicitHydrogens": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
