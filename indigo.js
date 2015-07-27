@@ -66,11 +66,6 @@ IndigoObject = function (d, id, parent) {
         return [xyz[0], xyz[1], xyz[2]];
     }
     
-    this.setXYZ = function (x, y, z) {
-        d._setSessionId();
-        d._checkResult(d._lib.indigoSetXYZ(id, x, y, z))
-    }
-    
     this.alignAtoms = function (atom_ids, desired_xyz) {
         d._setSessionId();
         if (atom_ids.length * 3 != desired_xyz.length)
@@ -474,6 +469,11 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoCountImplicitHydrogens(this.id));
     }
     
+    this.setXYZ = function (x, y, z) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetXYZ(this.id, x, y, z));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -689,10 +689,10 @@ function Indigo() {
         "indigoValence": ["int", ["int"]],
         "indigoCountHydrogens": ["int", ["int", int_ptr]],
         "indigoCountImplicitHydrogens": ["int", ["int"]],
+        "indigoXYZ": [float_ptr, ["int"]],
+        "indigoSetXYZ": ["int", ["int", "float", "float", "float"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoXYZ":[float_ptr,["int"]],
-        "indigoSetXYZ": ["int", ["int", "float", "float", "float"]],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
         "indigoLayout": ["int", ["int"]],
         "indigoAromatize": ["int", ["int"]],
