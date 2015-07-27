@@ -438,7 +438,27 @@ IndigoObject = function (d, id, parent) {
         else
             return value.deref();
     }
+    
+    this.setRadical = function (radical) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetRadical(this.id, radical));
+    }
+    
+    this.atomicNumber = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAtomicNumber(this.id));
+    }
+    
+    this.isotope = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoIsotope(this.id));
+    }
 
+    this.valence = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoValence(this.id));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -648,6 +668,10 @@ function Indigo() {
         "indigoSetExplicitValence": ["int", ["int", "int"]],
         "indigoGetRadicalElectrons": ["int", ["int", int_ptr]],
         "indigoGetRadical": ["int", ["int", int_ptr]],
+        "indigoSetRadical": ["int", ["int", "int"]],
+        "indigoAtomicNumber": ["int", ["int"]],
+        "indigoIsotope": ["int", ["int"]],
+        "indigoValence": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoXYZ":[float_ptr,["int"]],
