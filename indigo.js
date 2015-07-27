@@ -473,7 +473,27 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoSetXYZ(this.id, x, y, z));
     }
+    
+    this.countSuperatoms = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountSuperatoms(this.id));
+    }
 
+    this.countDataSGroups = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountDataSGroups(this.id));
+    }
+
+    this.countRepeatingUnits = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountRepeatingUnits(this.id));
+    }
+
+    this.countMultipleGroups = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountMultipleGroups(this.id));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -691,6 +711,10 @@ function Indigo() {
         "indigoCountImplicitHydrogens": ["int", ["int"]],
         "indigoXYZ": [float_ptr, ["int"]],
         "indigoSetXYZ": ["int", ["int", "float", "float", "float"]],
+        "indigoCountSuperatoms": ["int", ["int"]],
+        "indigoCountDataSGroups": ["int", ["int"]],
+        "indigoCountRepeatingUnits": ["int", ["int"]],
+        "indigoCountMultipleGroups": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
