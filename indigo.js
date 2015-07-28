@@ -499,6 +499,31 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoCountGenericSGroups(this.id));
     }
     
+    this.iterateDataSGroups = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDataSGroups(this.id)));
+    }
+
+    this.iterateSuperatoms = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateSuperatoms(this.id)));
+    }
+
+    this.iterateGenericSGroups = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateGenericSGroups(this.id)));
+    }
+
+    this.iterateRepeatingUnits = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRepeatingUnits(this.id)));
+    }
+    
+    this.iterateMultipleGroups = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMultipleGroups(this.id)));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -721,6 +746,11 @@ function Indigo() {
         "indigoCountRepeatingUnits": ["int", ["int"]],
         "indigoCountMultipleGroups": ["int", ["int"]],
         "indigoCountGenericSGroups": ["int", ["int"]],
+        "indigoIterateDataSGroups": ["int", ["int"]],
+        "indigoIterateSuperatoms": ["int", ["int"]],
+        "indigoIterateGenericSGroups": ["int", ["int"]],
+        "indigoIterateRepeatingUnits": ["int", ["int"]],
+        "indigoIterateMultipleGroups": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
