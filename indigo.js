@@ -524,6 +524,26 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMultipleGroups(this.id)));
     }
     
+    this.getSuperatom = function (index) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetSuperatom(this.id, index)));
+    }
+    
+    this.getDataSGroup = function (index) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetDataSGroup(this.id, index)));
+    }
+    
+    this.getGenericSGroup = function (index) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetGenericSGroup(this.id, index)));
+    }
+
+    this.getMultipleGroup = function (index) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetMultipleGroup(this.id, index)));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -751,6 +771,10 @@ function Indigo() {
         "indigoIterateGenericSGroups": ["int", ["int"]],
         "indigoIterateRepeatingUnits": ["int", ["int"]],
         "indigoIterateMultipleGroups": ["int", ["int"]],
+        "indigoGetSuperatom": ["int", ["int", "int"]],
+        "indigoGetDataSGroup": ["int", ["int", "int"]],
+        "indigoGetGenericSGroup": ["int", ["int", "int"]],
+        "indigoGetMultipleGroup": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
