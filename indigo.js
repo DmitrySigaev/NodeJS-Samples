@@ -549,6 +549,17 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoGetRepeatingUnit(this.id, index)));
     }
     
+    this.description = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoDescription(this.id));
+    }
+    
+    this.data = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoData(this.id));
+    }
+    
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -781,6 +792,8 @@ function Indigo() {
         "indigoGetGenericSGroup": ["int", ["int", "int"]],
         "indigoGetMultipleGroup": ["int", ["int", "int"]],
         "indigoGetRepeatingUnit": ["int", ["int", "int"]],
+        "indigoDescription": ["string", ["int"]],
+        "indigoData": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
