@@ -629,6 +629,16 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoSetSGroupLocation(this.id, option));
     }
     
+    this.setSGroupTag = function (tag) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetSGroupTag(this.id, tag));
+    }
+    
+    this.setSGroupTagAlign = function (tag_align) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetSGroupTagAlign(this.id, tag_align));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -874,6 +884,8 @@ function Indigo() {
         "indigoSetSGroupQueryOper": ["int", ["int", "string"]],
         "indigoSetSGroupDisplay": ["int", ["int", "string"]],
         "indigoSetSGroupLocation": ["int", ["int", "string"]],
+        "indigoSetSGroupTag": ["int", ["int", "string"]],
+        "indigoSetSGroupTagAlign": ["int", ["int", "string"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
