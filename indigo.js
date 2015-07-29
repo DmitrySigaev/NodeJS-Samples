@@ -581,6 +581,14 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoAddSuperatom(this.id, atoms.length, arr2, name)));
     }
     
+    this.setDataSGroupXY = function (x, y, options) {
+        d._setSessionId();
+        if (options === undefined || options === null) {
+            options = '';
+        }
+        return d._checkResult(d._lib.indigoSetDataSGroupXY(this.id, x, y, options));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -817,6 +825,7 @@ function Indigo() {
         "indigoData": ["string", ["int"]],
         "indigoAddDataSGroup": ["int", ["int", "int", int_ptr, "int", int_ptr, "string", "string"]],
         "indigoAddSuperatom": ["int", ["int", "int", int_ptr, "string"]],
+        "indigoSetDataSGroupXY": ["int", ["int", "float", "float", "string"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
