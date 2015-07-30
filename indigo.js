@@ -660,6 +660,26 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateSGroup(sgtype, mapping.id, name)));
     }
     
+    this.setSGroupClass = function (sgclass) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetSGroupClass(this.id, sgclass));
+    }
+
+    this.setSGroupName = function (sgname) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetSGroupName(this.id, sgname));
+    }
+
+    this.getSGroupClass = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoGetSGroupClass(this.id));
+    }
+    
+    this.getSGroupName = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoGetSGroupName(this.id));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -911,6 +931,10 @@ function Indigo() {
         "indigoSetSGroupXCoord": ["int", ["int", "float"]],
         "indigoSetSGroupYCoord": ["int", ["int", "float"]],
         "indigoCreateSGroup": ["int", ["string", "int", "string"]],
+        "indigoSetSGroupClass": ["int", ["int", "string"]],
+        "indigoSetSGroupName": ["int", ["int", "string"]],
+        "indigoGetSGroupClass": ["string", ["int"]],
+        "indigoGetSGroupName": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
