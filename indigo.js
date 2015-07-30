@@ -679,6 +679,11 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResultString(d._lib.indigoGetSGroupName(this.id));
     }
+    
+    this.getSGroupNumCrossBonds = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoGetSGroupNumCrossBonds(this.id));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -935,6 +940,7 @@ function Indigo() {
         "indigoSetSGroupName": ["int", ["int", "string"]],
         "indigoGetSGroupClass": ["string", ["int"]],
         "indigoGetSGroupName": ["string", ["int"]],
+        "indigoGetSGroupNumCrossBonds": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
