@@ -695,6 +695,16 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoDeleteSGroupAttachmentPoint(this.id, apidx));
     }
     
+    this.getSGroupDisplayOption = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoGetSGroupDisplayOption(this.id));
+    }
+    
+    this.setSGroupDisplayOption = function (option) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetSGroupDisplayOption(this.id, option));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -953,6 +963,8 @@ function Indigo() {
         "indigoGetSGroupNumCrossBonds": ["int", ["int"]],
         "indigoAddSGroupAttachmentPoint": ["int", ["int", "int", "int", "string"]],
         "indigoDeleteSGroupAttachmentPoint": ["int", ["int", "int"]],
+        "indigoGetSGroupDisplayOption": ["int", ["int"]],
+        "indigoSetSGroupDisplayOption": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
