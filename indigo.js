@@ -705,6 +705,16 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoSetSGroupDisplayOption(this.id, option));
     }
     
+    this.getSGroupMultiplier = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoGetSGroupMultiplier(this.id));
+    }
+    
+    this.setSGroupMultiplier = function (mult) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetSGroupMultiplier(this.id, mult));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -965,6 +975,8 @@ function Indigo() {
         "indigoDeleteSGroupAttachmentPoint": ["int", ["int", "int"]],
         "indigoGetSGroupDisplayOption": ["int", ["int"]],
         "indigoSetSGroupDisplayOption": ["int", ["int", "int"]],
+        "indigoGetSGroupMultiplier": ["int", ["int"]],
+        "indigoSetSGroupMultiplier": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
