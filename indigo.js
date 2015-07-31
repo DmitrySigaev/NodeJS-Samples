@@ -722,7 +722,7 @@ IndigoObject = function (d, id, parent) {
     
     this.findSGroups = function (prop, val) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateSGroup(prop, val)));
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoFindSGroups(prop, val)));
     }
    
     this.layout = function () {
@@ -989,6 +989,7 @@ function Indigo() {
         "indigoSetSGroupMultiplier": ["int", ["int", "int"]],
         "indigoSetSGroupBrackets": ["int", ["int", "int", "float", "float", "float", "float", "float", "float", "float", "float"]],
         "indigoFindSGroups": ["int", ["int", "string", "string"]],
+
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
