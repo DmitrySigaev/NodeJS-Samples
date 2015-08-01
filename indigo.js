@@ -734,6 +734,16 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoGetSGroupIndex(this.id));
     }
+
+    this.transformSCSRtoCTAB = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoTransformSCSRtoCTAB(this.id));
+    }
+
+    this.transformCTABtoSCSR = function (templates) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoTransformCTABtoSCSR(this.id, templates.id));
+    }
     
     this.layout = function () {
         d._setSessionId();
@@ -1001,6 +1011,8 @@ function Indigo() {
         "indigoFindSGroups": ["int", ["int", "string", "string"]],
         "indigoGetSGroupType": ["int", ["int"]],
         "indigoGetSGroupIndex": ["int", ["int"]],
+        "indigoTransformSCSRtoCTAB": ["int", ["int"]],
+        "indigoTransformCTABtoSCSR": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
