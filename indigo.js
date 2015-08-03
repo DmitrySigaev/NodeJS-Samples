@@ -764,7 +764,22 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoResetIsotope(this.id));
     }
-
+    
+    this.setAttachmentPoint = function (order) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetAttachmentPoint(this.id, order));
+    }
+    
+    this.clearAttachmentPoints = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoClearAttachmentPoints(this.id));
+    }
+    
+    this.removeConstraints = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoRemoveConstraints(this.id, type));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -1037,6 +1052,9 @@ function Indigo() {
         "indigoResetExplicitValence": ["int", ["int"]],
         "indigoResetRadical": ["int", ["int"]],
         "indigoResetIsotope": ["int", ["int"]],
+        "indigoSetAttachmentPoint": ["int", ["int", "int"]],
+        "indigoClearAttachmentPoints": ["int", ["int"]],
+        "indigoRemoveConstraints": ["int", ["int", "string"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
