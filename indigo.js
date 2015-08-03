@@ -775,7 +775,7 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoClearAttachmentPoints(this.id));
     }
     
-    this.removeConstraints = function () {
+    this.removeConstraints = function (type) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoRemoveConstraints(this.id, type));
     }
@@ -795,6 +795,21 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoAddConstraintOr(this.id, type, value));
     }
 
+    this.resetStereo = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoResetStereo(this.id));
+    }
+    
+    this.invertStereo = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoInvertStereo(this.id));
+    }
+    
+    this.countAtoms = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountAtoms(this.id));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -1073,6 +1088,9 @@ function Indigo() {
         "indigoAddConstraint": ["int", ["int", "string", "string"]],
         "indigoAddConstraintNot": ["int", ["int", "string", "string"]],
         "indigoAddConstraintOr": ["int", ["int", "string", "string"]],
+        "indigoResetStereo": ["int", ["int"]],
+        "indigoInvertStereo": ["int", ["int"]],
+        "indigoCountAtoms": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
