@@ -780,6 +780,21 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoRemoveConstraints(this.id, type));
     }
     
+    this.addConstraint = function (type, value) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAddConstraint(this.id, type, value));
+    }
+    
+    this.addConstraintNot = function (type, value) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAddConstraintNot(this.id, type, value));
+    }
+    
+    this.addConstraintOr = function (type, value) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAddConstraintOr(this.id, type, value));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -1055,6 +1070,9 @@ function Indigo() {
         "indigoSetAttachmentPoint": ["int", ["int", "int"]],
         "indigoClearAttachmentPoints": ["int", ["int"]],
         "indigoRemoveConstraints": ["int", ["int", "string"]],
+        "indigoAddConstraint": ["int", ["int", "string", "string"]],
+        "indigoAddConstraintNot": ["int", ["int", "string", "string"]],
+        "indigoAddConstraintOr": ["int", ["int", "string", "string"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
