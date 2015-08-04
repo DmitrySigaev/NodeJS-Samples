@@ -840,6 +840,10 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoBondStereo(this.id));
     }
     
+    this.topology = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoTopology(this.id));
+    }
 
     this.layout = function () {
         d._setSessionId();
