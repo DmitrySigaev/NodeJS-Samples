@@ -1132,6 +1132,7 @@ function Indigo() {
         "indigoIterateBonds": ["int", ["int"]],
         "indigoBondOrder": ["int", ["int"]],
         "indigoBondStereo": ["int", ["int"]],
+        "indigoTopology": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
