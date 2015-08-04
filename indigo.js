@@ -859,6 +859,21 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoGetAtom(this.id, idx)));
     }
+    
+    this.getBond = function (idx) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetBond(this.id, idx)));
+    }
+    
+    this.source = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoSource(this.id)));
+    }
+    
+    this.destination = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoDestination(this.id)));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -1151,6 +1166,9 @@ function Indigo() {
         "indigoIterateNeighbors": ["int", ["int"]],
         "indigoBond": ["int", ["int"]],
         "indigoGetAtom": ["int", ["int", "int"]],
+        "indigoGetBond": ["int", ["int", "int"]],
+        "indigoSource": ["int", ["int"]],
+        "indigoDestination": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
