@@ -949,6 +949,22 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoSetIsotope(this.id, isotope));
     }
+    
+    this.setImplicitHCount = function (impl_h) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetImplicitHCount(this.id, impl_h));
+    }
+    
+    this.addBond = function (destination, order) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoAddBond(this.id, destination.id, order)));
+    }
+    
+    this.setBondOrder = function (order) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoSetBondOrder(this.id, order)));
+    }
+    
  
     this.layout = function () {
         d._setSessionId();
@@ -1259,6 +1275,9 @@ function Indigo() {
         "indigoSetRSite": ["int", ["int", "string"]],
         "indigoSetCharge": ["int", ["int", "int"]],
         "indigoSetIsotope": ["int", ["int", "int"]],
+        "indigoSetImplicitHCount": ["int", ["int", "int"]],
+        "indigoAddBond": ["int", ["int", "int", "int"]],
+        "indigoSetBondOrder": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
