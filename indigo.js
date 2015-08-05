@@ -890,6 +890,21 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoCountStereocenters(this.id));
     }
     
+    this.clearAlleneCenters = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoClearAlleneCenters(this.id));
+    }
+    
+    this.countAlleneCenters = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountAlleneCenters(this.id));
+    }
+    
+    this.resetSymmetricCisTrans = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoResetSymmetricCisTrans(this.id));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -1187,6 +1202,9 @@ function Indigo() {
         "indigoClearCisTrans": ["int", ["int"]],
         "indigoClearStereocenters": ["int", ["int"]],
         "indigoCountStereocenters": ["int", ["int"]],
+        "indigoClearAlleneCenters": ["int", ["int"]],
+        "indigoCountAlleneCenters": ["int", ["int"]],
+        "indigoResetSymmetricCisTrans": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
