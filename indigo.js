@@ -964,7 +964,21 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoSetBondOrder(this.id, order)));
     }
+  
+    this.merge = function (what) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoMerge(this.id, what.id)));
+    }
     
+    this.highlight = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoHighlight(this.id));
+    }
+    
+    this.unhighlight = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoUnhighlight(this.id));
+    }
  
     this.layout = function () {
         d._setSessionId();
@@ -1278,6 +1292,9 @@ function Indigo() {
         "indigoSetImplicitHCount": ["int", ["int", "int"]],
         "indigoAddBond": ["int", ["int", "int", "int"]],
         "indigoSetBondOrder": ["int", ["int", "int"]],
+        "indigoMerge": ["int", ["int", "int"]],
+        "indigoHighlight": ["int", ["int"]],
+        "indigoUnhighlight": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
