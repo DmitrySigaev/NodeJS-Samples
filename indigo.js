@@ -995,6 +995,21 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoComponentIndex(this.id));
     }
     
+    this.iterateComponents = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateComponents(this.id)));
+    }
+    
+    this.component = function (index) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoComponent(this.id, index)));
+    }
+
+    this.countSSSR = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountSSSR(this.id));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -1313,6 +1328,9 @@ function Indigo() {
         "indigoIsHighlighted": ["int", ["int"]],
         "indigoCountComponents": ["int", ["int"]],
         "indigoComponentIndex": ["int", ["int"]],
+        "indigoIterateComponents": ["int", ["int"]],
+        "indigoComponent": ["int", ["int", "int"]],
+        "indigoCountSSSR": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
