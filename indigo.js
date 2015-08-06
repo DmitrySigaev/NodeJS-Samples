@@ -1025,7 +1025,11 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRings(this.id, min_atoms, max_atoms)));
     }
     
-
+    this.iterateEdgeSubmolecules = function (min_bonds, max_bonds) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateEdgeSubmolecules(this.id, min_bonds, max_bonds)));
+    }
+    
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -1350,6 +1354,7 @@ function Indigo() {
         "indigoIterateSSSR": ["int", ["int"]],
         "indigoIterateSubtrees": ["int", ["int", "int", "int"]],
         "indigoIterateRings": ["int", ["int", "int", "int"]],
+        "indigoIterateEdgeSubmolecules": ["int", ["int", "int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
