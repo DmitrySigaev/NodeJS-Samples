@@ -1009,6 +1009,22 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoCountSSSR(this.id));
     }
+    
+    this.iterateSSSR = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateSSSR(this.id)));
+    }
+    
+    this.iterateSubtrees = function (min_atoms, max_atoms) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateSubtrees(this.id, min_atoms, max_atoms)));
+    }
+    
+    this.iterateRings = function (min_atoms, max_atoms) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRings(this.id, min_atoms, max_atoms)));
+    }
+    
 
     this.layout = function () {
         d._setSessionId();
@@ -1331,6 +1347,9 @@ function Indigo() {
         "indigoIterateComponents": ["int", ["int"]],
         "indigoComponent": ["int", ["int", "int"]],
         "indigoCountSSSR": ["int", ["int"]],
+        "indigoIterateSSSR": ["int", ["int"]],
+        "indigoIterateSubtrees": ["int", ["int", "int", "int"]],
+        "indigoIterateRings": ["int", ["int", "int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
