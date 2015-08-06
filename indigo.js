@@ -34,13 +34,7 @@ IndigoObject = function (d, id, parent) {
         this.id = -1;
     }
 
-    this.grossFormula = function () {
-        d._setSessionId();
-        gfid = d._checkResult(d._lib.indigoGrossFormula(id));
-        gf = d.IndigoObject(d, gfid);
-        return d._checkResultString(d._lib.indigoToString(gf.id));
-    }
-    
+  
     this.toString = function () {
         d._setSessionId();
         return d._checkResultString(d._lib.indigoToString(id));
@@ -1030,6 +1024,28 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateEdgeSubmolecules(this.id, min_bonds, max_bonds)));
     }
     
+    this.countHeavyAtoms = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountHeavyAtoms(this.id));
+    }
+    
+    this.grossFormula = function () {
+        d._setSessionId();
+        gfid = d._checkResult(d._lib.indigoGrossFormula(this.id));
+        gf = d.IndigoObject(d, gfid);
+        return d._checkResultString(d._lib.indigoToString(gf.id));
+    }
+
+    this.molecularWeight = function () {
+        d._setSessionId();
+        return d._checkResultFloat(d._lib.indigoMolecularWeight(this.id));
+    }
+
+    this.mostAbundantMass = function () {
+        d._setSessionId();
+        return d._checkResultFloat(d._lib.indigoMostAbundantMass(this.id));
+    }
+
     this.layout = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoLayout(id));
@@ -1355,6 +1371,10 @@ function Indigo() {
         "indigoIterateSubtrees": ["int", ["int", "int", "int"]],
         "indigoIterateRings": ["int", ["int", "int", "int"]],
         "indigoIterateEdgeSubmolecules": ["int", ["int", "int", "int"]],
+        "indigoCountHeavyAtoms": ["int", ["int"]],
+        "indigoGrossFormula": ["int", ["int"]],
+        "indigoMolecularWeight": ["float", ["int"]],
+        "indigoMostAbundantMass": ["float", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
@@ -1403,6 +1423,8 @@ function Indigo() {
     this._sid = this._lib.indigoAllocSessionId();
     this._setSessionId = function () { this._lib.indigoSetSessionId(this._sid) };
     this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result; }
+    this._checkResultFloat = function (result) { if (result < -0.5) { throw new Error('indigo:res < -0.5[' + result + ']') } return result; }
+    this._checkResultPtr = function (result) { if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result; }
     this._checkResultString = function (result) { console.log(result); return result; }
     this.writeBuffer = function () {
         this._setSessionId();
