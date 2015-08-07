@@ -1446,7 +1446,7 @@ function Indigo() {
         "indigoHasZCoord": ["int", ["int"]],
         "indigoIsChiral": ["int", ["int"]],
         "indigoCreateSubmolecule": ["int", ["int", "int", int_ptr]],
-        "indigoSymmetryClasses": ["int", ["int", "int", int_ptr, "int", int_ptr]],
+        "indigoCreateEdgeSubmolecule": ["int", ["int", "int", int_ptr, "int", int_ptr]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
