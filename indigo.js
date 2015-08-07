@@ -1060,6 +1060,27 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResultString(d._lib.indigoLayeredCode(this.id));
     }
+    
+    this.symmetryClasses = function () {
+        d._setSessionId();
+        var size = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        buf = d._checkResultPtr(d._lib.indigoSymmetryClasses(this.id, size));
+        res = new Array();
+        for (i = 0; i < size.deref(); i++) {
+            res.push(buf[i]);
+        }
+        return res;
+    }
+    
+    this.hasCoord = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoHasCoord(this.id));
+    }
+
+    this.hasZCoord = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoHasZCoord(this.id));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -1393,6 +1414,9 @@ function Indigo() {
         "indigoMonoisotopicMass": ["float", ["int"]],
         "indigoCanonicalSmiles": ["string", ["int"]],
         "indigoLayeredCode": ["string", ["int"]],
+        "indigoSymmetryClasses": [int_ptr, ["int", int_ptr]],
+        "indigoHasCoord": ["int", ["int"]],
+        "indigoHasZCoord": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
