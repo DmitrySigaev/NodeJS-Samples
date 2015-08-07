@@ -1108,6 +1108,33 @@ IndigoObject = function (d, id, parent) {
         }
         return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateEdgeSubmolecule(this.id, vertices.length, arr2, edges.length, arr4)));
     }
+    
+    this.getSubmolecule = function (vertices) {
+        d._setSessionId();
+        arr2 = new IntArray(vertices.length);
+        for (i = 0; i < vertices.length; i++) {
+            arr2[i] = vertices[i];
+        }
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetSubmolecule(this.id, vertices.length, arr2)));
+    }
+    
+    this.removeAtoms = function (vertices) {
+        d._setSessionId();
+        arr2 = new IntArray(vertices.length);
+        for (i = 0; i < vertices.length; i++) {
+            arr2[i] = vertices[i];
+        }
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoRemoveAtoms(this.id, vertices.length, arr2)));
+    }
+
+    this.removeBonds = function (bonds) {
+        d._setSessionId();
+        arr2 = new IntArray(bonds.length);
+        for (i = 0; i < bonds.length; i++) {
+            arr2[i] = bonds[i];
+        }
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoRemoveBonds(this.id, bonds.length, arr2)));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -1447,6 +1474,9 @@ function Indigo() {
         "indigoIsChiral": ["int", ["int"]],
         "indigoCreateSubmolecule": ["int", ["int", "int", int_ptr]],
         "indigoCreateEdgeSubmolecule": ["int", ["int", "int", int_ptr, "int", int_ptr]],
+        "indigoGetSubmolecule": ["int", ["int", "int", int_ptr]],
+        "indigoRemoveAtoms": ["int", ["int", "int", int_ptr]],
+        "indigoRemoveBonds": ["int", ["int", "int", int_ptr]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
