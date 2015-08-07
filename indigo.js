@@ -1136,11 +1136,6 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoRemoveBonds(this.id, bonds.length, arr2)));
     }
 
-    this.layout = function () {
-        d._setSessionId();
-        return d._checkResult(d._lib.indigoLayout(id));
-    }
-
     this.aromatize = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoAromatize(id));
@@ -1155,10 +1150,25 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoFoldHydrogens(id));
     }
-    
+  
     this.unfoldHydrogens = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoUnfoldHydrogens(id));
+    }
+
+    this.layout = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoLayout(id));
+    }
+    
+    this.smiles = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoSmiles(id));
+    }
+    
+    this.name = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoName(id));
     }
 
     this.clearProperties = function () {
@@ -1257,10 +1267,6 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoDbgInternalType(id));
     }
     
-    this.smiles = function () {
-        d._setSessionId();
-        return d._checkResultString(d._lib.indigoSmiles(id));
-    }
 
 }
 
@@ -1477,14 +1483,16 @@ function Indigo() {
         "indigoGetSubmolecule": ["int", ["int", "int", int_ptr]],
         "indigoRemoveAtoms": ["int", ["int", "int", int_ptr]],
         "indigoRemoveBonds": ["int", ["int", "int", int_ptr]],
-        "indigoOneBitsList": ["string", ["int"]],
-        "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
-        "indigoLayout": ["int", ["int"]],
         "indigoAromatize": ["int", ["int"]],
         "indigoDearomatize": ["int", ["int"]],
         "indigoFoldHydrogens": ["int", ["int"]],
         "indigoUnfoldHydrogens": ["int", ["int"]],
+        "indigoLayout": ["int", ["int"]],
+        "indigoSmiles": ["string", ["int"]], 
+        "indigoName": ["string", ["int"]], 
+        "indigoOneBitsList": ["string", ["int"]],
+        "indigoGetLastError": ["string", []],
         "indigoClearProperties": ["int", ["int"]],
         "indigoTell": ["int", ["int"]],
         "indigoCount": ["int", ["int"]],
@@ -1504,8 +1512,6 @@ function Indigo() {
         "indigoIterateDecompositions": ["int", ["int"]],
         "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["int", ["int"]],
-        "indigoSmiles": ["string", ["int"]], 
-        "indigoName": ["string", ["int"]], 
         "indigoCheckBadValence": ["string", ["int"]], 
         "indigoCheckAmbiguousH": ["string", ["int"]], 
         "indigoRawData": ["string", ["int"]], 
