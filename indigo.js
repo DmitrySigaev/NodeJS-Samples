@@ -1138,39 +1138,44 @@ IndigoObject = function (d, id, parent) {
 
     this.aromatize = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoAromatize(id));
+        return d._checkResult(d._lib.indigoAromatize(this.id));
     }
 
     this.dearomatize = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoDearomatize(id));
+        return d._checkResult(d._lib.indigoDearomatize(this.id));
     }
     
     this.foldHydrogens = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoFoldHydrogens(id));
+        return d._checkResult(d._lib.indigoFoldHydrogens(this.id));
     }
   
     this.unfoldHydrogens = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoUnfoldHydrogens(id));
+        return d._checkResult(d._lib.indigoUnfoldHydrogens(this.id));
     }
 
     this.layout = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoLayout(id));
+        return d._checkResult(d._lib.indigoLayout(this.id));
     }
     
     this.smiles = function () {
         d._setSessionId();
-        return d._checkResultString(d._lib.indigoSmiles(id));
+        return d._checkResultString(d._lib.indigoSmiles(this.id));
     }
     
     this.name = function () {
         d._setSessionId();
-        return d._checkResultString(d._lib.indigoName(id));
+        return d._checkResultString(d._lib.indigoName(this.id));
     }
-
+    
+    this.setName = function (name) {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoSetName(this.id, name));
+    }
+    
     this.clearProperties = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoClearProperties(id));
@@ -1491,6 +1496,7 @@ function Indigo() {
         "indigoLayout": ["int", ["int"]],
         "indigoSmiles": ["string", ["int"]], 
         "indigoName": ["string", ["int"]], 
+        "indigoSetName": ["int", ["int", "string"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoClearProperties": ["int", ["int"]],
