@@ -1045,6 +1045,21 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResultFloat(d._lib.indigoMostAbundantMass(this.id));
     }
+    
+    this.monoisotopicMass = function () {
+        d._setSessionId();
+        return d._checkResultFloat(d._lib.indigoMonoisotopicMass(this.id));
+    }
+
+    this.canonicalSmiles = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoCanonicalSmiles(this.id));
+    }
+    
+    this.layeredCode = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoLayeredCode(this.id));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -1375,6 +1390,9 @@ function Indigo() {
         "indigoGrossFormula": ["int", ["int"]],
         "indigoMolecularWeight": ["float", ["int"]],
         "indigoMostAbundantMass": ["float", ["int"]],
+        "indigoMonoisotopicMass": ["float", ["int"]],
+        "indigoCanonicalSmiles": ["string", ["int"]],
+        "indigoLayeredCode": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
