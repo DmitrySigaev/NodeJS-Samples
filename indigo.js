@@ -1081,6 +1081,33 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoHasZCoord(this.id));
     }
+    
+    this.isChiral = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoIsChiral(this.id));
+    }
+    
+    this.createSubmolecule = function (vertices) {
+        d._setSessionId();
+        arr2 = new IntArray(vertices.length);
+        for (i = 0; i < vertices.length; i++) {
+            arr2[i] = vertices[i];
+        }
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateSubmolecule(this.id, vertices.length, arr2)));
+    }
+
+    this.createEdgeSubmolecule = function (vertices, edges) {
+        d._setSessionId();
+        arr2 = new IntArray(vertices.length);
+        for (i = 0; i < vertices.length; i++) {
+            arr2[i] = vertices[i];
+        }
+        arr4 = new IntArray(edges.length);
+        for (i = 0; i < edges.length; i++) {
+            arr4[i] = edges[i];
+        }
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateEdgeSubmolecule(this.id, vertices.length, arr2, edges.length, arr4)));
+    }
 
     this.layout = function () {
         d._setSessionId();
@@ -1417,6 +1444,9 @@ function Indigo() {
         "indigoSymmetryClasses": [int_ptr, ["int", int_ptr]],
         "indigoHasCoord": ["int", ["int"]],
         "indigoHasZCoord": ["int", ["int"]],
+        "indigoIsChiral": ["int", ["int"]],
+        "indigoCreateSubmolecule": ["int", ["int", "int", int_ptr]],
+        "indigoSymmetryClasses": ["int", ["int", "int", int_ptr, "int", int_ptr]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
