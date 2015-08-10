@@ -1204,10 +1204,20 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoSetProperty(this.id, prop, value));
     }
-
+    
+    this.removeProperty = function (prop) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoRemoveProperty(this.id, prop));
+    }
+    
+    this.iterateProperties = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateProperties(this.id)));
+    }
+    
     this.clearProperties = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoClearProperties(id));
+        return d._checkResult(d._lib.indigoClearProperties(this.id));
     }
     
     this.tell = function () {
@@ -1531,9 +1541,11 @@ function Indigo() {
         "indigoHasProperty": ["int", ["int", "string"]],
         "indigoGetProperty": ["int", ["int", "string"]],
         "indigoSetProperty": ["int", ["int", "string", "string"]],
+        "indigoRemoveProperty": ["int", ["int", "string"]],
+        "indigoIterateProperties": ["int", ["int"]],
+        "indigoClearProperties": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoClearProperties": ["int", ["int"]],
         "indigoTell": ["int", ["int"]],
         "indigoCount": ["int", ["int"]],
         "indigoClear": ["int", ["int"]],
