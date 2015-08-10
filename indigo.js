@@ -1190,6 +1190,21 @@ IndigoObject = function (d, id, parent) {
         return res;
     }
     
+    this.hasProperty = function (prop) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoHasProperty(this.id, prop));
+    }
+    
+    this.getProperty = function (prop) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoGetProperty(this.id, prop));
+    }
+    
+    this.setProperty = function (prop, value) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSetProperty(this.id, prop, value));
+    }
+
     this.clearProperties = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoClearProperties(id));
@@ -1513,6 +1528,9 @@ function Indigo() {
         "indigoName": ["string", ["int"]], 
         "indigoSetName": ["int", ["int", "string"]],
         "indigoSerialize": ["int", ["int", byte_ptr, int_ptr]],
+        "indigoHasProperty": ["int", ["int", "string"]],
+        "indigoGetProperty": ["int", ["int", "string"]],
+        "indigoSetProperty": ["int", ["int", "string", "string"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoClearProperties": ["int", ["int"]],
