@@ -1220,6 +1220,25 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoClearProperties(this.id));
     }
     
+    this.checkBadValence = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoCheckBadValence(this.id));
+    }
+    
+    this.checkAmbiguousH = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoCheckAmbiguousH(this.id));
+    }
+    
+    this.fingerprint = function (type) {
+        d._setSessionId();
+        newobj = d._checkResult(d._lib.indigoFingerprint(this.id, type));
+        if (newobj == null)
+            return null;
+        else
+            return d.IndigoObject(d, newobj, this);
+    }
+
     this.tell = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoTell(id));
@@ -1544,6 +1563,9 @@ function Indigo() {
         "indigoRemoveProperty": ["int", ["int", "string"]],
         "indigoIterateProperties": ["int", ["int"]],
         "indigoClearProperties": ["int", ["int"]],
+        "indigoCheckBadValence": ["string", ["int"]], 
+        "indigoCheckAmbiguousH": ["string", ["int"]],         
+        "indigoFingerprint": ["int", ["int", "string"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoTell": ["int", ["int"]],
@@ -1564,8 +1586,7 @@ function Indigo() {
         "indigoIterateDecompositions": ["int", ["int"]],
         "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["int", ["int"]],
-        "indigoCheckBadValence": ["string", ["int"]], 
-        "indigoCheckAmbiguousH": ["string", ["int"]], 
+
         "indigoRawData": ["string", ["int"]], 
         "indigoToString": ["string", ["int"]],
         "indigoLoadReactionFromString": ["int", ["string"]], 
