@@ -11,8 +11,10 @@ var ref = require('ref');
 var ArrayType = require('ref-array')
 var c_int = ref.types.int;
 var int_ptr = ref.refType('int');
+var byte_ptr = ref.refType('byte');
 var c_float = ref.types.float;
 var IntArray = ArrayType('int');
+var ByteArray = ArrayType('byte');
 var FloatArray = ArrayType('float');
 
 
@@ -1176,6 +1178,18 @@ IndigoObject = function (d, id, parent) {
         return d._checkResultString(d._lib.indigoSetName(this.id, name));
     }
     
+    this.serialize = function () {
+        d._setSessionId();
+        var size = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        buf = new ByteArray();
+        out_res = d._checkResult(d._lib.indigoSerialize(this.id, buf, size));
+        res = new Array();
+        for (i = 0; i < size.deref(); i++) {
+            res.push(buf[i]);
+        }
+        return res;
+    }
+    
     this.clearProperties = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoClearProperties(id));
@@ -1286,6 +1300,7 @@ function Indigo() {
     }
     
     int_ptr = ref.refType('int');
+    byte_ptr = ref.refType('byte');
     float_ptr = ref.refType('float');
         
     var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo';
@@ -1497,6 +1512,7 @@ function Indigo() {
         "indigoSmiles": ["string", ["int"]], 
         "indigoName": ["string", ["int"]], 
         "indigoSetName": ["int", ["int", "string"]],
+        "indigoSerialize": ["int", ["int", byte_ptr, int_ptr]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoClearProperties": ["int", ["int"]],
