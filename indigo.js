@@ -1311,16 +1311,21 @@ IndigoObject = function (d, id, parent) {
     
     this.clear = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoClear(id));
+        return d._checkResult(d._lib.indigoClear(this.id));
     }
         
     this.iterateArray = function () {
         d._setSessionId();
-        newobj = d._checkResult(d._lib.indigoIterateArray(id));
+        newobj = d._checkResult(d._lib.indigoIterateArray(this.id));
         if (newobj == 0)
             return null;
         else
             return d.IndigoObject(d, newobj, this)
+    }
+    
+    this.ignoreAtom = function (atom_object) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoIgnoreAtom(this.id, atom_object.id));
     }
     
     this.unignoreAllAtoms = function () {
@@ -1620,10 +1625,11 @@ function Indigo() {
         "indigoArrayAdd": ["int", ["int", "int"]],
         "indigoAt": ["int", ["int", "int"]],
         "indigoCount": ["int", ["int"]],
-        "indigoOneBitsList": ["string", ["int"]],
-        "indigoGetLastError": ["string", []],
         "indigoClear": ["int", ["int"]],
         "indigoIterateArray": ["int", ["int"]],
+        "indigoIgnoreAtom": ["int", ["int", "int"]],
+        "indigoOneBitsList": ["string", ["int"]],
+        "indigoGetLastError": ["string", []],
         "indigoUnignoreAllAtoms": ["int", ["int"]],
         "indigoHighlightedTarget": ["int", ["int"]],
         "indigoAllScaffolds": ["int", ["int"]],
