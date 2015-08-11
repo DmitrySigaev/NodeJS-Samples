@@ -1254,6 +1254,16 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoTell(this.id));
     }
     
+    this.sdfAppend = function (item) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSdfAppend(this.id, item.id));
+    }
+    
+    this.smilesAppend = function (item) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoSmilesAppend(this.id, item.id));
+    }
+
     this.count = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoCount(id));
@@ -1575,6 +1585,8 @@ function Indigo() {
         "indigoCountBits": ["int", ["int"]],
         "indigoRawData": ["string", ["int"]], 
         "indigoTell": ["int", ["int"]],
+        "indigoSdfAppend": ["int", ["int", "int"]],
+        "indigoSmilesAppend": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoCount": ["int", ["int"]],
