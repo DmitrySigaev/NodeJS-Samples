@@ -1263,7 +1263,22 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoSmilesAppend(this.id, item.id));
     }
+    
+    this.rdfHeader = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoRdfHeader(this.id));
+    }
+    
+    this.rdfAppend = function (item) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoRdfAppend(this.id, item.id));
+    }
 
+    this.cmlHeader = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCmlHeader(this.id));
+    }
+    
     this.count = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoCount(id));
@@ -1274,16 +1289,6 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoClear(id));
     }
     
-    this.rdfHeader = function () {
-        d._setSessionId();
-        return d._checkResult(d._lib.indigoRdfHeader(id));
-    }
-
-    
-    this.cmlHeader = function () {
-        d._setSessionId();
-        return d._checkResult(d._lib.indigoCmlHeader(id));
-    }
     
     this.cmlFooter = function () {
         d._setSessionId();
@@ -1587,12 +1592,13 @@ function Indigo() {
         "indigoTell": ["int", ["int"]],
         "indigoSdfAppend": ["int", ["int", "int"]],
         "indigoSmilesAppend": ["int", ["int", "int"]],
+        "indigoRdfHeader": ["int", ["int"]],
+        "indigoRdfAppend": ["int", ["int", "int"]],
+        "indigoCmlHeader": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoCount": ["int", ["int"]],
         "indigoClear": ["int", ["int"]],
-        "indigoRdfHeader": ["int", ["int"]],
-        "indigoCmlHeader": ["int", ["int"]],
         "indigoCmlFooter": ["int", ["int"]],
         "indigoIterateArray": ["int", ["int"]],
         "indigoUnignoreAllAtoms": ["int", ["int"]],
