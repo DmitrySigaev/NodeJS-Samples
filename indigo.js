@@ -1294,9 +1294,19 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoAppend(this.id, object.id));
     }
     
+    this.arrayAdd = function (object) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoArrayAdd(this.id, object.id));
+    }
+
+    this.at = function (index) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoAt(this.id, index)));
+    }
+
     this.count = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoCount(id));
+        return d._checkResult(d._lib.indigoCount(this.id));
     }
     
     this.clear = function () {
@@ -1607,9 +1617,11 @@ function Indigo() {
         "indigoCmlAppend": ["int", ["int", "int"]],
         "indigoCmlFooter": ["int", ["int"]],
         "indigoAppend": ["int", ["int", "int"]],
+        "indigoArrayAdd": ["int", ["int", "int"]],
+        "indigoAt": ["int", ["int", "int"]],
+        "indigoCount": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoCount": ["int", ["int"]],
         "indigoClear": ["int", ["int"]],
         "indigoIterateArray": ["int", ["int"]],
         "indigoUnignoreAllAtoms": ["int", ["int"]],
