@@ -1279,6 +1279,21 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoCmlHeader(this.id));
     }
     
+    this.cmlAppend = function (item) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCmlAppend(this.id, item.id));
+    }
+    
+    this.cmlFooter = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCmlFooter(this.id));
+    }
+    
+    this.append = function (object) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAppend(this.id, object.id));
+    }
+    
     this.count = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoCount(id));
@@ -1288,13 +1303,7 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResult(d._lib.indigoClear(id));
     }
-    
-    
-    this.cmlFooter = function () {
-        d._setSessionId();
-        return d._checkResult(d._lib.indigoCmlFooter(id));
-    }
-    
+        
     this.iterateArray = function () {
         d._setSessionId();
         newobj = d._checkResult(d._lib.indigoIterateArray(id));
@@ -1595,11 +1604,13 @@ function Indigo() {
         "indigoRdfHeader": ["int", ["int"]],
         "indigoRdfAppend": ["int", ["int", "int"]],
         "indigoCmlHeader": ["int", ["int"]],
+        "indigoCmlAppend": ["int", ["int", "int"]],
+        "indigoCmlFooter": ["int", ["int"]],
+        "indigoAppend": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoCount": ["int", ["int"]],
         "indigoClear": ["int", ["int"]],
-        "indigoCmlFooter": ["int", ["int"]],
         "indigoIterateArray": ["int", ["int"]],
         "indigoUnignoreAllAtoms": ["int", ["int"]],
         "indigoHighlightedTarget": ["int", ["int"]],
