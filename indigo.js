@@ -1238,10 +1238,20 @@ IndigoObject = function (d, id, parent) {
         else
             return d.IndigoObject(d, newobj, this);
     }
+    
+    this.countBits = function () {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountBits(this.id));
+    }
 
+    this.rawData = function () {
+        d._setSessionId();
+        return d._checkResultString(d._lib.indigoRawData(this.id));
+    }
+    
     this.tell = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoTell(id));
+        return d._checkResult(d._lib.indigoTell(this.id));
     }
     
     this.count = function () {
@@ -1259,10 +1269,6 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoRdfHeader(id));
     }
 
-    this.countBits = function () {
-        d._setSessionId();
-        return d._checkResult(d._lib.indigoCountBits(id));
-    }
     
     this.cmlHeader = function () {
         d._setSessionId();
@@ -1566,13 +1572,14 @@ function Indigo() {
         "indigoCheckBadValence": ["string", ["int"]], 
         "indigoCheckAmbiguousH": ["string", ["int"]],         
         "indigoFingerprint": ["int", ["int", "string"]],
+        "indigoCountBits": ["int", ["int"]],
+        "indigoRawData": ["string", ["int"]], 
+        "indigoTell": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoTell": ["int", ["int"]],
         "indigoCount": ["int", ["int"]],
         "indigoClear": ["int", ["int"]],
         "indigoRdfHeader": ["int", ["int"]],
-        "indigoCountBits": ["int", ["int"]],
         "indigoCmlHeader": ["int", ["int"]],
         "indigoCmlFooter": ["int", ["int"]],
         "indigoIterateArray": ["int", ["int"]],
@@ -1587,7 +1594,6 @@ function Indigo() {
         "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["int", ["int"]],
 
-        "indigoRawData": ["string", ["int"]], 
         "indigoToString": ["string", ["int"]],
         "indigoLoadReactionFromString": ["int", ["string"]], 
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
