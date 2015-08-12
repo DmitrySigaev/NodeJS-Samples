@@ -1419,11 +1419,21 @@ IndigoObject = function (d, id, parent) {
         return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeWithRGroups(this.id)));
     }
 
-    this.iterateDecompositions = function () {
+    this.decomposeMolecule = function (mol) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDecompositions(id)));
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposeMolecule(this.id, mol.id)));
     }
     
+    this.iterateDecompositions = function () {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDecompositions(this.id)));
+    }
+    
+    this.addDecomposition = function (q_match) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoAddDecomposition(this.id, q_match.id));
+    }
+   
     this.expandAbbreviations = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoExpandAbbreviations(id));
@@ -1702,9 +1712,11 @@ function Indigo() {
         "indigoIterateDecomposedMolecules": ["int", ["int"]],
         "indigoDecomposedMoleculeHighlighted": ["int", ["int"]],
         "indigoDecomposedMoleculeWithRGroups": ["int", ["int"]],
+        "indigoDecomposeMolecule": ["int", ["int", "int"]],
+        "indigoIterateDecompositions": ["int", ["int"]],
+        "indigoAddDecomposition": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoIterateDecompositions": ["int", ["int"]],
         "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["int", ["int"]],
 
