@@ -1384,23 +1384,36 @@ IndigoObject = function (d, id, parent) {
         else
             return d.IndigoObject(d, newobj, this);
     }
+    
+    this.mapMolecule = function (molecule) {
+        d._setSessionId();
+        newobj = d._checkResult(d._lib.indigoMapMolecule(this.id, molecule.id));
+        if (newobj == null)
+            return null;
+        else
+            return d.IndigoObject(d, newobj, this);
+    }
+
     this.allScaffolds = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAllScaffolds(id)));
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoAllScaffolds(this.id)));
     }
     
     this.decomposedMoleculeScaffold = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeScaffold(id)));
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeScaffold(this.id)));
     }
+
     this.iterateDecomposedMolecules = function () {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDecomposedMolecules(id)));
     }
+
     this.decomposedMoleculeHighlighted = function () {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeHighlighted(id)));
     }
+
     this.decomposedMoleculeWithRGroups = function () {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeWithRGroups(id)));
@@ -1683,10 +1696,11 @@ function Indigo() {
         "indigoHighlightedTarget": ["int", ["int"]],
         "indigoMapAtom": ["int", ["int", "int"]],
         "indigoMapBond": ["int", ["int", "int"]],
-        "indigoOneBitsList": ["string", ["int"]],
-        "indigoGetLastError": ["string", []],
+        "indigoMapMolecule": ["int", ["int", "int"]],
         "indigoAllScaffolds": ["int", ["int"]],
         "indigoDecomposedMoleculeScaffold": ["int", ["int"]],
+        "indigoOneBitsList": ["string", ["int"]],
+        "indigoGetLastError": ["string", []],
         "indigoIterateDecomposedMolecules": ["int", ["int"]],
         "indigoDecomposedMoleculeHighlighted": ["int", ["int"]],
         "indigoDecomposedMoleculeWithRGroups": ["int", ["int"]],
