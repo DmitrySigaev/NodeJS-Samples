@@ -1348,6 +1348,21 @@ IndigoObject = function (d, id, parent) {
 
     }
     
+    this.countMatches = function (query) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountMatches(this.id, query.id));
+    }
+ 
+    this.countMatchesWithLimit = function (query, embeddings_limit) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoCountMatchesWithLimit(this.id, query.id, embeddings_limit));
+    }
+    
+    this.iterateMatches = function (query) {
+        d._setSessionId();
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMatches(this.id, query.id)));
+    }
+    
     this.highlightedTarget = function () {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoHighlightedTarget(id)));
@@ -1646,6 +1661,9 @@ function Indigo() {
         "indigoUnignoreAtom": ["int", ["int", "int"]],
         "indigoUnignoreAllAtoms": ["int", ["int"]],
         "indigoMatch": ["int", ["int", "int"]],
+        "indigoCountMatches": ["int", ["int", "int"]],
+        "indigoCountMatchesWithLimit": ["int", ["int", "int", "int"]],
+        "indigoIterateMatches": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoHighlightedTarget": ["int", ["int"]],
