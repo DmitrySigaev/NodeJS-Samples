@@ -1320,7 +1320,7 @@ IndigoObject = function (d, id, parent) {
         if (newobj == 0)
             return null;
         else
-            return d.IndigoObject(d, newobj, this)
+            return d.IndigoObject(d, newobj, this);
     }
     
     this.ignoreAtom = function (atom_object) {
@@ -1328,9 +1328,24 @@ IndigoObject = function (d, id, parent) {
         return d._checkResult(d._lib.indigoIgnoreAtom(this.id, atom_object.id));
     }
     
+    this.unignoreAtom = function (atom_object) {
+        d._setSessionId();
+        return d._checkResult(d._lib.indigoUnignoreAtom(this.id, atom_object.id));
+    }
+
     this.unignoreAllAtoms = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoUnignoreAllAtoms(id));
+        return d._checkResult(d._lib.indigoUnignoreAllAtoms(this.id));
+    }
+    
+    this.match = function (query) {
+        d._setSessionId();
+        newobj = d._checkResult(d._lib.indigoMatch(this.id, query.id));
+        if (newobj == null)
+            return null;
+        else
+            return d.IndigoObject(d, newobj, this);
+
     }
     
     this.highlightedTarget = function () {
@@ -1628,9 +1643,11 @@ function Indigo() {
         "indigoClear": ["int", ["int"]],
         "indigoIterateArray": ["int", ["int"]],
         "indigoIgnoreAtom": ["int", ["int", "int"]],
+        "indigoUnignoreAtom": ["int", ["int", "int"]],
+        "indigoUnignoreAllAtoms": ["int", ["int"]],
+        "indigoMatch": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoUnignoreAllAtoms": ["int", ["int"]],
         "indigoHighlightedTarget": ["int", ["int"]],
         "indigoAllScaffolds": ["int", ["int"]],
         "indigoDecomposedMoleculeScaffold": ["int", ["int"]],
