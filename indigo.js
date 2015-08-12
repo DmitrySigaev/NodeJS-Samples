@@ -1345,7 +1345,6 @@ IndigoObject = function (d, id, parent) {
             return null;
         else
             return d.IndigoObject(d, newobj, this);
-
     }
     
     this.countMatches = function (query) {
@@ -1365,9 +1364,26 @@ IndigoObject = function (d, id, parent) {
     
     this.highlightedTarget = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoHighlightedTarget(id)));
+        return d.IndigoObject(d, d._checkResult(d._lib.indigoHighlightedTarget(this.id)));
     }
 
+    this.mapAtom = function (atom) {
+        d._setSessionId();
+        newobj = d._checkResult(d._lib.indigoMapAtom(this.id, atom.id));
+        if (newobj == null)
+            return null;
+        else
+            return d.IndigoObject(d, newobj, this);
+    }
+    
+    this.mapBond = function (bond) {
+        d._setSessionId();
+        newobj = d._checkResult(d._lib.indigoMapBond(this.id, bond.id));
+        if (newobj == null)
+            return null;
+        else
+            return d.IndigoObject(d, newobj, this);
+    }
     this.allScaffolds = function () {
         d._setSessionId();
         return d.IndigoObject(d, d._checkResult(d._lib.indigoAllScaffolds(id)));
@@ -1664,9 +1680,11 @@ function Indigo() {
         "indigoCountMatches": ["int", ["int", "int"]],
         "indigoCountMatchesWithLimit": ["int", ["int", "int", "int"]],
         "indigoIterateMatches": ["int", ["int", "int"]],
+        "indigoHighlightedTarget": ["int", ["int"]],
+        "indigoMapAtom": ["int", ["int", "int"]],
+        "indigoMapBond": ["int", ["int", "int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoHighlightedTarget": ["int", ["int"]],
         "indigoAllScaffolds": ["int", ["int"]],
         "indigoDecomposedMoleculeScaffold": ["int", ["int"]],
         "indigoIterateDecomposedMolecules": ["int", ["int"]],
