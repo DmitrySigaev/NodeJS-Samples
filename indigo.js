@@ -1457,7 +1457,7 @@ IndigoObject = function (d, id, parent) {
 
     this.expandAbbreviations = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoExpandAbbreviations(id));
+        return d._checkResult(d._lib.indigoExpandAbbreviations(this.id));
     }
     
     this.dbgInternalType = function () {
@@ -1738,9 +1738,9 @@ function Indigo() {
         "indigoAddDecomposition": ["int", ["int", "int"]],
         "indigoToString": ["string", ["int"]],
         "indigoToBuffer": ["int", ["int", byte_ptr, int_ptr]],
+        "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["int", ["int"]],
         "indigoLoadReactionFromString": ["int", ["string"]], 
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
