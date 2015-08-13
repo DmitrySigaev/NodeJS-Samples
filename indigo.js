@@ -1444,6 +1444,16 @@ IndigoObject = function (d, id, parent) {
         }
         return res;
     }
+    
+    this.stereocenterPyramid = function () {
+        d._setSessionId();
+        ptr = d._checkResultPtr(d._lib.indigoStereocenterPyramid(this.id));
+        res = new Array();
+        for (i = 0; i < 4; i++) {
+            res.push(ptr[i]);
+        }
+        return res;
+    }
 
     this.expandAbbreviations = function () {
         d._setSessionId();
