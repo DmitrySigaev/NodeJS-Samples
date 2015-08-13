@@ -1432,7 +1432,19 @@ IndigoObject = function (d, id, parent) {
         d._setSessionId();
         return d._checkResultString(d._lib.indigoToString(this.id));
     }
-   
+    
+    this.toBuffer = function () {
+        d._setSessionId();
+        var size = ref.alloc('int'); // allocate a 4-byte (32-bit) chunk for the output value
+        buf = new ByteArray();
+        out_res = d._checkResult(d._lib.indigoToBuffer(this.id, buf, size));
+        res = new Array();
+        for (i = 0; i < size.deref(); i++) {
+            res.push(buf[i]);
+        }
+        return res;
+    }
+
     this.expandAbbreviations = function () {
         d._setSessionId();
         return d._checkResult(d._lib.indigoExpandAbbreviations(id));
@@ -1715,6 +1727,7 @@ function Indigo() {
         "indigoIterateDecompositions": ["int", ["int"]],
         "indigoAddDecomposition": ["int", ["int", "int"]],
         "indigoToString": ["string", ["int"]],
+        "indigoToBuffer": ["int", ["int", byte_ptr, int_ptr]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
         "indigoExpandAbbreviations": ["int", ["int"]],
