@@ -1462,7 +1462,7 @@ IndigoObject = function (d, id, parent) {
     
     this.dbgInternalType = function () {
         d._setSessionId();
-        return d._checkResult(d._lib.indigoDbgInternalType(id));
+        return d._checkResultString(d._lib.indigoDbgInternalType(this.id));
     }
     
 
@@ -1738,10 +1738,11 @@ function Indigo() {
         "indigoAddDecomposition": ["int", ["int", "int"]],
         "indigoToString": ["string", ["int"]],
         "indigoToBuffer": ["int", ["int", byte_ptr, int_ptr]],
+        "indigoStereocenterPyramid": [int_ptr, ["int"]],
         "indigoExpandAbbreviations": ["int", ["int"]],
+        "indigoDbgInternalType": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
         "indigoGetLastError": ["string", []],
-        "indigoDbgInternalType": ["int", ["int"]],
         "indigoLoadReactionFromString": ["int", ["string"]], 
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
         "indigoLoadMoleculeFromString": ["int", ["string"]],
