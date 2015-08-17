@@ -1789,17 +1789,35 @@ function Indigo() {
         if (this._lib)
             this._lib.indigoReleaseSessionId(this._sid);
     }
-    this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result; }
-    this._checkResultFloat = function (result) { if (result < -0.5) { throw new Error('indigo:res < -0.5[' + result + ']') } return result; }
-    this._checkResultPtr = function (result) { if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result; }
-    this._checkResultString = function (result) { console.log(result); return result; }
+
     this.writeBuffer = function () {
         this._setSessionId();
         id = this._checkResult(this._lib.indigoWriteBuffer());
         return IndigoObject(this, id);
     }
-    this.writeBuffer = function (self) { this._setSessionId(); id = this._checkResult(this._lib.indigoWriteBuffer()); return IndigoObject(id) }
     
+    this.writeFile = function (filename) {
+        this._setSessionId();
+        id = this._checkResult(this._lib.indigoWriteFile(filename));
+        return IndigoObject(this, id);
+    }
+    
+    this.unserialize = function (arr) {
+        this._setSessionId()
+        values = new ByteArray(arr.length);
+        for (i = 0; i < arr.length; i++)
+            values[i] = arr[i];
+        res = Indigo._lib.indigoUnserialize(values, arr.length);
+        return IndigoObject(this, this._checkResult(res));
+    }
+
+
+    this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result; }
+    this._checkResultFloat = function (result) { if (result < -0.5) { throw new Error('indigo:res < -0.5[' + result + ']') } return result; }
+    this._checkResultPtr = function (result) { if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result; }
+    this._checkResultString = function (result) { console.log(result); return result; }
+    
+
     this.iterateSDFile = function (filename) {
         this._setSessionId();
         this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));
