@@ -1516,8 +1516,8 @@ function Indigo() {
         "indigoFree": ["int", ["int"]],
         "indigoCountReferences": ["int", []],
         "indigoFreeAllObjects": ["int", []],
-
         "indigoWriteBuffer": ["int", []],
+        "indigoCreateMolecule": ["int", []],
         "indigoIterateSDFile": ["int", ["string"]],
         "indigoNext": ["int", ["int"]],
         "indigoHasNext": ["int", ["int"]],
@@ -1829,6 +1829,11 @@ function Indigo() {
         return this._checkResult(this._lib.indigoCountReferences());
     }
     
+    this.createMolecule = function () {
+        this._setSessionId()
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateMolecule()));
+    }
+
     this.iterateSDFile = function (filename) {
         this._setSessionId();
         this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));
