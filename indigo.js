@@ -1507,6 +1507,7 @@ function Indigo() {
         
     var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo';
     this._lib = ffi.Library(libpath, {
+        "indigoDbgBreakpoint":["void",[]],
         "indigoVersion": ["string", []], 
         "indigoAllocSessionId": [qword, []],
         "indigoSetSessionId": ["void", [qword]],
@@ -1817,6 +1818,11 @@ function Indigo() {
     this._checkResultPtr = function (result) { if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result; }
     this._checkResultString = function (result) { console.log(result); return result; }
     
+    
+    this.dbgBreakpoint = function () {
+        this._setSessionId()
+        return Indigo._lib.indigoDbgBreakpoint();
+    }
 
     this.iterateSDFile = function (filename) {
         this._setSessionId();
