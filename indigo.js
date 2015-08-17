@@ -1820,10 +1820,15 @@ function Indigo() {
     
     
     this.dbgBreakpoint = function () {
-        this._setSessionId()
-        return Indigo._lib.indigoDbgBreakpoint();
+        this._setSessionId();
+        return this._lib.indigoDbgBreakpoint();
     }
-
+    
+    this.countReferences = function () {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoCountReferences());
+    }
+    
     this.iterateSDFile = function (filename) {
         this._setSessionId();
         this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));
