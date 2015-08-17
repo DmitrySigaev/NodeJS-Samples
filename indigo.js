@@ -1481,14 +1481,42 @@ function Indigo() {
     int_ptr = ref.refType('int');
     byte_ptr = ref.refType('byte');
     float_ptr = ref.refType('float');
+    
+    ABS = 1;
+    OR = 2;
+    AND = 3;
+    EITHER = 4;
+    UP = 5;
+    DOWN = 6;
+    CIS = 7;
+    TRANS = 8;
+    CHAIN = 9;
+    RING = 10;
+    ALLENE = 11;
+    
+    SINGLET = 101;
+    DOUBLET = 102;
+    TRIPLET = 103;
+    RC_NOT_CENTER = -1;
+    RC_UNMARKED = 0;
+    RC_CENTER = 1;
+    RC_UNCHANGED = 2;
+    RC_MADE_OR_BROKEN = 4;
+    RC_ORDER_CHANGED = 8;
+    
         
     var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo';
     this._lib = ffi.Library(libpath, {
         "indigoVersion": ["string", []], 
         "indigoAllocSessionId": [qword, []],
         "indigoSetSessionId": ["void", [qword]],
-        "indigoWriteBuffer": ["int", []],
+        "indigoReleaseSessionId": ["void", [qword]],
+        "indigoGetLastError": ["string", []],
         "indigoFree": ["int", ["int"]],
+        "indigoCountReferences": ["int", []],
+        "indigoFreeAllObjects": ["int", []],
+
+        "indigoWriteBuffer": ["int", []],
         "indigoIterateSDFile": ["int", ["string"]],
         "indigoNext": ["int", ["int"]],
         "indigoHasNext": ["int", ["int"]],
@@ -1742,11 +1770,11 @@ function Indigo() {
         "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
-        "indigoGetLastError": ["string", []],
         "indigoLoadReactionFromString": ["int", ["string"]], 
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
         "indigoLoadMoleculeFromString": ["int", ["string"]],
         "indigoLoadQueryMoleculeFromString": ["int", ["string"]]
+
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -1757,6 +1785,10 @@ function Indigo() {
 
     this._sid = this._lib.indigoAllocSessionId();
     this._setSessionId = function () { this._lib.indigoSetSessionId(this._sid) };
+    this.release = function () {
+        if (this._lib)
+            this._lib.indigoReleaseSessionId(this._sid);
+    }
     this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result; }
     this._checkResultFloat = function (result) { if (result < -0.5) { throw new Error('indigo:res < -0.5[' + result + ']') } return result; }
     this._checkResultPtr = function (result) { if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result; }
@@ -1767,6 +1799,7 @@ function Indigo() {
         return IndigoObject(this, id);
     }
     this.writeBuffer = function (self) { this._setSessionId(); id = this._checkResult(this._lib.indigoWriteBuffer()); return IndigoObject(id) }
+    
     this.iterateSDFile = function (filename) {
         this._setSessionId();
         this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));

@@ -49,7 +49,6 @@ console.log('[' + __filename + ']' + "Bingo.version:" + Bingo.version());
 m = ind.indigo().iterateSDFile("./mols.sdf");
 console.log("molobject: " + m.id);////ind._lib.indigoSaveMolfileToFile(m.id, "aaa.mol");
 mol_stri = m.next().value.molfile();////t = m.next().value.saveMolfile("ttt.mol");
-m.next().value.molfile();
 
 
 console.log('[' +__filename + ']' + ": modules initialization");
