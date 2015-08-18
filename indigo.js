@@ -1835,9 +1835,14 @@ function Indigo() {
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateMolecule()));
     }
     
-    this.createQueryMolecule  = function () {
+    this.createQueryMolecule = function () {
         this._setSessionId()
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateQueryMolecule()));
+    }
+    
+    this.loadMolecule = function (string) {
+        this._setSessionId()
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadMoleculeFromString(string)));
     }
     
     this.iterateSDFile = function (filename) {
