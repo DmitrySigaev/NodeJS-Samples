@@ -1776,7 +1776,8 @@ function Indigo() {
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
         "indigoLoadMoleculeFromString": ["int", ["string"]],
         "indigoLoadMoleculeFromFile": ["int", ["string"]],
-        "indigoLoadQueryMoleculeFromString": ["int", ["string"]]
+        "indigoLoadQueryMoleculeFromString": ["int", ["string"]],
+        "indigoLoadQueryMoleculeFromFile": ["int", ["string"]]
 
     });
     
@@ -1846,9 +1847,19 @@ function Indigo() {
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadMoleculeFromString(string)));
     }
     
-    this.loadMolecule = function (filename) {
+    this.loadMoleculeFromFile = function (filename) {
         this._setSessionId()
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadMoleculeFromFile(filename)));
+    }
+    
+    this.loadQueryMolecule = function (string) {
+        this._setSessionId()
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryMoleculeFromString(string)));
+    }
+    
+    this.loadQueryMoleculeFromFile = function (filename) {
+        this._setSessionId()
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryMoleculeFromFile(filename)));
     }
     
     this.iterateSDFile = function (filename) {
