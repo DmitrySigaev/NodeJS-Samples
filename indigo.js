@@ -1772,14 +1772,15 @@ function Indigo() {
         "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
-        "indigoLoadReactionFromString": ["int", ["string"]], 
         "indigoLoadQueryReactionFromString": ["int", ["string"]], 
         "indigoLoadMoleculeFromString": ["int", ["string"]],
         "indigoLoadMoleculeFromFile": ["int", ["string"]],
         "indigoLoadQueryMoleculeFromString": ["int", ["string"]],
         "indigoLoadQueryMoleculeFromFile": ["int", ["string"]],
         "indigoLoadSmartsFromString": ["int", ["string"]],
-        "indigoLoadSmartsFromFile": ["int", ["string"]]
+        "indigoLoadSmartsFromFile": ["int", ["string"]],
+        "indigoLoadReactionFromString": ["int", ["string"]],
+        "indigoLoadReactionFromFile": ["int", ["string"]]
 
     });
     
@@ -1809,7 +1810,7 @@ function Indigo() {
     }
     
     this.unserialize = function (arr) {
-        this._setSessionId()
+        this._setSessionId();
         values = new ByteArray(arr.length);
         for (i = 0; i < arr.length; i++)
             values[i] = arr[i];
@@ -1835,43 +1836,53 @@ function Indigo() {
     }
     
     this.createMolecule = function () {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateMolecule()));
     }
     
     this.createQueryMolecule = function () {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateQueryMolecule()));
     }
     
     this.loadMolecule = function (string) {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadMoleculeFromString(string)));
     }
     
     this.loadMoleculeFromFile = function (filename) {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadMoleculeFromFile(filename)));
     }
     
     this.loadQueryMolecule = function (string) {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryMoleculeFromString(string)));
     }
     
     this.loadQueryMoleculeFromFile = function (filename) {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryMoleculeFromFile(filename)));
     }
     
     this.loadSmarts = function (string) {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadSmartsFromString(string)));
     }
     
     this.loadSmartsFromFile = function (filename) {
-        this._setSessionId()
+        this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadSmartsFromFile(filename)));
+    }
+    
+    this.loadReaction = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionFromString(string)));
+    }
+    
+    this.loadReactionFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionFromFile(filename)));
     }
     
     this.iterateSDFile = function (filename) {
