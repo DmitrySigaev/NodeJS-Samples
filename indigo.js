@@ -1784,7 +1784,8 @@ function Indigo() {
         "indigoLoadQueryReactionFromFile": ["int", ["string"]],
         "indigoLoadReactionSmartsFromString": ["int", ["string"]],
         "indigoLoadReactionSmartsFromFile": ["int", ["string"]],
-        "indigoCreateReaction": ["int", []]
+        "indigoCreateReaction": ["int", []],
+        "indigoCreateQueryReaction": ["int", []]
 
     });
     
@@ -1908,8 +1909,13 @@ function Indigo() {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionSmartsFromFile(filename)));
     }
-    
+       
     this.createReaction = function () {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateReaction()));
+    }
+    
+    this.createQueryReaction = function () {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateQueryReaction()));
     }
