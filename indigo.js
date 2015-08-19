@@ -1772,7 +1772,6 @@ function Indigo() {
         "indigoExpandAbbreviations": ["int", ["int"]],
         "indigoDbgInternalType": ["string", ["int"]],
         "indigoOneBitsList": ["string", ["int"]],
-        "indigoLoadQueryReactionFromString": ["int", ["string"]], 
         "indigoLoadMoleculeFromString": ["int", ["string"]],
         "indigoLoadMoleculeFromFile": ["int", ["string"]],
         "indigoLoadQueryMoleculeFromString": ["int", ["string"]],
@@ -1780,7 +1779,9 @@ function Indigo() {
         "indigoLoadSmartsFromString": ["int", ["string"]],
         "indigoLoadSmartsFromFile": ["int", ["string"]],
         "indigoLoadReactionFromString": ["int", ["string"]],
-        "indigoLoadReactionFromFile": ["int", ["string"]]
+        "indigoLoadReactionFromFile": ["int", ["string"]],
+        "indigoLoadQueryReactionFromString": ["int", ["string"]],
+        "indigoLoadQueryReactionFromFile": ["int", ["string"]]
 
     });
     
@@ -1883,6 +1884,16 @@ function Indigo() {
     this.loadReactionFromFile = function (filename) {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionFromFile(filename)));
+    }
+    
+    this.loadQueryReaction = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryReactionFromString(string)));
+    }
+    
+    this.loadQueryReactionFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryReactionFromFile(filename)));
     }
     
     this.iterateSDFile = function (filename) {
