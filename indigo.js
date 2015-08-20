@@ -1786,7 +1786,10 @@ function Indigo() {
         "indigoLoadReactionSmartsFromFile": ["int", ["string"]],
         "indigoCreateReaction": ["int", []],
         "indigoCreateQueryReaction": ["int", []], 
-         "indigoExactMatch": ["int", ["int", "int", "string"]]
+        "indigoExactMatch": ["int", ["int", "int", "string"]],
+        "indigoSetTautomerRule": ["int", ["int", "string", "string"]],
+        "indigoRemoveTautomerRule": ["int", ["int"]], 
+        "indigoClearTautomerRules": ["int", []], 
 
     });
     
@@ -1933,6 +1936,21 @@ function Indigo() {
             return IndigoObject(this, newobj, [item1, item2, this]);
     }
     
+    this.setTautomerRule = function (id, beg, end) {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoSetTautomerRule(id, beg, end));
+    }
+    
+    this.removeTautomerRule = function (id) {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoRemoveTautomerRule(id));
+    }
+    
+    this.clearTautomerRules = function () {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoClearTautomerRules());
+    }
+
     this.iterateSDFile = function (filename) {
         this._setSessionId();
         this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));
