@@ -1519,7 +1519,6 @@ function Indigo() {
         "indigoWriteBuffer": ["int", []],
         "indigoCreateMolecule": ["int", []],
         "indigoCreateQueryMolecule": ["int", []],
-        "indigoIterateSDFile": ["int", ["string"]],
         "indigoNext": ["int", ["int"]],
         "indigoHasNext": ["int", ["int"]],
         "indigoClone": ["int", ["int"]],
@@ -1792,7 +1791,10 @@ function Indigo() {
         "indigoClearTautomerRules": ["int", []], 
         "indigoUnserialize": ["int", [byte_ptr, "int"]],
         "indigoCommonBits": ["int", ["int", "int"]], 
-        "indigoSimilarity": ["float", ["int", "int", "string"]]
+        "indigoSimilarity": ["float", ["int", "int", "string"]], 
+        "indigoIterateSDFile": ["int", ["string"]],
+        "indigoIterateRDFile": ["int", ["string"]],
+        "indigoIterateSmilesFile": ["int", ["string"]]
         
     });
     
@@ -1969,8 +1971,17 @@ function Indigo() {
     
     this.iterateSDFile = function (filename) {
         this._setSessionId();
-        this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));
-        return this;
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateSDFile(filename)));
+    }
+    
+    this.iterateRDFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateRDFile(filename)));
+    }
+    
+    this.iterateSmilesFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateSmilesFile(filename)));
     }
     
     this.next = function () {
