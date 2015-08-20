@@ -1790,7 +1790,10 @@ function Indigo() {
         "indigoSetTautomerRule": ["int", ["int", "string", "string"]],
         "indigoRemoveTautomerRule": ["int", ["int"]], 
         "indigoClearTautomerRules": ["int", []], 
-
+        "indigoUnserialize": ["int", [byte_ptr, "int"]],
+        "indigoCommonBits": ["int", ["int", "int"]], 
+        "indigoSimilarity": ["float", ["int", "int", "string"]]
+        
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -1950,7 +1953,20 @@ function Indigo() {
         this._setSessionId();
         return this._checkResult(this._lib.indigoClearTautomerRules());
     }
-
+    
+    this.commonBits = function (fingerprint1, fingerprint2) {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoCommonBits(fingerprint1.id, fingerprint2.id));
+    }
+    
+    this.similarity = function (item1, item2, metrics) {
+        this._setSessionId();
+        if (metrics === undefined || metrics === null) {
+            metrics = '';
+        }
+        return this._checkResultFloat(this._lib.indigoSimilarity(item1.id, item2.id, metrics));
+    }
+    
     this.iterateSDFile = function (filename) {
         this._setSessionId();
         this.id = this._checkResult(this._lib.indigoIterateSDFile(filename));
