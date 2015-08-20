@@ -1796,8 +1796,8 @@ function Indigo() {
         "indigoIterateRDFile": ["int", ["string"]],
         "indigoIterateSmilesFile": ["int", ["string"]],
         "indigoIterateCMLFile": ["int", ["string"]],
-        "indigoIterateCDXFile": ["int", ["string"]]
-        
+        "indigoIterateCDXFile": ["int", ["string"]], 
+        "indigoCreateFileSaver": ["int", ["string", "string"]]        
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -1996,6 +1996,12 @@ function Indigo() {
         return IndigoObject(this, this._checkResult(this._lib.indigoIterateCDXFile(filename)));
     }
     
+    this.createFileSaver = function (filename, format) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateFileSaver(filename, format)));
+    }
+    
+
     this.next = function () {
         this._setSessionId();
         newobj = this._checkResult(this._lib.indigoNext(this.id))
