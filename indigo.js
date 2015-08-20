@@ -1794,7 +1794,9 @@ function Indigo() {
         "indigoSimilarity": ["float", ["int", "int", "string"]], 
         "indigoIterateSDFile": ["int", ["string"]],
         "indigoIterateRDFile": ["int", ["string"]],
-        "indigoIterateSmilesFile": ["int", ["string"]]
+        "indigoIterateSmilesFile": ["int", ["string"]],
+        "indigoIterateCMLFile": ["int", ["string"]],
+        "indigoIterateCDXFile": ["int", ["string"]]
         
     });
     
@@ -1982,6 +1984,16 @@ function Indigo() {
     this.iterateSmilesFile = function (filename) {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoIterateSmilesFile(filename)));
+    }
+    
+    this.iterateCMLFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateCMLFile(filename)));
+    }
+    
+    this.iterateCDXFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateCDXFile(filename)));
     }
     
     this.next = function () {
