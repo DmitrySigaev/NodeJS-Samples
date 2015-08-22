@@ -44,7 +44,7 @@ IndigoObject = function (d, id, parent) {
     this.mdlct = function () {
         d._setSessionId();
         buf = d.writeBuffer();
-        d._checkResult(d._lib.indigoSaveMDLCT(id, buf.id));
+        d._checkResult(d._lib.indigoSaveMDLCT(this.id, buf.id));
         return buf.toBuffer();
     }
     
@@ -68,7 +68,7 @@ IndigoObject = function (d, id, parent) {
         xyz = new FloatArray(desired_xyz.length);
         for (i = 0; i < desired_xyz.length; i++)
             xyz[i] = desired_xyz[i];
-        return d._checkResultFloat(d._lib.indigoAlignAtoms(id, atoms.length, atoms, xyz));
+        return d._checkResultFloat(d._lib.indigoAlignAtoms(this.id, atoms.length, atoms, xyz));
     }
     
     this.addStereocenter = function (type, v1, v2, v3, v4) {
