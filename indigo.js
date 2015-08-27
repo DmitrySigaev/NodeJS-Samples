@@ -1800,7 +1800,9 @@ function Indigo() {
         "indigoCreateFileSaver": ["int", ["string", "string"]],
         "indigoCreateSaver": ["int", ["int", "string"]],
         "indigoCreateArray": ["int", []], 
-        "indigoSubstructureMatcher": ["int", ["int", "string"]]
+        "indigoSubstructureMatcher": ["int", ["int", "string"]], 
+        "indigoExtractCommonScaffold": ["int", ["int", "string"]]
+        
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2020,6 +2022,31 @@ function Indigo() {
             mode = '';
         }
         return IndigoObject(this, this._checkResult(this._lib.indigoSubstructureMatcher(target.id, mode)), target);
+    }
+/*    
+    def convertToArray(self, iteratable):
+    if isinstance(iteratable, IndigoObject):
+    return iteratable
+    try:
+        some_object_iterator = iter(iteratable)
+        res = self.createArray()
+        for obj in some_object_iterator:
+                 res.arrayAdd(self.convertToArray(obj))
+            return res
+        except TypeError:
+            raise IndigoException("Cannot convert object %s to an array" % (iteratable))
+*/
+    this.extractCommonScaffold = function (structures, options) {
+        this._setSessionId();
+        if (options === undefined || options === null) {
+            options = '';
+        }
+        structures = this.convertToArray(structures);
+        newobj = this._checkResult(this._lib.indigoExtractCommonScaffold(structures.id, options));
+        if (newobj == null)
+            return null;
+        else
+            return IndigoObject(this, newobj, this);
     }
 
     this.next = function () {
