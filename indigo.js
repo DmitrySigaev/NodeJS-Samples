@@ -1798,7 +1798,8 @@ function Indigo() {
         "indigoIterateCMLFile": ["int", ["string"]],
         "indigoIterateCDXFile": ["int", ["string"]], 
         "indigoCreateFileSaver": ["int", ["string", "string"]],
-        "indigoCreateSaver": ["int", ["int", "string"]]        
+        "indigoCreateSaver": ["int", ["int", "string"]],
+        "indigoCreateArray": ["int", []]        
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2005,6 +2006,11 @@ function Indigo() {
     this.createSaver = function (obj, format) {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateSaver(obj.id, format)));
+    }
+    
+    this.createArray = function () {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateArray()));
     }
 
     this.next = function () {
