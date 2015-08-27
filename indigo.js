@@ -1799,7 +1799,8 @@ function Indigo() {
         "indigoIterateCDXFile": ["int", ["string"]], 
         "indigoCreateFileSaver": ["int", ["string", "string"]],
         "indigoCreateSaver": ["int", ["int", "string"]],
-        "indigoCreateArray": ["int", []]        
+        "indigoCreateArray": ["int", []], 
+        "indigoSubstructureMatcher": ["int", ["int", "string"]]
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2011,6 +2012,14 @@ function Indigo() {
     this.createArray = function () {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateArray()));
+    }
+    
+    this.substructureMatcher = function (target, mode) {
+        this._setSessionId();
+        if (mode === undefined || mode === null) {
+            mode = '';
+        }
+        return IndigoObject(this, this._checkResult(this._lib.indigoSubstructureMatcher(target.id, mode)), target);
     }
 
     this.next = function () {
