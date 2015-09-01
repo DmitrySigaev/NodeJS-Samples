@@ -1801,8 +1801,9 @@ function Indigo() {
         "indigoCreateSaver": ["int", ["int", "string"]],
         "indigoCreateArray": ["int", []], 
         "indigoSubstructureMatcher": ["int", ["int", "string"]], 
-        "indigoExtractCommonScaffold": ["int", ["int", "string"]]
-        
+        "indigoExtractCommonScaffold": ["int", ["int", "string"]],
+        "indigoDecomposeMolecules": ["int", ["int", "int"]], 
+        "indigoCreateDecomposer": ["int", ["int"]]        
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2053,6 +2054,11 @@ function Indigo() {
         this._setSessionId();
         structures = this.convertToArray(structures);
         return IndigoObject(this, this._checkResult(this._lib.indigoDecomposeMolecules(scaffold.id, structures.id)), scaffold);
+    }
+    
+    this.createDecomposer = function (scaffold) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateDecomposer(scaffold.id)), scaffold);
     }
 
     this.next = function () {
