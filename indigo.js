@@ -2048,6 +2048,12 @@ function Indigo() {
         else
             return IndigoObject(this, newobj, this);
     }
+    
+    this.decomposeMolecules = function (scaffold, structures) {
+        this._setSessionId();
+        structures = this.convertToArray(structures);
+        return IndigoObject(this, this._checkResult(this._lib.indigoDecomposeMolecules(scaffold.id, structures.id)), scaffold);
+    }
 
     this.next = function () {
         this._setSessionId();
