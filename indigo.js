@@ -1804,8 +1804,10 @@ function Indigo() {
         "indigoExtractCommonScaffold": ["int", ["int", "string"]], 
         "indigoDecomposeMolecules": ["int", ["int", "int"]], 
         "indigoCreateDecomposer": ["int", ["int"]], 
-        "indigoReactionProductEnumerate": ["int", ["int", "int"]]
-    
+        "indigoReactionProductEnumerate": ["int", ["int", "int"]], 
+        "indigoTransform": ["int", ["int", "int"]],
+        "indigoLoadBuffer": ["int", [byte_ptr, "int"]],
+        "indigoLoadString": ["int", ["string"]],
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2086,6 +2088,11 @@ function Indigo() {
             values[i] = arr[i];
         res = Indigo._lib.indigoLoadBuffer(values, arr.length);
         return IndigoObject(this, this._checkResult(res));
+    }
+    
+    this.loadString = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadString(string)));
     }
 
     this.next = function () {
