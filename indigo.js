@@ -1809,8 +1809,10 @@ function Indigo() {
         "indigoLoadBuffer": ["int", [byte_ptr, "int"]],
         "indigoLoadString": ["int", ["string"]],
         "indigoIterateSDF": ["int", ["int"]], 
-        "indigoIterateSmiles": ["int", ["int"]]
-        
+        "indigoIterateSmiles": ["int", ["int"]],
+        "indigoIterateCML": ["int", ["int"]],
+        "indigoIterateCDX": ["int", ["int"]],
+        "indigoIterateRDF": ["int", ["int"]]
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2110,6 +2112,33 @@ function Indigo() {
     this.iterateSmiles = function (reader) {
         this._setSessionId();
         result = this._checkResult(this._lib.indigoIterateSmiles(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
+    this.iterateCML = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateCML(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
+    this.iterateCDX = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateCDX(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+
+    this.iterateRDF = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateRDF(reader.id));
         if (result == null)
             return null;
         else
