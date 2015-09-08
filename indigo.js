@@ -2077,6 +2077,16 @@ function Indigo() {
         else
             return IndigoObject(this, newobj, this);
     }
+    
+    this.loadBuffer = function (buf) {
+        this._setSessionId();
+        arr = buf.split('');
+        values = new ByteArray(arr.length);
+        for (i = 0; i < arr.length; i++)
+            values[i] = arr[i];
+        res = Indigo._lib.indigoLoadBuffer(values, arr.length);
+        return IndigoObject(this, this._checkResult(res));
+    }
 
     this.next = function () {
         this._setSessionId();
