@@ -1808,6 +1808,9 @@ function Indigo() {
         "indigoTransform": ["int", ["int", "int"]],
         "indigoLoadBuffer": ["int", [byte_ptr, "int"]],
         "indigoLoadString": ["int", ["string"]],
+        "indigoIterateSDF": ["int", ["int"]], 
+        "indigoIterateSmiles": ["int", ["int"]]
+        
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2094,7 +2097,25 @@ function Indigo() {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadString(string)));
     }
-
+    
+    this.iterateSDF = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateSDF(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
+    this.iterateSmiles = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateSmiles(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
     this.next = function () {
         this._setSessionId();
         newobj = this._checkResult(this._lib.indigoNext(this.id))
