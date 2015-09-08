@@ -2069,6 +2069,15 @@ function Indigo() {
         return IndigoObject(this, this._checkResult(this._lib.indigoReactionProductEnumerate(replacedaction.id, monomers.id)), replacedaction);
     }
     
+    this.transform = function (reaction, monomers) {
+        this._setSessionId();
+        newobj = this._checkResult(this._lib.indigoTransform(reaction.id, monomers.id));
+        if (newobj == null)
+            return null;
+        else
+            return IndigoObject(this, newobj, this);
+    }
+
     this.next = function () {
         this._setSessionId();
         newobj = this._checkResult(this._lib.indigoNext(this.id))
