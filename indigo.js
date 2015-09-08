@@ -1812,7 +1812,9 @@ function Indigo() {
         "indigoIterateSmiles": ["int", ["int"]],
         "indigoIterateCML": ["int", ["int"]],
         "indigoIterateCDX": ["int", ["int"]],
-        "indigoIterateRDF": ["int", ["int"]]
+        "indigoIterateRDF": ["int", ["int"]], 
+/*        "indigoIterateTautomers": ["int", ["int", "string"]] */
+
     });
     
     /* function indigo.vesrion() gets node +indigo versions*/
@@ -2143,6 +2145,15 @@ function Indigo() {
             return null;
         else
             return IndigoObject(this, result, reader);
+    }
+    
+    this.iterateTautomers = function (molecule, params) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateTautomers(molecule.id, params));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, molecule);
     }
     
     this.next = function () {
