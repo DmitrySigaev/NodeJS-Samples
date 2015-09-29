@@ -19,20 +19,22 @@ exports.done = false;
 /* start of file <- */
 
 console.log('Standard ECMA-262 3rd Edition - December 1999:');
-console.log('Execution context:');
-// influence global context
-function foo() {
-    var x = 1;
-    return function () { console.log(x); };
-};
+console.log('Variable object:');
+/*
+ * Always in programs we declare functions and variables which then successfully use building our systems.
+ * But how and where the interpreter finds our data (functions, variable)?
+ *  What occurs, when we reference to needed objects?
+ *  Many ECMAScript programmers know that variables are closely related with the execution context:
+ * */
 
-var bar = foo();
+var a = 10; // variable of the global context
 
-bar(); // 1
+(function () {
+    var b = 20; // local variable of the function context
+})();
 
-eval('x = 2', bar); // pass context, influence internal var "x"
-
-bar(); // 2
+console.log(a); // 10
+console.log(b); // "b" is not defined
 
 
 /* ----------------------------------------- */
