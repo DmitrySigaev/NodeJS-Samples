@@ -18,6 +18,22 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 /* start of file <- */
 
+console.log('Standard ECMA-262 3rd Edition - December 1999:');
+console.log('Execution context:');
+// influence global context
+eval('var x = 10');
+
+(function foo() {
+    // and here, variable "y" is
+    // created in the local context
+    // of "foo" function
+    eval('var y = 20');
+})();
+
+console.log(x); // 10
+console.log(y); // "y" is not defined
+
+
 /* ----------------------------------------- */
 /* todo
 var cluster = require('cluster');
