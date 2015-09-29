@@ -64,6 +64,67 @@ console.log(a === this.a); // true beacause this is exports;
 // var aKey = 'a';
 // console.log(window[aKey]); // косвенно, имя свойства сформировано налету: "test"
 
+/*
+ * Variable object in function context
+ * 
+ * Regarding the execution context of functions — there VO is inaccessible directly,
+ * and its role plays so - called an activation object(in abbreviated form — AO).
+ * 
+ * VO(functionContext) === AO;
+ * 
+ * An activation object is created on entering the context of a function and initialized 
+ * by property arguments which value is the Arguments object:
+ *  
+ * AO ={
+ *   arguments: <ArgO>
+ *   };
+ *   
+ * 
+ * Arguments object is a property of the activation object. It contains the following properties:
+ * callee — the reference to the current function;
+ * length — quantity of real passed arguments;
+ * properties-indexes (integer, converted to string) which values are the values of function’s arguments
+ *  (from left to right in the list of arguments). 
+ *  Quantity of these properties-indexes == arguments.length. 
+ *  Values of properties-indexes of the arguments object and present (really passed) formal parameters are shared.
+ */
+
+function foo(x, y, z) {
+    
+    // quantity of defined function arguments (x, y, z)
+    console.log('foo.length: '+ foo.length); // 3
+    
+    // quantity of really passed arguments (only x, y)
+    console.log('arguments.length:' + arguments.length); // 2
+    
+    // reference of a function to itself
+    console.log('arguments.callee === foo: ' + (arguments.callee === foo)); // true
+    
+    // parameters sharing
+    
+    console.log('x === arguments[0]: ' + (x === arguments[0])); // true
+    console.log(x); // 10
+    
+    arguments[0] = 20;
+    console.log(x); // 20
+    
+    x = 30;
+    console.log('arguments[0]: '+arguments[0]); // 30
+    
+    // however, for not passed argument z,
+    // related index-property of the arguments
+    // object is not shared
+    
+    z = 40;
+    console.log('arguments[2]:'+ arguments[2]); // undefined
+    
+    arguments[2] = 50;
+    console.log(z); // 40
+  
+}
+
+foo(10, 20);
+
 
 /* ----------------------------------------- */
 /* todo
