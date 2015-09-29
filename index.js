@@ -21,17 +21,18 @@ exports.done = false;
 console.log('Standard ECMA-262 3rd Edition - December 1999:');
 console.log('Execution context:');
 // influence global context
-eval('var x = 10');
+function foo() {
+    var x = 1;
+    return function () { console.log(x); };
+};
 
-(function foo() {
-    // and here, variable "y" is
-    // created in the local context
-    // of "foo" function
-    eval('var y = 20');
-})();
+var bar = foo();
 
-console.log(x); // 10
-console.log(y); // "y" is not defined
+bar(); // 1
+
+eval('x = 2', bar); // pass context, influence internal var "x"
+
+bar(); // 2
 
 
 /* ----------------------------------------- */
