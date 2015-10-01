@@ -52,6 +52,7 @@ console.log('k' + k); // variable "k" still in scope even the loop is finished
 */
 
 var a = new String('test');
+b = 10;
 
 console.log(a); // напрямую, будет найдено в VO(globalContext): "test"
 
@@ -125,6 +126,7 @@ function foo(x, y, z) {
 
 foo(10, 20);
 
+console.log(foo.__parent__);
 
 /* ----------------------------------------- */
 /* todo
