@@ -31,21 +31,52 @@ exports.done = false;
 
 
 
-function A() { y = 3; }
+function A() {
+    y = 3;
+    z = 7;
+}
+
 A.prototype.x = 1;
+
+console.log("def A: y:" + y);
+console.log("def A: z:" + z);
+console.log("def A.x:" + A.x);
+
 var y = new A();
 A.prototype = {
     x : 2
 }
-console.log(y.x); // 1;
-console.log(y.y); // 1;
-function B() { y = 3; }
-B.prototype.x = 1;
+
+console.log("y:" + y);
+console.log("z:" + z);
+console.log("A.x:" + A.x);
+
+console.log("A->y.x:" + y.x); 
+console.log("A->y.y:" + y.y); 
+function B() {
+    y =  4;
+    z = 8;
+    if (z > 10)
+         var k = 12;
+    return k;
+}
+
 var b = new B();
+B.prototype.x = 2;
 B.prototype.y = 2;
-console.log(b.x);
-console.log(b.y);
+
+console.log("y:" + y);
+console.log("z:" + z);
+console.log("A.x:" + A.x);
+
+  var z = -1;
+
+console.log("z:" + z);
+
+console.log("B->x:" + b.x);
+console.log("B->y:" + b.y);
  
+
 
 /* ----------------------------------------- */
 /* todo
