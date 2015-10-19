@@ -32,29 +32,51 @@ exports.done = false;
 
 
 function A() {
+    this.x = 0;
     y = 3;
     z = 7;
+    this.x = function (x) { this.x = x };
 }
 
 A.prototype.x = 1;
 
+
+Aproto = A.prototype;
 console.log("def A: y:" + y);
 console.log("def A: z:" + z);
 console.log("def A.x:" + A.x);
 
 var y = new A();
+y.x(5);
+console.log("A->y.x:" + y.x);
+console.log("A->y.y:" + y.y);
+
 A.prototype = {
     x : 2
 }
+
+var yx2 = new A();
+yx2.x(10);
 
 console.log("y:" + y);
 console.log("z:" + z);
 console.log("A.x:" + A.x);
 
 console.log("A->y.x:" + y.x); 
-console.log("A->y.y:" + y.y); 
+console.log("A->y.y:" + y.y);
+
+A.prototype = function() {
+    this.x = 2;
+};
+
+var yx22 = new A();
+
+console.log("A->y.x:" + y.x); 
+console.log("A->y.y:" + y.y);
+
+
 function B() {
-    y =  4;
+    var y =  4;
     z = 8;
     if (z > 10)
          var k = 12;
