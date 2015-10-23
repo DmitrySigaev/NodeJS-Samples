@@ -95,7 +95,7 @@ IndigoObject = function (d, id, parent) {
         if (newobj == 0)
             return null;
         else
-            return d.IndigoObject(d, newobj, this)
+            return IndigoObject(d, newobj, this)
 
     }
 
@@ -121,6 +121,7 @@ IndigoObject = function (d, id, parent) {
 
     this.molfile = function () {
         d._setSessionId();
+        var str = d._lib.indigoMolfile(this.id);
         return d._checkResultString(d._lib.indigoMolfile(this.id));
     }
     
@@ -1468,9 +1469,701 @@ IndigoObject = function (d, id, parent) {
 
 }
 
-function Indigo() {
-    if (!(this instanceof Indigo)) {
-        return new Indigo();
+function Indigo(options) {
+    options = options || {};
+    var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo';
+    this.libpath = options.libpath || libpath;
+    qword = "ulonglong";
+    if (process.platform == "win32") {
+        qword = "uint64";
+    }
+    
+    int_ptr = ref.refType('int');
+    byte_ptr = ref.refType('byte');
+    float_ptr = ref.refType('float');
+
+    this._lib = ffi.Library(libpath, {
+        "indigoDbgBreakpoint": ["void", []],
+        "indigoVersion": ["string", []], 
+        "indigoAllocSessionId": [qword, []],
+        "indigoSetSessionId": ["void", [qword]],
+        "indigoReleaseSessionId": ["void", [qword]],
+        "indigoGetLastError": ["string", []],
+        "indigoFree": ["int", ["int"]],
+        "indigoCountReferences": ["int", []],
+        "indigoFreeAllObjects": ["int", []],
+        "indigoWriteBuffer": ["int", []],
+        "indigoCreateMolecule": ["int", []],
+        "indigoCreateQueryMolecule": ["int", []],
+        "indigoNext": ["int", ["int"]],
+        "indigoHasNext": ["int", ["int"]],
+        "indigoClone": ["int", ["int"]],
+        "indigoClose": ["int", ["int"]],
+        "indigoIndex": ["int", ["int"]],
+        "indigoRemove": ["int", ["int"]],
+        "indigoSaveMolfileToFile": ["int", ["string"]], 
+        "indigoMolfile": ["string", ["int"]],
+        "indigoSaveCmlToFile": ["int", ["string"]], 
+        "indigoCml": ["string", ["int"]],
+        "indigoSaveMDLCT": ["int", ["int", "int"]],
+        "indigoAddReactant": ["int", ["int", "int"]],
+        "indigoAddProduct": ["int", ["int", "int"]],
+        "indigoAddCatalyst": ["int", ["int", "int"]],
+        "indigoCountReactants": ["int", ["int"]],
+        "indigoCountProducts": ["int", ["int"]],
+        "indigoCountCatalysts": ["int", ["int"]],
+        "indigoCountMolecules": ["int", ["int"]],
+        "indigoGetMolecule": ["int", ["int", "int"]],
+        "indigoIterateReactants": ["int", ["int"]],
+        "indigoIterateProducts": ["int", ["int"]],
+        "indigoIterateCatalysts": ["int", ["int"]],
+        "indigoIterateMolecules": ["int", ["int"]],
+        "indigoSaveRxnfileToFile": ["int", ["string"]], 
+        "indigoRxnfile": ["string", ["int"]],
+        "indigoOptimize": ["int", ["int", "string"]], 
+        "indigoNormalize": ["int", ["int", "string"]], 
+        "indigoStandardize": ["int", ["int"]],
+        "indigoAutomap": ["int", ["int", "string"]], 
+        "indigoGetAtomMappingNumber": ["int", ["int", "int"]],
+        "indigoSetAtomMappingNumber": ["int", ["int", "int", "int"]],
+        "indigoGetReactingCenter": ["int", ["int", "int", int_ptr]],
+        "indigoSetReactingCenter": ["int", ["int", "int", "int"]],
+        "indigoClearAAM": ["int", ["int"]],
+        "indigoCorrectReactingCenters": ["int", ["int"]],
+        "indigoIterateAtoms": ["int", ["int"]],
+        "indigoIteratePseudoatoms": ["int", ["int"]],
+        "indigoIterateRSites": ["int", ["int"]],
+        "indigoIterateStereocenters": ["int", ["int"]],
+        "indigoIterateAlleneCenters": ["int", ["int"]],
+        "indigoIterateRGroups": ["int", ["int"]],
+        "indigoIsPseudoatom": ["int", ["int"]],
+        "indigoIsRSite": ["int", ["int"]],
+        "indigoStereocenterType": ["int", ["int"]],
+        "indigoStereocenterGroup": ["int", ["int"]],
+        "indigoSetStereocenterGroup": ["int", ["int", "int"]],
+        "indigoChangeStereocenterType": ["int", ["int", "int"]],
+        "indigoValidateChirality": ["int", ["int"]],
+        "indigoSingleAllowedRGroup": ["int", ["int"]],
+        "indigoAddStereocenter": ["int", ["int", "int", "int", "int", "int", "int"]],
+        "indigoIterateRGroupFragments": ["int", ["int"]],
+        "indigoCountAttachmentPoints": ["int", ["int"]],
+        "indigoIterateAttachmentPoints": ["int", ["int", "int"]],
+        "indigoSymbol": ["int", ["int"]],
+        "indigoDegree": ["int", ["int"]],
+        "indigoGetCharge": ["int", ["int", int_ptr]],
+        "indigoGetExplicitValence": ["int", ["int", int_ptr]],
+        "indigoSetExplicitValence": ["int", ["int", "int"]],
+        "indigoGetRadicalElectrons": ["int", ["int", int_ptr]],
+        "indigoGetRadical": ["int", ["int", int_ptr]],
+        "indigoSetRadical": ["int", ["int", "int"]],
+        "indigoAtomicNumber": ["int", ["int"]],
+        "indigoIsotope": ["int", ["int"]],
+        "indigoValence": ["int", ["int"]],
+        "indigoCountHydrogens": ["int", ["int", int_ptr]],
+        "indigoCountImplicitHydrogens": ["int", ["int"]],
+        "indigoXYZ": [float_ptr, ["int"]],
+        "indigoSetXYZ": ["int", ["int", "float", "float", "float"]],
+        "indigoCountSuperatoms": ["int", ["int"]],
+        "indigoCountDataSGroups": ["int", ["int"]],
+        "indigoCountRepeatingUnits": ["int", ["int"]],
+        "indigoCountMultipleGroups": ["int", ["int"]],
+        "indigoCountGenericSGroups": ["int", ["int"]],
+        "indigoIterateDataSGroups": ["int", ["int"]],
+        "indigoIterateSuperatoms": ["int", ["int"]],
+        "indigoIterateGenericSGroups": ["int", ["int"]],
+        "indigoIterateRepeatingUnits": ["int", ["int"]],
+        "indigoIterateMultipleGroups": ["int", ["int"]],
+        "indigoGetSuperatom": ["int", ["int", "int"]],
+        "indigoGetDataSGroup": ["int", ["int", "int"]],
+        "indigoGetGenericSGroup": ["int", ["int", "int"]],
+        "indigoGetMultipleGroup": ["int", ["int", "int"]],
+        "indigoGetRepeatingUnit": ["int", ["int", "int"]],
+        "indigoDescription": ["string", ["int"]],
+        "indigoData": ["string", ["int"]],
+        "indigoAddDataSGroup": ["int", ["int", "int", int_ptr, "int", int_ptr, "string", "string"]],
+        "indigoAddSuperatom": ["int", ["int", "int", int_ptr, "string"]],
+        "indigoSetDataSGroupXY": ["int", ["int", "float", "float", "string"]],
+        "indigoSetSGroupData": ["int", ["int", "string"]],
+        "indigoSetSGroupCoords": ["int", ["int", "float", "float"]],
+        "indigoSetSGroupDescription": ["int", ["int", "string"]],
+        "indigoSetSGroupFieldName": ["int", ["int", "string"]],
+        "indigoSetSGroupQueryCode": ["int", ["int", "string"]],
+        "indigoSetSGroupQueryOper": ["int", ["int", "string"]],
+        "indigoSetSGroupDisplay": ["int", ["int", "string"]],
+        "indigoSetSGroupLocation": ["int", ["int", "string"]],
+        "indigoSetSGroupTag": ["int", ["int", "string"]],
+        "indigoSetSGroupTagAlign": ["int", ["int", "string"]],
+        "indigoSetSGroupDataType": ["int", ["int", "string"]],
+        "indigoSetSGroupXCoord": ["int", ["int", "float"]],
+        "indigoSetSGroupYCoord": ["int", ["int", "float"]],
+        "indigoCreateSGroup": ["int", ["string", "int", "string"]],
+        "indigoSetSGroupClass": ["int", ["int", "string"]],
+        "indigoSetSGroupName": ["int", ["int", "string"]],
+        "indigoGetSGroupClass": ["string", ["int"]],
+        "indigoGetSGroupName": ["string", ["int"]],
+        "indigoGetSGroupNumCrossBonds": ["int", ["int"]],
+        "indigoAddSGroupAttachmentPoint": ["int", ["int", "int", "int", "string"]],
+        "indigoDeleteSGroupAttachmentPoint": ["int", ["int", "int"]],
+        "indigoGetSGroupDisplayOption": ["int", ["int"]],
+        "indigoSetSGroupDisplayOption": ["int", ["int", "int"]],
+        "indigoGetSGroupMultiplier": ["int", ["int"]],
+        "indigoSetSGroupMultiplier": ["int", ["int", "int"]],
+        "indigoSetSGroupBrackets": ["int", ["int", "int", "float", "float", "float", "float", "float", "float", "float", "float"]],
+        "indigoFindSGroups": ["int", ["int", "string", "string"]],
+        "indigoGetSGroupType": ["int", ["int"]],
+        "indigoGetSGroupIndex": ["int", ["int"]],
+        "indigoTransformSCSRtoCTAB": ["int", ["int"]],
+        "indigoTransformCTABtoSCSR": ["int", ["int", "int"]],
+        "indigoResetCharge": ["int", ["int"]],
+        "indigoResetExplicitValence": ["int", ["int"]],
+        "indigoResetRadical": ["int", ["int"]],
+        "indigoResetIsotope": ["int", ["int"]],
+        "indigoSetAttachmentPoint": ["int", ["int", "int"]],
+        "indigoClearAttachmentPoints": ["int", ["int"]],
+        "indigoRemoveConstraints": ["int", ["int", "string"]],
+        "indigoAddConstraint": ["int", ["int", "string", "string"]],
+        "indigoAddConstraintNot": ["int", ["int", "string", "string"]],
+        "indigoAddConstraintOr": ["int", ["int", "string", "string"]],
+        "indigoResetStereo": ["int", ["int"]],
+        "indigoInvertStereo": ["int", ["int"]],
+        "indigoCountAtoms": ["int", ["int"]],
+        "indigoCountBonds": ["int", ["int"]],
+        "indigoCountPseudoatoms": ["int", ["int"]],
+        "indigoCountRSites": ["int", ["int"]],
+        "indigoIterateBonds": ["int", ["int"]],
+        "indigoBondOrder": ["int", ["int"]],
+        "indigoBondStereo": ["int", ["int"]],
+        "indigoTopology": ["int", ["int"]],
+        "indigoIterateNeighbors": ["int", ["int"]],
+        "indigoBond": ["int", ["int"]],
+        "indigoGetAtom": ["int", ["int", "int"]],
+        "indigoGetBond": ["int", ["int", "int"]],
+        "indigoSource": ["int", ["int"]],
+        "indigoDestination": ["int", ["int"]],
+        "indigoClearCisTrans": ["int", ["int"]],
+        "indigoClearStereocenters": ["int", ["int"]],
+        "indigoCountStereocenters": ["int", ["int"]],
+        "indigoClearAlleneCenters": ["int", ["int"]],
+        "indigoCountAlleneCenters": ["int", ["int"]],
+        "indigoResetSymmetricCisTrans": ["int", ["int"]],
+        "indigoResetSymmetricStereocenters": ["int", ["int"]],
+        "indigoMarkEitherCisTrans": ["int", ["int"]],
+        "indigoMarkStereobonds": ["int", ["int"]],
+        "indigoAddAtom": ["int", ["int", "string"]],
+        "indigoResetAtom": ["int", ["int", "string"]],
+        "indigoAddRSite": ["int", ["int", "string"]],
+        "indigoSetRSite": ["int", ["int", "string"]],
+        "indigoSetCharge": ["int", ["int", "int"]],
+        "indigoSetIsotope": ["int", ["int", "int"]],
+        "indigoSetImplicitHCount": ["int", ["int", "int"]],
+        "indigoAddBond": ["int", ["int", "int", "int"]],
+        "indigoSetBondOrder": ["int", ["int", "int"]],
+        "indigoMerge": ["int", ["int", "int"]],
+        "indigoHighlight": ["int", ["int"]],
+        "indigoUnhighlight": ["int", ["int"]],
+        "indigoIsHighlighted": ["int", ["int"]],
+        "indigoCountComponents": ["int", ["int"]],
+        "indigoComponentIndex": ["int", ["int"]],
+        "indigoIterateComponents": ["int", ["int"]],
+        "indigoComponent": ["int", ["int", "int"]],
+        "indigoCountSSSR": ["int", ["int"]],
+        "indigoIterateSSSR": ["int", ["int"]],
+        "indigoIterateSubtrees": ["int", ["int", "int", "int"]],
+        "indigoIterateRings": ["int", ["int", "int", "int"]],
+        "indigoIterateEdgeSubmolecules": ["int", ["int", "int", "int"]],
+        "indigoCountHeavyAtoms": ["int", ["int"]],
+        "indigoGrossFormula": ["int", ["int"]],
+        "indigoMolecularWeight": ["float", ["int"]],
+        "indigoMostAbundantMass": ["float", ["int"]],
+        "indigoMonoisotopicMass": ["float", ["int"]],
+        "indigoCanonicalSmiles": ["string", ["int"]],
+        "indigoLayeredCode": ["string", ["int"]],
+        "indigoSymmetryClasses": [int_ptr, ["int", int_ptr]],
+        "indigoHasCoord": ["int", ["int"]],
+        "indigoHasZCoord": ["int", ["int"]],
+        "indigoIsChiral": ["int", ["int"]],
+        "indigoCreateSubmolecule": ["int", ["int", "int", int_ptr]],
+        "indigoCreateEdgeSubmolecule": ["int", ["int", "int", int_ptr, "int", int_ptr]],
+        "indigoGetSubmolecule": ["int", ["int", "int", int_ptr]],
+        "indigoRemoveAtoms": ["int", ["int", "int", int_ptr]],
+        "indigoRemoveBonds": ["int", ["int", "int", int_ptr]],
+        "indigoAlignAtoms": ["float", ["int", "int", int_ptr, float_ptr]],
+        "indigoAromatize": ["int", ["int"]],
+        "indigoDearomatize": ["int", ["int"]],
+        "indigoFoldHydrogens": ["int", ["int"]],
+        "indigoUnfoldHydrogens": ["int", ["int"]],
+        "indigoLayout": ["int", ["int"]],
+        "indigoSmiles": ["string", ["int"]], 
+        "indigoName": ["string", ["int"]], 
+        "indigoSetName": ["int", ["int", "string"]],
+        "indigoSerialize": ["int", ["int", byte_ptr, int_ptr]],
+        "indigoHasProperty": ["int", ["int", "string"]],
+        "indigoGetProperty": ["int", ["int", "string"]],
+        "indigoSetProperty": ["int", ["int", "string", "string"]],
+        "indigoRemoveProperty": ["int", ["int", "string"]],
+        "indigoIterateProperties": ["int", ["int"]],
+        "indigoClearProperties": ["int", ["int"]],
+        "indigoCheckBadValence": ["string", ["int"]], 
+        "indigoCheckAmbiguousH": ["string", ["int"]],         
+        "indigoFingerprint": ["int", ["int", "string"]],
+        "indigoCountBits": ["int", ["int"]],
+        "indigoRawData": ["string", ["int"]], 
+        "indigoTell": ["int", ["int"]],
+        "indigoSdfAppend": ["int", ["int", "int"]],
+        "indigoSmilesAppend": ["int", ["int", "int"]],
+        "indigoRdfHeader": ["int", ["int"]],
+        "indigoRdfAppend": ["int", ["int", "int"]],
+        "indigoCmlHeader": ["int", ["int"]],
+        "indigoCmlAppend": ["int", ["int", "int"]],
+        "indigoCmlFooter": ["int", ["int"]],
+        "indigoAppend": ["int", ["int", "int"]],
+        "indigoArrayAdd": ["int", ["int", "int"]],
+        "indigoAt": ["int", ["int", "int"]],
+        "indigoCount": ["int", ["int"]],
+        "indigoClear": ["int", ["int"]],
+        "indigoIterateArray": ["int", ["int"]],
+        "indigoIgnoreAtom": ["int", ["int", "int"]],
+        "indigoUnignoreAtom": ["int", ["int", "int"]],
+        "indigoUnignoreAllAtoms": ["int", ["int"]],
+        "indigoMatch": ["int", ["int", "int"]],
+        "indigoCountMatches": ["int", ["int", "int"]],
+        "indigoCountMatchesWithLimit": ["int", ["int", "int", "int"]],
+        "indigoIterateMatches": ["int", ["int", "int"]],
+        "indigoHighlightedTarget": ["int", ["int"]],
+        "indigoMapAtom": ["int", ["int", "int"]],
+        "indigoMapBond": ["int", ["int", "int"]],
+        "indigoMapMolecule": ["int", ["int", "int"]],
+        "indigoAllScaffolds": ["int", ["int"]],
+        "indigoDecomposedMoleculeScaffold": ["int", ["int"]],
+        "indigoIterateDecomposedMolecules": ["int", ["int"]],
+        "indigoDecomposedMoleculeHighlighted": ["int", ["int"]],
+        "indigoDecomposedMoleculeWithRGroups": ["int", ["int"]],
+        "indigoDecomposeMolecule": ["int", ["int", "int"]],
+        "indigoIterateDecompositions": ["int", ["int"]],
+        "indigoAddDecomposition": ["int", ["int", "int"]],
+        "indigoToString": ["string", ["int"]],
+        "indigoToBuffer": ["int", ["int", byte_ptr, int_ptr]],
+        "indigoStereocenterPyramid": [int_ptr, ["int"]],
+        "indigoExpandAbbreviations": ["int", ["int"]],
+        "indigoDbgInternalType": ["string", ["int"]],
+        "indigoOneBitsList": ["string", ["int"]],
+        "indigoLoadMoleculeFromString": ["int", ["string"]],
+        "indigoLoadMoleculeFromFile": ["int", ["string"]],
+        "indigoLoadQueryMoleculeFromString": ["int", ["string"]],
+        "indigoLoadQueryMoleculeFromFile": ["int", ["string"]],
+        "indigoLoadSmartsFromString": ["int", ["string"]],
+        "indigoLoadSmartsFromFile": ["int", ["string"]],
+        "indigoLoadReactionFromString": ["int", ["string"]],
+        "indigoLoadReactionFromFile": ["int", ["string"]],
+        "indigoLoadQueryReactionFromString": ["int", ["string"]],
+        "indigoLoadQueryReactionFromFile": ["int", ["string"]],
+        "indigoLoadReactionSmartsFromString": ["int", ["string"]],
+        "indigoLoadReactionSmartsFromFile": ["int", ["string"]],
+        "indigoCreateReaction": ["int", []],
+        "indigoCreateQueryReaction": ["int", []], 
+        "indigoExactMatch": ["int", ["int", "int", "string"]],
+        "indigoSetTautomerRule": ["int", ["int", "string", "string"]],
+        "indigoRemoveTautomerRule": ["int", ["int"]], 
+        "indigoClearTautomerRules": ["int", []], 
+        "indigoUnserialize": ["int", [byte_ptr, "int"]],
+        "indigoCommonBits": ["int", ["int", "int"]], 
+        "indigoSimilarity": ["float", ["int", "int", "string"]], 
+        "indigoIterateSDFile": ["int", ["string"]],
+        "indigoIterateRDFile": ["int", ["string"]],
+        "indigoIterateSmilesFile": ["int", ["string"]],
+        "indigoIterateCMLFile": ["int", ["string"]],
+        "indigoIterateCDXFile": ["int", ["string"]], 
+        "indigoCreateFileSaver": ["int", ["string", "string"]],
+        "indigoCreateSaver": ["int", ["int", "string"]],
+        "indigoCreateArray": ["int", []], 
+        "indigoSubstructureMatcher": ["int", ["int", "string"]], 
+        "indigoExtractCommonScaffold": ["int", ["int", "string"]], 
+        "indigoDecomposeMolecules": ["int", ["int", "int"]], 
+        "indigoCreateDecomposer": ["int", ["int"]], 
+        "indigoReactionProductEnumerate": ["int", ["int", "int"]], 
+        "indigoTransform": ["int", ["int", "int"]],
+        "indigoLoadBuffer": ["int", [byte_ptr, "int"]],
+        "indigoLoadString": ["int", ["string"]],
+        "indigoIterateSDF": ["int", ["int"]], 
+        "indigoIterateSmiles": ["int", ["int"]],
+        "indigoIterateCML": ["int", ["int"]],
+        "indigoIterateCDX": ["int", ["int"]],
+        "indigoIterateRDF": ["int", ["int"]], 
+/*        "indigoIterateTautomers": ["int", ["int", "string"]] */
+
+    });
+    
+    this._sid = this._lib.indigoAllocSessionId();
+}
+
+
+var IVars = {
+    ABS: 1, OR: 2, AND: 3,  EITHER: 4, UP: 5, 
+    DOWN: 6,  CIS: 7,  TRANS: 8, CHAIN:9, RING: 10,
+    ALLENE: 11,  SINGLET:101, DOUBLET: 102, TRIPLET:103,
+    RC_NOT_CENTER:-1, RC_UNMARKED: 0, RC_CENTER: 1, RC_UNCHANGED: 2, 
+    RC_MADE_OR_BROKEN: 4, RC_ORDER_CHANGED : 8 };
+
+Indigo.prototype.version = function () {
+        return "Node (" + process.version + "); Indigo (" + this._lib.indigoVersion() + ");";
+    }
+    
+
+Indigo.prototype._setSessionId = function () { this._lib.indigoSetSessionId(this._sid) };
+Indigo.prototype.release = function () {
+        if (this._lib)
+            this._lib.indigoReleaseSessionId(this._sid);
+    }
+
+Indigo.prototype.writeBuffer = function () {
+        this._setSessionId();
+        id = this._checkResult(this._lib.indigoWriteBuffer());
+        return IndigoObject(this, id);
+    }
+    
+Indigo.prototype.writeFile = function (filename) {
+        this._setSessionId();
+        id = this._checkResult(this._lib.indigoWriteFile(filename));
+        return IndigoObject(this, id);
+    }
+    
+Indigo.prototype.unserialize = function (arr) {
+        this._setSessionId();
+        values = new ByteArray(arr.length);
+        for (i = 0; i < arr.length; i++)
+            values[i] = arr[i];
+        res = Indigo._lib.indigoUnserialize(values, arr.length);
+        return IndigoObject(this, this._checkResult(res));
+    }
+
+
+Indigo.prototype._checkResult = function (result) {
+    if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result;
+}
+
+Indigo.prototype._checkResultFloat = function (result) {
+    if (result < -0.5) { throw new Error('indigo:res < -0.5[' + result + ']') } return result;
+}
+
+Indigo.prototype._checkResultPtr = function (result) {
+    if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result;
+}
+
+Indigo.prototype._checkResultString = function (result) {
+    console.log(result); return result;
+}
+        
+Indigo.prototype.dbgBreakpoint = function () {
+        this._setSessionId();
+        return this._lib.indigoDbgBreakpoint();
+    }
+    
+Indigo.prototype.countReferences = function () {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoCountReferences());
+    }
+    
+Indigo.prototype.createMolecule = function () {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateMolecule()));
+    }
+    
+Indigo.prototype.createQueryMolecule = function () {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateQueryMolecule()));
+    }
+    
+Indigo.prototype.loadMolecule = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadMoleculeFromString(string)));
+    }
+    
+Indigo.prototype.loadMoleculeFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadMoleculeFromFile(filename)));
+    }
+    
+Indigo.prototype.loadQueryMolecule = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryMoleculeFromString(string)));
+    }
+    
+Indigo.prototype.loadQueryMoleculeFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryMoleculeFromFile(filename)));
+    }
+    
+Indigo.prototype.loadSmarts = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadSmartsFromString(string)));
+    }
+    
+Indigo.prototype.loadSmartsFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadSmartsFromFile(filename)));
+    }
+    
+Indigo.prototype.loadReaction = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionFromString(string)));
+    }
+    
+Indigo.prototype.loadReactionFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionFromFile(filename)));
+    }
+    
+Indigo.prototype.loadQueryReaction = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryReactionFromString(string)));
+    }
+    
+Indigo.prototype.loadQueryReactionFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadQueryReactionFromFile(filename)));
+    }
+    
+Indigo.prototype.loadReactionSmarts = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionSmartsFromString(string)));
+    }
+    
+Indigo.prototype.loadReactionSmartsFromFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionSmartsFromFile(filename)));
+    }
+       
+Indigo.prototype.createReaction = function () {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateReaction()));
+    }
+    
+Indigo.prototype.createQueryReaction = function () {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateQueryReaction()));
+    }
+    
+Indigo.prototype.exactMatch = function (item1, item2, flags) {
+        this._setSessionId();
+        if (flags === undefined || flags === null) {
+            flags = '';
+        }
+        newobj = this._checkResult(this._lib.indigoExactMatch(item1.id, item2.id, flags));
+        if (newobj == null)
+            return null;
+        else
+            return IndigoObject(this, newobj, [item1, item2, this]);
+    }
+    
+Indigo.prototype.setTautomerRule = function (id, beg, end) {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoSetTautomerRule(id, beg, end));
+    }
+    
+Indigo.prototype.removeTautomerRule = function (id) {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoRemoveTautomerRule(id));
+    }
+    
+Indigo.prototype.clearTautomerRules = function () {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoClearTautomerRules());
+    }
+    
+Indigo.prototype.commonBits = function (fingerprint1, fingerprint2) {
+        this._setSessionId();
+        return this._checkResult(this._lib.indigoCommonBits(fingerprint1.id, fingerprint2.id));
+    }
+    
+Indigo.prototype.similarity = function (item1, item2, metrics) {
+        this._setSessionId();
+        if (metrics === undefined || metrics === null) {
+            metrics = '';
+        }
+        return this._checkResultFloat(this._lib.indigoSimilarity(item1.id, item2.id, metrics));
+    }
+    
+Indigo.prototype.iterateSDFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateSDFile(filename)));
+    }
+    
+Indigo.prototype.iterateRDFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateRDFile(filename)));
+    }
+    
+Indigo.prototype.iterateSmilesFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateSmilesFile(filename)));
+    }
+    
+Indigo.prototype.iterateCMLFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateCMLFile(filename)));
+    }
+    
+Indigo.prototype.iterateCDXFile = function (filename) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoIterateCDXFile(filename)));
+    }
+    
+Indigo.prototype.createFileSaver = function (filename, format) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateFileSaver(filename, format)));
+    }
+    
+Indigo.prototype.createSaver = function (obj, format) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateSaver(obj.id, format)));
+    }
+    
+Indigo.prototype.createArray = function () {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateArray()));
+    }
+    
+Indigo.prototype.substructureMatcher = function (target, mode) {
+        this._setSessionId();
+        if (mode === undefined || mode === null) {
+            mode = '';
+        }
+        return IndigoObject(this, this._checkResult(this._lib.indigoSubstructureMatcher(target.id, mode)), target);
+    }
+/*    
+    def convertToArray(self, iteratable):
+    if isinstance(iteratable, IndigoObject):
+    return iteratable
+    try:
+        some_object_iterator = iter(iteratable)
+        res = self.createArray()
+        for obj in some_object_iterator:
+                 res.arrayAdd(self.convertToArray(obj))
+            return res
+        except TypeError:
+            raise IndigoException("Cannot convert object %s to an array" % (iteratable))
+*/
+Indigo.prototype.extractCommonScaffold = function (structures, options) {
+        this._setSessionId();
+        if (options === undefined || options === null) {
+            options = '';
+        }
+        structures = this.convertToArray(structures);
+        newobj = this._checkResult(this._lib.indigoExtractCommonScaffold(structures.id, options));
+        if (newobj == null)
+            return null;
+        else
+            return IndigoObject(this, newobj, this);
+    }
+    
+Indigo.prototype.decomposeMolecules = function (scaffold, structures) {
+        this._setSessionId();
+        structures = this.convertToArray(structures);
+        return IndigoObject(this, this._checkResult(this._lib.indigoDecomposeMolecules(scaffold.id, structures.id)), scaffold);
+    }
+    
+Indigo.prototype.createDecomposer = function (scaffold) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoCreateDecomposer(scaffold.id)), scaffold);
+    }
+    
+Indigo.prototype.reactionProductEnumerate = function (replacedaction, monomers) {
+        this._setSessionId();
+        structures = this.convertToArray(monomers);
+        return IndigoObject(this, this._checkResult(this._lib.indigoReactionProductEnumerate(replacedaction.id, monomers.id)), replacedaction);
+    }
+    
+Indigo.prototype.transform = function (reaction, monomers) {
+        this._setSessionId();
+        newobj = this._checkResult(this._lib.indigoTransform(reaction.id, monomers.id));
+        if (newobj == null)
+            return null;
+        else
+            return IndigoObject(this, newobj, this);
+    }
+    
+Indigo.prototype.loadBuffer = function (buf) {
+        this._setSessionId();
+        arr = buf.split('');
+        values = new ByteArray(arr.length);
+        for (i = 0; i < arr.length; i++)
+            values[i] = arr[i];
+        res = Indigo._lib.indigoLoadBuffer(values, arr.length);
+        return IndigoObject(this, this._checkResult(res));
+    }
+    
+Indigo.prototype.loadString = function (string) {
+        this._setSessionId();
+        return IndigoObject(this, this._checkResult(this._lib.indigoLoadString(string)));
+    }
+    
+Indigo.prototype.iterateSDF = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateSDF(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
+Indigo.prototype.iterateSmiles = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateSmiles(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
+Indigo.prototype.iterateCML = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateCML(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
+Indigo.prototype.iterateCDX = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateCDX(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+
+Indigo.prototype.iterateRDF = function (reader) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateRDF(reader.id));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, reader);
+    }
+    
+Indigo.prototype.iterateTautomers = function (molecule, params) {
+        this._setSessionId();
+        result = this._checkResult(this._lib.indigoIterateTautomers(molecule.id, params));
+        if (result == null)
+            return null;
+        else
+            return IndigoObject(this, result, molecule);
+    }
+    
+Indigo.prototype.next = function () {
+        this._setSessionId();
+        newobj = this._checkResult(this._lib.indigoNext(this.id))
+        if (newobj !== 0) {
+            this.id = newobj;
+            return { value: IndigoObject(this, newobj), done: false }
+        } else { return { done: true }; }
+    }
+
+
+function IndigoStat() {
+    if (!(this instanceof IndigoStat)) {
+        return new IndigoStat();
     }
     
     qword = "ulonglong";
@@ -1504,10 +2197,10 @@ function Indigo() {
     RC_MADE_OR_BROKEN = 4;
     RC_ORDER_CHANGED = 8;
     
-        
+    
     var libpath = './indigo-libs/shared/' + process.platform + '/' + process.arch + '/indigo';
     this._lib = ffi.Library(libpath, {
-        "indigoDbgBreakpoint":["void",[]],
+        "indigoDbgBreakpoint": ["void", []],
         "indigoVersion": ["string", []], 
         "indigoAllocSessionId": [qword, []],
         "indigoSetSessionId": ["void", [qword]],
@@ -1822,14 +2515,14 @@ function Indigo() {
         return "Node (" + process.version + "); Indigo (" + this._lib.indigoVersion() + ");";
     }
     
-
+    
     this._sid = this._lib.indigoAllocSessionId();
     this._setSessionId = function () { this._lib.indigoSetSessionId(this._sid) };
     this.release = function () {
         if (this._lib)
             this._lib.indigoReleaseSessionId(this._sid);
     }
-
+    
     this.writeBuffer = function () {
         this._setSessionId();
         id = this._checkResult(this._lib.indigoWriteBuffer());
@@ -1850,8 +2543,8 @@ function Indigo() {
         res = Indigo._lib.indigoUnserialize(values, arr.length);
         return IndigoObject(this, this._checkResult(res));
     }
-
-
+    
+    
     this._checkResult = function (result) { if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result; }
     this._checkResultFloat = function (result) { if (result < -0.5) { throw new Error('indigo:res < -0.5[' + result + ']') } return result; }
     this._checkResultPtr = function (result) { if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result; }
@@ -1937,7 +2630,7 @@ function Indigo() {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoLoadReactionSmartsFromFile(filename)));
     }
-       
+    
     this.createReaction = function () {
         this._setSessionId();
         return IndigoObject(this, this._checkResult(this._lib.indigoCreateReaction()));
@@ -2035,7 +2728,7 @@ function Indigo() {
         }
         return IndigoObject(this, this._checkResult(this._lib.indigoSubstructureMatcher(target.id, mode)), target);
     }
-/*    
+    /*    
     def convertToArray(self, iteratable):
     if isinstance(iteratable, IndigoObject):
     return iteratable
@@ -2137,7 +2830,7 @@ function Indigo() {
         else
             return IndigoObject(this, result, reader);
     }
-
+    
     this.iterateRDF = function (reader) {
         this._setSessionId();
         result = this._checkResult(this._lib.indigoIterateRDF(reader.id));
@@ -2167,8 +2860,9 @@ function Indigo() {
 
 
 }
-      
+
 exports.indigo = Indigo;
+exports.indigoStat = IndigoStat;
 
 /* ----------------------------------------- */
 

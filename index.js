@@ -29,6 +29,35 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 /* start of file <- */
 
+console.log([] + 1 + 2);
+var obj = {"0": 1,
+    0 : 2, 
+    1: 4,
+    "1": 2
+};
+console.log(obj["0"] + obj[0]);
+
+function Aa(){ };
+Aa.prototype.x = 1;
+
+var aa = new Aa();
+
+Aapr = Aa.prototype;
+
+var aa2 = new aa.constructor();
+Aapr.x = 2;
+
+
+console.log("Aa.x:" + aa.x);
+
+function Bb() { };
+Bb.prototype.x = 1;
+
+var bb = new Bb();
+
+Bb.prototype.x = 2;
+
+console.log("Bb.x:" + bb.x);
 
 
 function A() {
@@ -172,26 +201,37 @@ assert.equal(result2.category, "good");
 assert.equal((result2.probability < 1), true);
 
 // ---
+console.log('[' + __filename + ']' + "Version:" + ind.indigoStat().version());
+indigo = new ind.indigo();
 
-
-console.log('[' + __filename + ']' + "Version:" + ind.indigo().version());
-Inchi = inc.inchi(ind.indigo);
+console.log('[' + __filename + ']' + "Version:" + indigo.version());
+Inchi = inc.inchi(indigo);
 console.log('[' + __filename + ']' + "Inchi.version:" + Inchi.version());
 console.log('[' + __filename + ']' + "Inchi.getWarning:" + Inchi.getWarning());
 console.log('[' + __filename + ']' + "Inchi.getLog:" + Inchi.getLog());
 console.log('[' + __filename + ']' + "Inchi.getAuxInfo:" + Inchi.getAuxInfo());
 
-Render = ren.renderer(ind.indigo);
+Render = ren.renderer(indigo);
 
-Bingo = bin.bingo(ind.indigo);
+Bingo = bin.bingo(indigo);
 console.log('[' + __filename + ']' + "Bingo.version:" + Bingo.version());
 
-m = ind.indigo().iterateSDFile("./mols.sdf");
+m = indigo.iterateSDFile("./mols.sdf");
 console.log("molobject: " + m.id);////ind._lib.indigoSaveMolfileToFile(m.id, "aaa.mol");
+m_stat = ind.indigoStat().iterateSDFile("./mols.sdf");
 
+mol_n = m._next();
 //mol_stri = m.next().value.molfile();////t = m.next().value.saveMolfile("ttt.mol");
-mol_stri = m.molfile();////t = m.next().value.saveMolfile("ttt.mol");
+mol_stri = m_stat.molfile();////t = m.next().value.saveMolfile("ttt.mol");
+m_n__str = mol_n.molfile();////t = m.next().value.saveMolfile("ttt.mol");
+m_stat_n = m_stat._next();////t = m.next().value.saveMolfile("ttt.mol");
+m_stat_n_str = m_stat_n._next().molfile();
 
+mol1 = indigo.loadMolecule("ONc1cccc1");
+console.log(mol1.molfile());
+
+qmol1 = indigo.loadQueryMolecule("C1-C-C-C-1");
+console.log(qmol1.molfile())
 
 console.log('[' +__filename + ']' + ": modules initialization");
 /* initialization of modules */
