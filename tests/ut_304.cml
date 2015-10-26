@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="basic-0007-00">
+    <atomArray>
+        <atom id="a0" elementType="Cl" formalCharge="-1" x2="0" y2="0" />
+    </atomArray>
+</molecule>
+</cml>

@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="basic-0013-00">
+    <atomArray>
+        <atom id="a0" elementType="N" formalCharge="1" x2="10.3582" y2="-4.2267" />
+        <atom id="a1" elementType="H" x2="10.3582" y2="-2.8967" />
+        <atom id="a2" elementType="H" x2="8.7577" y2="-4.2267" />
+        <atom id="a3" elementType="H" x2="11.9475" y2="-4.2267" />
+        <atom id="a4" elementType="H" x2="10.3582" y2="-5.568" />
+    </atomArray>
+    <bondArray>
+        <bond atomRefs2="a1 a0" order="1" />
+        <bond atomRefs2="a2 a0" order="1" />
+        <bond atomRefs2="a3 a0" order="1" />
+        <bond atomRefs2="a4 a0" order="1" />
+    </bondArray>
+</molecule>
+</cml>

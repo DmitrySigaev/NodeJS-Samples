@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="arom_het_6-0015-00">
+    <atomArray>
+        <atom id="a0" elementType="C" x2="6.7762" y2="-5.7121" />
+        <atom id="a1" elementType="C" x2="6.7762" y2="-6.5371" />
+        <atom id="a2" elementType="C" x2="6.0616" y2="-5.2996" />
+        <atom id="a3" elementType="N" x2="6.0616" y2="-6.9496" />
+        <atom id="a4" elementType="C" x2="5.3472" y2="-5.7121" />
+        <atom id="a5" elementType="C" x2="5.3472" y2="-6.5371" />
+        <atom id="a6" elementType="N" formalCharge="1" x2="6.1106" y2="-4.4606" />
+        <atom id="a7" elementType="C" x2="7.1034" y2="-4.2928" />
+        <atom id="a8" elementType="N" x2="7.432" y2="-3.4678" />
+    </atomArray>
+    <bondArray>
+        <bond atomRefs2="a0 a1" order="1" />
+        <bond atomRefs2="a0 a2" order="2" />
+        <bond atomRefs2="a1 a3" order="2" />
+        <bond atomRefs2="a2 a4" order="1" />
+        <bond atomRefs2="a3 a5" order="1" />
+        <bond atomRefs2="a4 a5" order="2" />
+        <bond atomRefs2="a6 a2" order="1" />
+        <bond atomRefs2="a7 a6" order="2" />
+        <bond atomRefs2="a8 a7" order="1" />
+    </bondArray>
+</molecule>
+</cml>

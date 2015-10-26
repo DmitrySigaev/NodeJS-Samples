@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="arom_fused-0031-00">
+    <atomArray>
+        <atom id="a0" elementType="C" x2="4.1837" y2="1.6497" />
+        <atom id="a1" elementType="C" x2="3.3587" y2="1.6497" />
+        <atom id="a2" elementType="N" x2="3.0008" y2="0.9064" />
+        <atom id="a3" elementType="N" x2="2.1965" y2="0.7229" />
+        <atom id="a4" elementType="C" x2="1.5515" y2="1.2372" />
+        <atom id="a5" elementType="C" x2="1.5515" y2="2.0622" />
+        <atom id="a6" elementType="C" x2="0.7265" y2="2.0622" />
+        <atom id="a7" elementType="O" x2="0.1431" y2="2.6456" />
+        <atom id="a8" elementType="C" x2="0.7265" y2="1.2372" />
+        <atom id="a9" elementType="O" x2="0.1431" y2="0.6539" />
+        <atom id="a10" elementType="N" x2="2.1965" y2="2.5766" />
+        <atom id="a11" elementType="N" x2="3.0008" y2="2.393" />
+        <atom id="a12" elementType="C" x2="2.0129" y2="3.3809" />
+        <atom id="a13" elementType="C" x2="2.0129" y2="-0.0814" />
+    </atomArray>
+    <bondArray>
+        <bond atomRefs2="a0 a1" order="1" />
+        <bond atomRefs2="a1 a2" order="2" />
+        <bond atomRefs2="a2 a3" order="1" />
+        <bond atomRefs2="a3 a4" order="1" />
+        <bond atomRefs2="a4 a5" order="2" />
+        <bond atomRefs2="a5 a6" order="1" />
+        <bond atomRefs2="a6 a7" order="2" />
+        <bond atomRefs2="a6 a8" order="1" />
+        <bond atomRefs2="a4 a8" order="1" />
+        <bond atomRefs2="a8 a9" order="2" />
+        <bond atomRefs2="a5 a10" order="1" />
+        <bond atomRefs2="a10 a11" order="1" />
+        <bond atomRefs2="a1 a11" order="1" />
+        <bond atomRefs2="a10 a12" order="1" />
+        <bond atomRefs2="a3 a13" order="1" />
+    </bondArray>
+</molecule>
+</cml>

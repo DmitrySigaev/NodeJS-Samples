@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="basic-0004-00">
+    <atomArray>
+        <atom id="a0" elementType="Ag" x2="-1.2875" y2="0" />
+        <atom id="a1" elementType="Ag" x2="-0.225" y2="0" />
+    </atomArray>
+    <bondArray>
+        <bond atomRefs2="a0 a1" order="1" />
+    </bondArray>
+</molecule>
+</cml>

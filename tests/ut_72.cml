@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="ali_ring_het_7-0002-00">
+    <atomArray>
+        <atom id="a0" elementType="C" x2="-2.9568" y2="2.0968" />
+        <atom id="a1" elementType="N" x2="-2.1341" y2="2.1584" />
+        <atom id="a2" elementType="C" x2="-1.8327" y2="2.9264" />
+        <atom id="a3" elementType="C" x2="-1.0444" y2="3.1696" />
+        <atom id="a4" elementType="N" x2="-0.3627" y2="2.7048" />
+        <atom id="a5" elementType="C" x2="0.3517" y2="3.1173" />
+        <atom id="a6" elementType="C" x2="1.0662" y2="2.7048" />
+        <atom id="a7" elementType="O" x2="1.0662" y2="1.8798" />
+        <atom id="a8" elementType="C" x2="1.7807" y2="3.1173" />
+        <atom id="a9" elementType="O" x2="2.4951" y2="2.7048" />
+        <atom id="a10" elementType="C" x2="3.2096" y2="3.1173" />
+        <atom id="a11" elementType="C" x2="3.9241" y2="2.7048" />
+        <atom id="a12" elementType="C" x2="4.6386" y2="3.1173" />
+        <atom id="a13" elementType="C" x2="-0.3011" y2="1.8821" />
+        <atom id="a14" elementType="C" x2="-0.9059" y2="1.321" />
+        <atom id="a15" elementType="C" x2="-1.7216" y2="1.444" />
+        <atom id="a16" elementType="C" x2="-3.4216" y2="2.7784" />
+        <atom id="a17" elementType="O" x2="-3.3148" y2="1.3535" />
+    </atomArray>
+    <bondArray>
+        <bond atomRefs2="a0 a1" order="1" />
+        <bond atomRefs2="a1 a2" order="1" />
+        <bond atomRefs2="a2 a3" order="1" />
+        <bond atomRefs2="a3 a4" order="1" />
+        <bond atomRefs2="a4 a5" order="1" />
+        <bond atomRefs2="a5 a6" order="1" />
+        <bond atomRefs2="a6 a7" order="1" />
+        <bond atomRefs2="a6 a8" order="1" />
+        <bond atomRefs2="a8 a9" order="1" />
+        <bond atomRefs2="a9 a10" order="1" />
+        <bond atomRefs2="a10 a11" order="1" />
+        <bond atomRefs2="a11 a12" order="2" />
+        <bond atomRefs2="a4 a13" order="1" />
+        <bond atomRefs2="a13 a14" order="1" />
+        <bond atomRefs2="a14 a15" order="1" />
+        <bond atomRefs2="a1 a15" order="1" />
+        <bond atomRefs2="a0 a16" order="1" />
+        <bond atomRefs2="a0 a17" order="2" />
+    </bondArray>
+</molecule>
+</cml>

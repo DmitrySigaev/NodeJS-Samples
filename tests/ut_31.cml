@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="ali_ring_het_5-0033-00">
+    <atomArray>
+        <atom id="a0" elementType="N" x2="-0.6078" y2="-1.2991" />
+        <atom id="a1" elementType="C" x2="-0.6078" y2="-2.1241" />
+        <atom id="a2" elementType="Se" x2="0.0597" y2="-2.609" />
+        <atom id="a3" elementType="C" x2="-0.1953" y2="-3.3937" />
+        <atom id="a4" elementType="C" x2="-1.0203" y2="-3.3937" />
+        <atom id="a5" elementType="N" x2="-1.2752" y2="-2.609" />
+    </atomArray>
+    <bondArray>
+        <bond atomRefs2="a0 a1" order="1" />
+        <bond atomRefs2="a1 a2" order="1" />
+        <bond atomRefs2="a2 a3" order="1" />
+        <bond atomRefs2="a3 a4" order="1" />
+        <bond atomRefs2="a4 a5" order="1" />
+        <bond atomRefs2="a1 a5" order="2" />
+    </bondArray>
+</molecule>
+</cml>

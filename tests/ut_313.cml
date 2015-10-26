@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<cml>
+<molecule title="basic-0016-00">
+    <atomArray>
+        <atom id="a0" elementType="P" x2="2.866" y2="0" />
+        <atom id="a1" elementType="Ni" x2="3.7321" y2="0.5" />
+        <atom id="a2" elementType="Ni" x2="2" y2="-0.5" />
+    </atomArray>
+    <bondArray>
+        <bond atomRefs2="a0 a1" order="3" />
+        <bond atomRefs2="a0 a2" order="2" />
+    </bondArray>
+</molecule>
+</cml>
