@@ -81,7 +81,7 @@ IndigoObject = function (d, id, parent) {
     
     this.clone = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoClone(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoClone(this.id)));
     }
     
     this.close = function () {
@@ -176,27 +176,27 @@ IndigoObject = function (d, id, parent) {
     
     this.getMolecule = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetMolecule(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetMolecule(this.id, index)));
     }
     
     this.iterateReactants = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateReactants(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateReactants(this.id)));
     }
     
     this.iterateProducts = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateProducts(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateProducts(this.id)));
     }
     
     this.iterateCatalysts = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateCatalysts(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateCatalysts(this.id)));
     }
     
     this.iterateMolecules = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMolecules(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateMolecules(this.id)));
     }
     
     this.saveRxnfile = function (filename) {
@@ -287,32 +287,32 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateAtoms = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateAtoms(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateAtoms(this.id)));
     }
     
     this.iteratePseudoatoms = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIteratePseudoatoms(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIteratePseudoatoms(this.id)));
     }
 
     this.iterateRSites = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRSites(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateRSites(this.id)));
     }
     
     this.iterateStereocenters = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateStereocenters(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateStereocenters(this.id)));
     }
     
     this.iterateAlleneCenters = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateAlleneCenters(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateAlleneCenters(this.id)));
     }
     
     this.iterateRGroups = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRGroups(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateRGroups(this.id)));
     }
     
     this.isPseudoatom = function () {
@@ -357,7 +357,7 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateRGroupFragments = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRGroupFragments(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateRGroupFragments(this.id)));
     }
     
     this.countAttachmentPoints = function () {
@@ -367,7 +367,7 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateAttachmentPoints = function (order) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateAttachmentPoints(this.id, order)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateAttachmentPoints(this.id, order)));
     }
     
     this.symbol = function () {
@@ -492,52 +492,52 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateDataSGroups = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDataSGroups(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateDataSGroups(this.id)));
     }
 
     this.iterateSuperatoms = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateSuperatoms(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateSuperatoms(this.id)));
     }
 
     this.iterateGenericSGroups = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateGenericSGroups(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateGenericSGroups(this.id)));
     }
 
     this.iterateRepeatingUnits = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRepeatingUnits(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateRepeatingUnits(this.id)));
     }
     
     this.iterateMultipleGroups = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMultipleGroups(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateMultipleGroups(this.id)));
     }
     
     this.getSuperatom = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetSuperatom(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetSuperatom(this.id, index)));
     }
     
     this.getDataSGroup = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetDataSGroup(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetDataSGroup(this.id, index)));
     }
     
     this.getGenericSGroup = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetGenericSGroup(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetGenericSGroup(this.id, index)));
     }
 
     this.getMultipleGroup = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetMultipleGroup(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetMultipleGroup(this.id, index)));
     }
     
     this.getRepeatingUnit = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetRepeatingUnit(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetRepeatingUnit(this.id, index)));
     }
     
     this.description = function () {
@@ -560,7 +560,7 @@ IndigoObject = function (d, id, parent) {
         for (i = 0; i < bonds.length; i++) {
             arr4[i] = bonds[i];
         }
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAddDataSGroup(this.id, atoms.length, arr2,  bonds.length, arr4, description, data)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoAddDataSGroup(this.id, atoms.length, arr2,  bonds.length, arr4, description, data)));
     }
     
     this.addSuperatom = function (atoms, name) {
@@ -569,7 +569,7 @@ IndigoObject = function (d, id, parent) {
         for (i = 0; i < atoms.length; i++) {
             arr2[i] = atoms[i];
         }
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAddSuperatom(this.id, atoms.length, arr2, name)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoAddSuperatom(this.id, atoms.length, arr2, name)));
     }
     
     this.setDataSGroupXY = function (x, y, options) {
@@ -648,7 +648,7 @@ IndigoObject = function (d, id, parent) {
     
     this.createSGroup = function (sgtype, mapping, name) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateSGroup(sgtype, mapping.id, name)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoCreateSGroup(sgtype, mapping.id, name)));
     }
     
     this.setSGroupClass = function (sgclass) {
@@ -713,7 +713,7 @@ IndigoObject = function (d, id, parent) {
     
     this.findSGroups = function (prop, val) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoFindSGroups(prop, val)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoFindSGroups(prop, val)));
     }
     
     this.getSGroupType = function () {
@@ -818,7 +818,7 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateBonds = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateBonds(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateBonds(this.id)));
     }
     
     this.bondOrder = function () {
@@ -838,32 +838,32 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateNeighbors = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateNeighbors(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateNeighbors(this.id)));
     }
         
     this.bond = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoBond(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoBond(this.id)));
     }
     
     this.getAtom = function (idx) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetAtom(this.id, idx)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetAtom(this.id, idx)));
     }
     
     this.getBond = function (idx) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetBond(this.id, idx)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetBond(this.id, idx)));
     }
     
     this.source = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoSource(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoSource(this.id)));
     }
     
     this.destination = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoDestination(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoDestination(this.id)));
     }
     
     this.clearCisTrans = function () {
@@ -913,7 +913,7 @@ IndigoObject = function (d, id, parent) {
     
     this.addAtom = function (symbol) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAddAtom(this.id, symbol)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoAddAtom(this.id, symbol)));
     }
     
     this.resetAtom = function (symbol) {
@@ -923,7 +923,7 @@ IndigoObject = function (d, id, parent) {
     
     this.addRSite = function (name) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAddRSite(this.id, name)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoAddRSite(this.id, name)));
     }
     
     this.setRSite = function (name) {
@@ -948,17 +948,17 @@ IndigoObject = function (d, id, parent) {
     
     this.addBond = function (destination, order) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAddBond(this.id, destination.id, order)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoAddBond(this.id, destination.id, order)));
     }
     
     this.setBondOrder = function (order) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoSetBondOrder(this.id, order)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoSetBondOrder(this.id, order)));
     }
   
     this.merge = function (what) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoMerge(this.id, what.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoMerge(this.id, what.id)));
     }
     
     this.highlight = function () {
@@ -988,12 +988,12 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateComponents = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateComponents(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateComponents(this.id)));
     }
     
     this.component = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoComponent(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoComponent(this.id, index)));
     }
 
     this.countSSSR = function () {
@@ -1003,22 +1003,22 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateSSSR = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateSSSR(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateSSSR(this.id)));
     }
     
     this.iterateSubtrees = function (min_atoms, max_atoms) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateSubtrees(this.id, min_atoms, max_atoms)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateSubtrees(this.id, min_atoms, max_atoms)));
     }
     
     this.iterateRings = function (min_atoms, max_atoms) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateRings(this.id, min_atoms, max_atoms)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateRings(this.id, min_atoms, max_atoms)));
     }
     
     this.iterateEdgeSubmolecules = function (min_bonds, max_bonds) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateEdgeSubmolecules(this.id, min_bonds, max_bonds)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateEdgeSubmolecules(this.id, min_bonds, max_bonds)));
     }
     
     this.countHeavyAtoms = function () {
@@ -1029,7 +1029,7 @@ IndigoObject = function (d, id, parent) {
     this.grossFormula = function () {
         d._setSessionId();
         gfid = d._checkResult(d._lib.indigoGrossFormula(this.id));
-        gf = d.IndigoObject(d, gfid);
+        gf = IndigoObject(d, gfid);
         return d._checkResultString(d._lib.indigoToString(gf.id));
     }
 
@@ -1090,7 +1090,7 @@ IndigoObject = function (d, id, parent) {
         for (i = 0; i < vertices.length; i++) {
             arr2[i] = vertices[i];
         }
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateSubmolecule(this.id, vertices.length, arr2)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoCreateSubmolecule(this.id, vertices.length, arr2)));
     }
 
     this.createEdgeSubmolecule = function (vertices, edges) {
@@ -1103,7 +1103,7 @@ IndigoObject = function (d, id, parent) {
         for (i = 0; i < edges.length; i++) {
             arr4[i] = edges[i];
         }
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoCreateEdgeSubmolecule(this.id, vertices.length, arr2, edges.length, arr4)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoCreateEdgeSubmolecule(this.id, vertices.length, arr2, edges.length, arr4)));
     }
     
     this.getSubmolecule = function (vertices) {
@@ -1112,7 +1112,7 @@ IndigoObject = function (d, id, parent) {
         for (i = 0; i < vertices.length; i++) {
             arr2[i] = vertices[i];
         }
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoGetSubmolecule(this.id, vertices.length, arr2)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoGetSubmolecule(this.id, vertices.length, arr2)));
     }
     
     this.removeAtoms = function (vertices) {
@@ -1121,7 +1121,7 @@ IndigoObject = function (d, id, parent) {
         for (i = 0; i < vertices.length; i++) {
             arr2[i] = vertices[i];
         }
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoRemoveAtoms(this.id, vertices.length, arr2)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoRemoveAtoms(this.id, vertices.length, arr2)));
     }
 
     this.removeBonds = function (bonds) {
@@ -1130,7 +1130,7 @@ IndigoObject = function (d, id, parent) {
         for (i = 0; i < bonds.length; i++) {
             arr2[i] = bonds[i];
         }
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoRemoveBonds(this.id, bonds.length, arr2)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoRemoveBonds(this.id, bonds.length, arr2)));
     }
 
     this.aromatize = function () {
@@ -1207,7 +1207,7 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateProperties = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateProperties(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateProperties(this.id)));
     }
     
     this.clearProperties = function () {
@@ -1231,7 +1231,7 @@ IndigoObject = function (d, id, parent) {
         if (newobj == null)
             return null;
         else
-            return d.IndigoObject(d, newobj, this);
+            return IndigoObject(d, newobj, this);
     }
     
     this.countBits = function () {
@@ -1296,7 +1296,7 @@ IndigoObject = function (d, id, parent) {
 
     this.at = function (index) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAt(this.id, index)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoAt(this.id, index)));
     }
 
     this.count = function () {
@@ -1315,7 +1315,7 @@ IndigoObject = function (d, id, parent) {
         if (newobj == 0)
             return null;
         else
-            return d.IndigoObject(d, newobj, this);
+            return IndigoObject(d, newobj, this);
     }
     
     this.ignoreAtom = function (atom_object) {
@@ -1339,7 +1339,7 @@ IndigoObject = function (d, id, parent) {
         if (newobj == null)
             return null;
         else
-            return d.IndigoObject(d, newobj, this);
+            return IndigoObject(d, newobj, this);
     }
     
     this.countMatches = function (query) {
@@ -1354,12 +1354,12 @@ IndigoObject = function (d, id, parent) {
     
     this.iterateMatches = function (query) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateMatches(this.id, query.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateMatches(this.id, query.id)));
     }
     
     this.highlightedTarget = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoHighlightedTarget(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoHighlightedTarget(this.id)));
     }
 
     this.mapAtom = function (atom) {
@@ -1368,7 +1368,7 @@ IndigoObject = function (d, id, parent) {
         if (newobj == null)
             return null;
         else
-            return d.IndigoObject(d, newobj, this);
+            return IndigoObject(d, newobj, this);
     }
     
     this.mapBond = function (bond) {
@@ -1377,7 +1377,7 @@ IndigoObject = function (d, id, parent) {
         if (newobj == null)
             return null;
         else
-            return d.IndigoObject(d, newobj, this);
+            return IndigoObject(d, newobj, this);
     }
     
     this.mapMolecule = function (molecule) {
@@ -1386,42 +1386,42 @@ IndigoObject = function (d, id, parent) {
         if (newobj == null)
             return null;
         else
-            return d.IndigoObject(d, newobj, this);
+            return IndigoObject(d, newobj, this);
     }
 
     this.allScaffolds = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoAllScaffolds(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoAllScaffolds(this.id)));
     }
     
     this.decomposedMoleculeScaffold = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeScaffold(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeScaffold(this.id)));
     }
 
     this.iterateDecomposedMolecules = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDecomposedMolecules(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateDecomposedMolecules(this.id)));
     }
 
     this.decomposedMoleculeHighlighted = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeHighlighted(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeHighlighted(this.id)));
     }
 
     this.decomposedMoleculeWithRGroups = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeWithRGroups(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoDecomposedMoleculeWithRGroups(this.id)));
     }
 
     this.decomposeMolecule = function (mol) {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoDecomposeMolecule(this.id, mol.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoDecomposeMolecule(this.id, mol.id)));
     }
     
     this.iterateDecompositions = function () {
         d._setSessionId();
-        return d.IndigoObject(d, d._checkResult(d._lib.indigoIterateDecompositions(this.id)));
+        return IndigoObject(d, d._checkResult(d._lib.indigoIterateDecompositions(this.id)));
     }
     
     this.addDecomposition = function (q_match) {
@@ -1789,6 +1789,7 @@ function Indigo(options) {
         "indigoIterateCML": ["int", ["int"]],
         "indigoIterateCDX": ["int", ["int"]],
         "indigoIterateRDF": ["int", ["int"]], 
+        "indigoWriteFile": ["int", ["string"]]
 /*        "indigoIterateTautomers": ["int", ["int", "string"]] */
 
     });
@@ -2506,6 +2507,8 @@ function IndigoStat() {
         "indigoIterateCML": ["int", ["int"]],
         "indigoIterateCDX": ["int", ["int"]],
         "indigoIterateRDF": ["int", ["int"]], 
+        "indigoWriteFile": ["int", ["string"]]
+
 /*        "indigoIterateTautomers": ["int", ["int", "string"]] */
 
     });
