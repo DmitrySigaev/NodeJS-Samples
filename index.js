@@ -219,6 +219,15 @@ console.log('[' + __filename + ']' + "Bingo.version:" + Bingo.version());
 m = indigo.iterateSDFile("./mols.sdf");
 console.log("molobject: " + m.id);////ind._lib.indigoSaveMolfileToFile(m.id, "aaa.mol");
 
+
+chem = require('./chemtool.js').chem;
+
+var fs = require('fs');
+var file_data = fs.readFileSync('./accholine.mol', 'utf8').split('\n');
+
+var mol = chem.Molfile.parseCTFile(file_data);
+console.info(mol);
+
 for (var i = 320; i < m.count(); i++) {
     snf = "./tests/ut_"+ i+".cml"
     saver = indigo.createFileSaver(snf, "cml");
@@ -227,6 +236,7 @@ for (var i = 320; i < m.count(); i++) {
     saver.close();
     console.log('[' + __filename + '] ' + i + " was saved: " + snf);
 }
+
 
 
 s = m.at(15).smiles();

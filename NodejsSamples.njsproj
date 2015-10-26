@@ -16,6 +16,14 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="chem\molfile.js" />
+    <Compile Include="chem\sgroup.js" />
+    <Compile Include="chem\struct.js" />
+    <Compile Include="chem\utils\map.js" />
+    <Compile Include="chem\utils\pool.js" />
+    <Compile Include="chem\utils\set.js" />
+    <Compile Include="chem\utils\util.js" />
+    <Compile Include="chem\utils\vec2.js" />
     <Compile Include="classifier.js">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
@@ -31,7 +39,10 @@
     <Compile Include="router.js" />
     <Compile Include="server.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="chem\" />
+    <Folder Include="chem\utils\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
