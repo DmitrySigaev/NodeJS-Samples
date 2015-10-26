@@ -218,12 +218,45 @@ console.log('[' + __filename + ']' + "Bingo.version:" + Bingo.version());
 
 m = indigo.iterateSDFile("./mols.sdf");
 console.log("molobject: " + m.id);////ind._lib.indigoSaveMolfileToFile(m.id, "aaa.mol");
-m_stat = ind.indigoStat().iterateSDFile("./mols.sdf");
+
+for (var i = 320; i < m.count(); i++) {
+    snf = "./tests/ut_"+ i+".cml"
+    saver = indigo.createFileSaver(snf, "cml");
+    mol = m.at(i);
+    saver.append(mol);
+    saver.close();
+    console.log('[' + __filename + '] ' + i + " was saved: " + snf);
+}
+
+
+s = m.at(15).smiles();
 
 mol_n = m._next();
+m_n_str = mol_n.molfile();////t = m.next().value.saveMolfile("ttt.mol");
+mol_n = m._next();
+m_n_str = mol_n.molfile();////t = m.next().value.saveMolfile("ttt.mol");
+
+
+
+
+saver = indigo.writeFile("structures.sdf");
+
+mol = indigo.loadMolecule("C1CCC1");
+mol.setName("cyclobutane");
+mol.setProperty("id", "8506");
+saver.sdfAppend(mol);
+
+mol = indigo.loadMolecule("C(NNN)C");
+mol.setProperty("id", "42");
+saver.sdfAppend(mol);
+saver.close();
+
+
+m_stat = ind.indigoStat().iterateSDFile("./mols.sdf");
+
+
 //mol_stri = m.next().value.molfile();////t = m.next().value.saveMolfile("ttt.mol");
 mol_stri = m_stat.molfile();////t = m.next().value.saveMolfile("ttt.mol");
-m_n__str = mol_n.molfile();////t = m.next().value.saveMolfile("ttt.mol");
 m_stat_n = m_stat._next();////t = m.next().value.saveMolfile("ttt.mol");
 m_stat_n_str = m_stat_n._next().molfile();
 
