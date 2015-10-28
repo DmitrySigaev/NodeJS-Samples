@@ -8,7 +8,7 @@ exports.done = false;
 /* ----------------------------------------- */
 
 
-util = {};
+var util = {};
 util.Set = require('./set.js').Set;
 util.Map = require('./map.js').Map;
 util.Pool = require('./pool.js').Pool;

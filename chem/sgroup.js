@@ -8,6 +8,7 @@ exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
 
+var chem = {};
 
 chem.SGroup = function (type)
 {

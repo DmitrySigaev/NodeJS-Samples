@@ -6,7 +6,7 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 
 
-chem = require('./struct.js').Chem;
+var chem = require('./struct.js').Chem;
 
 chem.Molfile = function (){
 };

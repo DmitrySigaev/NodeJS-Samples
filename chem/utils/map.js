@@ -6,6 +6,7 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
+var util = {};
 
 util.Map = function (obj) {
     if (typeof(obj) !== 'undefined' && obj.constructor !== Object)

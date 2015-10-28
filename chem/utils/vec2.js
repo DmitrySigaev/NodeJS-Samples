@@ -7,6 +7,7 @@ exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
 
+var util = {};
 
 // 2d-vector constructor and utilities
 util.assertDefined = function(v) {

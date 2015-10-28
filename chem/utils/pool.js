@@ -6,6 +6,7 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
+var util = {};
 
 util.Pool = function ()
 {

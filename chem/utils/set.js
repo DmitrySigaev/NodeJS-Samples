@@ -7,6 +7,7 @@ exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
 
+var util = {};
 
 util.Set = {
 	empty: function() {

@@ -10,9 +10,9 @@ exports.done = false;
 /* ----------------------------------------- */
 
 
-util = require('./utils/util.js').util;
+var util = require('./utils/util.js').util;
 
-chem = {};
+var chem = {};
 chem.SGroupForest = require('./sgroup.js').SGG;
 
 

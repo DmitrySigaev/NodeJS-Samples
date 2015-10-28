@@ -7,7 +7,7 @@ exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
 
-chem = require('./chem/molfile.js').chem;
+var chem = require('./chem/molfile.js').chem;
 
 exports.chem = chem;
 
