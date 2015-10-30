@@ -29,12 +29,88 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 /* start of file <- */
 
+
+/*
+String.prototype.strip = function () {
+    return this.replace(/^\s+/, "").replace(/\s+$/, "");
+};
+
+Object.prototype.supname = function () {
+    return this.supname = "Hello";
+};
+*/
+
+o = new Object();
+s = new String();
+
+var isEmpty = function (obj) {
+    for (var v in obj) {
+        if (obj.hasOwnProperty(v)) {
+            return false;
+        }
+    }
+    return true;
+};
+/* ---------- 
+ * JQuery https://github.com/jquery/jquery 20151030 */
+
+var isPlainObject = function (obj) {
+    
+    // Not plain objects:
+    // - Any object or value whose internal [[Class]] property is not "[object Object]"
+    // - DOM nodes
+    // - window
+    if (jQuery.type(obj) !== "object" || obj.nodeType || jQuery.isWindow(obj)) {
+        return false;
+    }
+    
+    if (obj.constructor &&
+				!hasOwn.call(obj.constructor.prototype, "isPrototypeOf")) {
+        return false;
+    }
+    
+    // If the function hasn't returned already, we're confident that
+    // |obj| is a plain object, created by {} or constructed with new Object
+    return true;
+};
+
+var isEmptyObject = function (obj) {
+    var name;
+    for (name in obj) {
+        return false;
+    }
+    return true;
+};
+
+/* ----------------------------*/
+/*
+ * http://stackoverflow.com/questions/4597900/checking-something-isempty-in-javascript
+ * http://stackoverflow.com/questions/4994201/is-object-empty
+ * 
+ * */
+t = isEmpty(o);
+//o.supname();
+console.log(t);
+t = isEmpty(o);
+console.log(t);
+
+
+st = isEmpty(s);
+//delete o.supname;
+console.log(st);
+st = isEmpty(s);
+console.log(st);
+
+
+
+
 console.log([] + 1 + 2);
 var obj = {"0": 1,
     0 : 2, 
     1: 4,
     "1": 2
 };
+
 console.log(obj["0"] + obj[0]);
 
 function Aa(){ };

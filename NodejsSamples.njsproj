@@ -16,13 +16,15 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="chemtool.js" />
     <Compile Include="chem\molfile.js" />
     <Compile Include="chem\sgroup.js" />
     <Compile Include="chem\struct.js" />
+    <Compile Include="chem\utils\box2abs.js" />
+    <Compile Include="chem\utils\index.js" />
     <Compile Include="chem\utils\map.js" />
     <Compile Include="chem\utils\pool.js" />
     <Compile Include="chem\utils\set.js" />
-    <Compile Include="chem\utils\util.js" />
     <Compile Include="chem\utils\vec2.js" />
     <Compile Include="classifier.js">
       <SubType>Code</SubType>
