@@ -1839,15 +1839,24 @@ Indigo.prototype.unserialize = function (arr) {
 
 
 Indigo.prototype._checkResult = function (result) {
-    if (result < 0) { throw new Error('indigo:res < 0[' + result + ']') } return result;
+    if (result < 0) {
+        var msg = this._lib.indigoGetLastError();
+        throw Error('indigo:res < 0[' + result + ']: ' + msg);
+    } return result;
 }
 
 Indigo.prototype._checkResultFloat = function (result) {
-    if (result < -0.5) { throw new Error('indigo:res < -0.5[' + result + ']') } return result;
+    if (result < -0.5) {
+        var msg = this._lib.indigoGetLastError();
+        throw Error('indigo:res < -0.5[' + result + ']: ' + msg);
+    } return result;
 }
 
 Indigo.prototype._checkResultPtr = function (result) {
-    if (result == null) { throw new Error('indigo:res_ptr == 0[' + result + ']') } return result;
+    if (result == null) {
+        var msg = this._lib.indigoGetLastError();
+        throw Error('indigo:res_ptr == 0[' + result + ']: ' + msg);
+    } return result;
 }
 
 Indigo.prototype._checkResultString = function (result) {

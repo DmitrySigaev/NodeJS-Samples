@@ -30,11 +30,11 @@ exports.done = false;
 /* start of file <- */
 
 
-/*
+
 String.prototype.strip = function () {
     return this.replace(/^\s+/, "").replace(/\s+$/, "");
 };
-
+/*
 Object.prototype.supname = function () {
     return this.supname = "Hello";
 };
@@ -96,7 +96,7 @@ console.log(t);
 
 
 st = isEmpty(s);
-//delete o.supname;
+// delete o.supname;
 console.log(st);
 st = isEmpty(s);
 console.log(st);
