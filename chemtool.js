@@ -7,8 +7,10 @@ exports.done = false;
 /* start of file <- */
 /* ----------------------------------------- */
 
-var chem = require('./chem/molfile.js').chem;
 
+var Molfile = require('./chem/molfile.js');
+chem = {};
+chem.Molfile = Molfile;
 exports.chem = chem;
 
 /* ----------------------------------------- */
