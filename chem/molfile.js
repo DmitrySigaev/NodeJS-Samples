@@ -10,7 +10,8 @@ var Set = require('./utils/set');
 var Vec2 = require('./utils/vec2');
 var util = require('./utils');
 
-var chem = require('./struct.js').Chem;
+var Struct = require('./struct.js');
+chem = {};
 
 chem.Molfile = function (){
 };
@@ -64,32 +65,32 @@ chem.Molfile.parseCTFile = function (molfileLines)
 
 chem.Molfile.fmtInfo = {
 	bondTypeMap: {
-		1: chem.Struct.BOND.TYPE.SINGLE,
-		2: chem.Struct.BOND.TYPE.DOUBLE,
-		3: chem.Struct.BOND.TYPE.TRIPLE,
-		4: chem.Struct.BOND.TYPE.AROMATIC,
-		5: chem.Struct.BOND.TYPE.SINGLE_OR_DOUBLE,
-		6: chem.Struct.BOND.TYPE.SINGLE_OR_AROMATIC,
-		7: chem.Struct.BOND.TYPE.DOUBLE_OR_AROMATIC,
-		8: chem.Struct.BOND.TYPE.ANY
+		1: Struct.BOND.TYPE.SINGLE,
+		2: Struct.BOND.TYPE.DOUBLE,
+		3: Struct.BOND.TYPE.TRIPLE,
+		4: Struct.BOND.TYPE.AROMATIC,
+		5: Struct.BOND.TYPE.SINGLE_OR_DOUBLE,
+		6: Struct.BOND.TYPE.SINGLE_OR_AROMATIC,
+		7: Struct.BOND.TYPE.DOUBLE_OR_AROMATIC,
+		8: Struct.BOND.TYPE.ANY
 	},
 	bondStereoMap: {
-		0: chem.Struct.BOND.STEREO.NONE,
-		1: chem.Struct.BOND.STEREO.UP,
-		4: chem.Struct.BOND.STEREO.EITHER,
-		6: chem.Struct.BOND.STEREO.DOWN,
-		3: chem.Struct.BOND.STEREO.CIS_TRANS
+		0: Struct.BOND.STEREO.NONE,
+		1: Struct.BOND.STEREO.UP,
+		4: Struct.BOND.STEREO.EITHER,
+		6: Struct.BOND.STEREO.DOWN,
+		3: Struct.BOND.STEREO.CIS_TRANS
 	},
 	v30bondStereoMap: {
-		0: chem.Struct.BOND.STEREO.NONE,
-		1: chem.Struct.BOND.STEREO.UP,
-		2: chem.Struct.BOND.STEREO.EITHER,
-		3: chem.Struct.BOND.STEREO.DOWN
+		0: Struct.BOND.STEREO.NONE,
+		1: Struct.BOND.STEREO.UP,
+		2: Struct.BOND.STEREO.EITHER,
+		3: Struct.BOND.STEREO.DOWN
 	},
 	bondTopologyMap: {
-		0: chem.Struct.BOND.TOPOLOGY.EITHER,
-		1: chem.Struct.BOND.TOPOLOGY.RING,
-		2: chem.Struct.BOND.TOPOLOGY.CHAIN
+		0: Struct.BOND.TOPOLOGY.EITHER,
+		1: Struct.BOND.TOPOLOGY.RING,
+		2: Struct.BOND.TOPOLOGY.CHAIN
 	},
 	countsLinePartition: [3,3,3,3,3,3,3,3,3,3,3,6],
 	atomLinePartition: [10,10,10,1,3,2,3,3,3,3,3,3,3,3,3,3,3],
@@ -140,7 +141,7 @@ chem.Molfile.parseAtomLine = function (atomLine)
 		// reaction query
 		exactChangeFlag: mf.parseDecimalInt(atomSplit[16]) != 0
 	};
-	return new chem.Struct.Atom(params);
+	return new Struct.Atom(params);
 };
 
 chem.Molfile.parseAtomCML = function (atom_obj) {
@@ -166,7 +167,7 @@ chem.Molfile.parseAtomCML = function (atom_obj) {
 	    // reaction query
 //	    exactChangeFlag: mf.parseDecimalInt(atomSplit[16]) != 0
 	};
-    return new chem.Struct.Atom(params);
+    return new Struct.Atom(params);
 };
 
 chem.Molfile.stripV30 = function (line)
@@ -202,7 +203,7 @@ chem.Molfile.parseAtomLineV3000 = function (line)
 			label = label.substr(1); // remove '['
 		}
 		atomListParams.ids = mf.labelsListToIds(label.split(','));
-		params['atomList'] = new chem.Struct.AtomList(atomListParams);
+		params['atomList'] = new Struct.AtomList(atomListParams);
 		params['label'] = 'L#';
 	} else {
 		params['label'] = label;
@@ -232,7 +233,7 @@ chem.Molfile.parseAtomLineV3000 = function (line)
 			params.attpnt = value.strip() - 0;
 		}
 	}
-	return new chem.Struct.Atom(params);
+	return new Struct.Atom(params);
 };
 
 chem.Molfile.parseBondLineV3000 = function (line)
@@ -252,8 +253,8 @@ chem.Molfile.parseBondLineV3000 = function (line)
 		value = subsplit[1];
 		if (key == 'CFG') {
 			params.stereo = mf.fmtInfo.v30bondStereoMap[mf.parseDecimalInt(value)];
-			if (params.type == chem.Struct.BOND.TYPE.DOUBLE && params.stereo == chem.Struct.BOND.STEREO.EITHER)
-				params.stereo = chem.Struct.BOND.STEREO.CIS_TRANS;
+			if (params.type == Struct.BOND.TYPE.DOUBLE && params.stereo == Struct.BOND.STEREO.EITHER)
+				params.stereo = Struct.BOND.STEREO.CIS_TRANS;
 		} else if (key == 'TOPO') {
 			params.topology = mf.fmtInfo.bondTopologyMap[mf.parseDecimalInt(value)];
 		} else if (key == 'RXCTR') {
@@ -262,7 +263,7 @@ chem.Molfile.parseBondLineV3000 = function (line)
 			params.stereoCare = mf.parseDecimalInt(value);
 		}
 	}
-	return new chem.Struct.Bond(params);
+	return new Struct.Bond(params);
 };
 
 chem.Molfile.parseBondLine = function (bondLine)
@@ -279,7 +280,7 @@ chem.Molfile.parseBondLine = function (bondLine)
 		reactingCenterStatus: mf.parseDecimalInt(bondSplit[6])
 	};
 
-	return new chem.Struct.Bond(params);
+	return new Struct.Bond(params);
 };
 
 chem.Molfile.parseBondCML = function (bond_obj) {
@@ -293,7 +294,7 @@ chem.Molfile.parseBondCML = function (bond_obj) {
 //	    reactingCenterStatus: mf.parseDecimalInt(bondSplit[6])
 	};
 
-    return new chem.Struct.Bond(params);
+    return new Struct.Bond(params);
 };
 
 
@@ -314,7 +315,7 @@ chem.Molfile.parseAtomListLine = function (/* string */atomListLine)
 
 	return {
 		'aid': number,
-		'atomList': new chem.Struct.AtomList({
+		'atomList': new Struct.AtomList({
 			'notList': notList,
 			'ids': list
 		})
@@ -365,7 +366,7 @@ chem.Molfile.parsePropertyLineAtomList = function (hdr, lst)
 	var notList = hdr[4].strip() == 'T';
 	var ids = mf.labelsListToIds(lst.slice(0, count));
 	var ret = {};
-	ret[aid] = new chem.Struct.AtomList({
+	ret[aid] = new Struct.AtomList({
 		'notList': notList,
 		'ids': ids
 	});
@@ -619,7 +620,7 @@ chem.Molfile.applyAtomProp = function (atoms /* Pool */, values /* Map */, propI
 
 chem.Molfile.parseCTabV2000 = function (ctabLines, countsSplit)
 {
-	var ctab = new chem.Struct();
+	var ctab = new Struct();
 	var i;
 	var mf = chem.Molfile;
 	var atomCount = mf.parseDecimalInt(countsSplit[0]);
@@ -691,7 +692,7 @@ chem.Molfile.parseCTabV2000 = function (ctabLines, countsSplit)
 		ctab.sgroups.remove(emptyGroups[i]);
 	}
 	for (var rgid in rLogic) {
-		ctab.rgroups.set(rgid, new chem.Struct.RGroup(rLogic[rgid]));
+		ctab.rgroups.set(rgid, new Struct.RGroup(rLogic[rgid]));
 	}
 	return ctab;
 };
@@ -962,8 +963,8 @@ chem.Molfile.readRGroups3000 = function (ctab, /* string */ ctabLines) /* chem.S
 	for (var rgid in rfrags) {
 		for (var j = 0; j < rfrags[rgid].length; ++j) {
 			var rg = rfrags[rgid][j];
-			rg.rgroups.set(rgid, new chem.Struct.RGroup(rLogic[rgid]));
-			var frid = rg.frags.add(new chem.Struct.Fragment());
+			rg.rgroups.set(rgid, new Struct.RGroup(rLogic[rgid]));
+			var frid = rg.frags.add(new Struct.Fragment());
 			rg.rgroups.get(rgid).frags.add(frid);
 			rg.atoms.each(function (aid, atom) {atom.fragment = frid;});
 			rg.mergeInto(ctab);
@@ -1619,16 +1620,16 @@ chem.Molfile.rxnMerge = function (mols, nReactants, nProducts, nAgents) /* chem.
 		if (!bb)
 			continue;
 
-		var fragmentType = (j < nReactants ? chem.Struct.FRAGMENT.REACTANT :
-			(j < nReactants + nProducts ? chem.Struct.FRAGMENT.PRODUCT :
-					chem.Struct.FRAGMENT.AGENT));
-		if (fragmentType == chem.Struct.FRAGMENT.REACTANT) {
+		var fragmentType = (j < nReactants ? Struct.FRAGMENT.REACTANT :
+			(j < nReactants + nProducts ? Struct.FRAGMENT.PRODUCT :
+					Struct.FRAGMENT.AGENT));
+		if (fragmentType == Struct.FRAGMENT.REACTANT) {
 			bbReact.push(bb);
 			molReact.push(mol);
-		} else if (fragmentType == chem.Struct.FRAGMENT.AGENT) {
+		} else if (fragmentType == Struct.FRAGMENT.AGENT) {
 			bbAgent.push(bb);
 			molAgent.push(mol);
-		} else if (fragmentType == chem.Struct.FRAGMENT.PRODUCT) {
+		} else if (fragmentType == Struct.FRAGMENT.PRODUCT) {
 			bbProd.push(bb);
 			molProd.push(mol);
 		}
@@ -1676,7 +1677,7 @@ chem.Molfile.rxnMerge = function (mols, nReactants, nProducts, nAgents) /* chem.
 		x = (bb1.max.x + bb2.min.x) / 2;
 		y = (bb1.max.y + bb1.min.y + bb2.max.y + bb2.min.y) / 4;
 
-		ret.rxnPluses.add(new chem.Struct.RxnPlus({'pp':new Vec2(x, y)}));
+		ret.rxnPluses.add(new Struct.RxnPlus({'pp':new Vec2(x, y)}));
 	}
 	for (j = 0; j <	bbReact.length; ++j) {
 		if (j == 0) {
@@ -1695,7 +1696,7 @@ chem.Molfile.rxnMerge = function (mols, nReactants, nProducts, nAgents) /* chem.
 		x = (bb1.max.x + bb2.min.x) / 2;
 		y = (bb1.max.y + bb1.min.y + bb2.max.y + bb2.min.y) / 4;
 
-		ret.rxnPluses.add(new chem.Struct.RxnPlus({'pp':new Vec2(x, y)}));
+		ret.rxnPluses.add(new Struct.RxnPlus({'pp':new Vec2(x, y)}));
 	}
 	for (j = 0; j <	bbProd.length; ++j) {
 		if (j == 0) {
@@ -1710,7 +1711,7 @@ chem.Molfile.rxnMerge = function (mols, nReactants, nProducts, nAgents) /* chem.
 	bb1 = bbReactAll;
 	bb2 = bbProdAll;
 	if (!bb1 && !bb2) {
-		ret.rxnArrows.add(new chem.Struct.RxnArrow({'pp':new Vec2(0, 0)}));
+		ret.rxnArrows.add(new Struct.RxnArrow({'pp':new Vec2(0, 0)}));
 	} else {
 		var v1 = bb1 ? new Vec2(bb1.max.x, (bb1.max.y + bb1.min.y) / 2) : null;
 		var v2 = bb2 ? new Vec2(bb2.min.x, (bb2.max.y + bb2.min.y) / 2) : null;
@@ -1719,7 +1720,7 @@ chem.Molfile.rxnMerge = function (mols, nReactants, nProducts, nAgents) /* chem.
 			v1 = new Vec2(v2.x - defaultOffset, v2.y);
 		if (!v2)
 			v2 = new Vec2(v1.x + defaultOffset, v1.y);
-		ret.rxnArrows.add(new chem.Struct.RxnArrow({ 'pp': Vec2.lc2(v1, 0.5, v2, 0.5 ) }));
+		ret.rxnArrows.add(new Struct.RxnArrow({ 'pp': Vec2.lc2(v1, 0.5, v2, 0.5 ) }));
 	}
 	ret.isReaction = true;
 	return ret;
@@ -1733,8 +1734,8 @@ chem.Molfile.rgMerge = function (scaffold, rgroups) /* chem.Struct */
 	for (var rgid in rgroups) {
 		for (var j = 0; j < rgroups[rgid].length; ++j) {
 			var ctab = rgroups[rgid][j];
-			ctab.rgroups.set(rgid, new chem.Struct.RGroup());
-			var frid = ctab.frags.add(new chem.Struct.Fragment());
+			ctab.rgroups.set(rgid, new Struct.RGroup());
+			var frid = ctab.frags.add(new Struct.Fragment());
 			ctab.rgroups.get(rgid).frags.add(frid);
 			ctab.atoms.each(function (aid, atom) {atom.fragment = frid;});
 			ctab.mergeInto(ret);
