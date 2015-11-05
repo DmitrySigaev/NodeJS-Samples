@@ -36,11 +36,33 @@ var Test = function (params){
     this.copy = params || init.copy;
 }
 
+var Test2 = function (params) {
+    var init = { copy: 1, close: 2 };
+    
+    return { copy: params || init.copy }
+}
+
 
 var TestedObject1 = Test();
 console.log(TestedObject1);
 var TestedObject2 = new Test();
 console.log(TestedObject2);
+
+var TestedObject3 = Test2();
+console.log(TestedObject3);
+var TestedObject4 = new Test2();
+console.log(TestedObject4);
+
+
+var TestedObject1 = Test("out");
+console.log(TestedObject1);
+var TestedObject2 = new Test("out");
+console.log(TestedObject2);
+
+var TestedObject3 = Test2("out");
+console.log(TestedObject3);
+var TestedObject4 = new Test2("out");
+console.log(TestedObject4);
 
 String.prototype.strip = function () {
     return this.replace(/^\s+/, "").replace(/\s+$/, "");
