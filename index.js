@@ -64,6 +64,17 @@ console.log(TestedObject3);
 var TestedObject4 = new Test2("out");
 console.log(TestedObject4);
 
+var TestedObject1 = Test(null);
+console.log(TestedObject1);
+var TestedObject2 = new Test(null);
+console.log(TestedObject2);
+
+var TestedObject3 = Test2(null);
+console.log(TestedObject3);
+var TestedObject4 = new Test2(null);
+console.log(TestedObject4);
+
+
 String.prototype.strip = function () {
     return this.replace(/^\s+/, "").replace(/\s+$/, "");
 };
