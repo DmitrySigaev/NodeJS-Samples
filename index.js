@@ -30,6 +30,17 @@ exports.done = false;
 /* start of file <- */
 
 
+var Test = function (params){
+    var init = { copy: 1, close: 2 };
+    
+    this.copy = params || init.copy;
+}
+
+
+var TestedObject1 = Test();
+console.log(TestedObject1);
+var TestedObject2 = new Test();
+console.log(TestedObject2);
 
 String.prototype.strip = function () {
     return this.replace(/^\s+/, "").replace(/\s+$/, "");
