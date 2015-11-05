@@ -42,7 +42,7 @@ var Test2 = function (params) {
     return { copy: params || init.copy }
 }
 
-
+console.log(":undefined:");
 var TestedObject1 = Test();
 console.log(TestedObject1);
 var TestedObject2 = new Test();
@@ -53,6 +53,7 @@ console.log(TestedObject3);
 var TestedObject4 = new Test2();
 console.log(TestedObject4);
 
+console.log(":out:");
 
 var TestedObject1 = Test("out");
 console.log(TestedObject1);
@@ -64,6 +65,8 @@ console.log(TestedObject3);
 var TestedObject4 = new Test2("out");
 console.log(TestedObject4);
 
+console.log(":null:");
+
 var TestedObject1 = Test(null);
 console.log(TestedObject1);
 var TestedObject2 = new Test(null);
@@ -72,6 +75,18 @@ console.log(TestedObject2);
 var TestedObject3 = Test2(null);
 console.log(TestedObject3);
 var TestedObject4 = new Test2(null);
+console.log(TestedObject4);
+
+console.log(":0:");
+
+var TestedObject1 = Test(0);
+console.log(TestedObject1);
+var TestedObject2 = new Test(0);
+console.log(TestedObject2);
+
+var TestedObject3 = Test2(0);
+console.log(TestedObject3);
+var TestedObject4 = new Test2(0);
 console.log(TestedObject4);
 
 
