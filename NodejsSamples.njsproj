@@ -17,10 +17,14 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Compile Include="chemtool.js" />
+    <Compile Include="chem\atom.js" />
+    <Compile Include="chem\bond.js" />
+    <Compile Include="chem\element.js" />
+    <Compile Include="chem\index.js" />
     <Compile Include="chem\molfile.js" />
+    <Compile Include="chem\sgforest.js" />
     <Compile Include="chem\sgroup.js" />
     <Compile Include="chem\struct.js" />
-    <Compile Include="chem\utils\box2abs.js" />
     <Compile Include="chem\utils\index.js" />
     <Compile Include="chem\utils\map.js" />
     <Compile Include="chem\utils\pool.js" />
@@ -30,6 +34,12 @@
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
     </Compile>
+    <Compile Include="util\box2abs.js" />
+    <Compile Include="util\index.js" />
+    <Compile Include="util\map.js" />
+    <Compile Include="util\pool.js" />
+    <Compile Include="util\set.js" />
+    <Compile Include="util\vec2.js" />
     <Content Include="README.md" />
     <Compile Include="helloworld.js" />
     <Compile Include="index.js" />
@@ -44,6 +54,7 @@
   <ItemGroup>
     <Folder Include="chem\" />
     <Folder Include="chem\utils\" />
+    <Folder Include="util\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

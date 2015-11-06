@@ -355,12 +355,13 @@ m = indigo.iterateSDFile("./mols.sdf");
 console.log("molobject: " + m.id);////ind._lib.indigoSaveMolfileToFile(m.id, "aaa.mol");
 
 
+require('./chem');
 Molfile = require('./chem/molfile.js');
 
 var fs = require('fs');
 var file_data = fs.readFileSync('./accholine.mol', 'utf8').split('\n');
 
-var mol = Molfile.parseCTFile(file_data);
+var mol = new Molfile().parseCTFile(file_data);
 console.info(mol);
 
 for (var i = 320; i < m.count(); i++) {
