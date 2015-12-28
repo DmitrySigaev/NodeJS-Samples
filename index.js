@@ -29,12 +29,67 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 /* start of file <- */
 
+var ObjA = function (params) {
+    var init = { copy: 1 };
+    this.copy = this.copy + 1 || init.copy;
+    var local_copy = this.copy;
+    return {
+        copy : local_copy,
+        constructor: ObjA
+    };
+};
+
+var copy_objA = ObjA();
+var copy_objA_ = new copy_objA.constructor();
+var copy_objA__ =  copy_objA.constructor();
+var copy_objA__ = new copy_objA_.constructor();
+
+var ObjB = function (params) {
+    var init = { copy: 1 };
+    this.copy = this.copy + 1 || init.copy;
+    return this;
+};
+
+var copy_objB = new ObjB();
+var copy_objB_ = new copy_objB.constructor();
+var copy_objB__ = new ( copy_objB.constructor());
+var copy_objB__ = new copy_objB_.constructor();
+
+
+var Test12 = function (params) {
+    var init = { copy: 1, close: 2 };
+    if (this.copy != undefined)
+        init.copy = this.copy;
+    this.copy = params || init.copy - 1;
+    return {
+        copy: params + 1 || init.copy,
+        constructor : Test12
+    };
+};
+
+var TestedObject12 = Test12();
+var TestedObject123 = TestedObject12.constructor();
+var TestedObject1234 = new TestedObject12.constructor();
+
+var TestedObject12_new = new Test12();
+var TestedObject123_new = TestedObject12_new.constructor();
+var TestedObject1234_new = new TestedObject12_new.constructor();
+
+var TestedObject12_ = Test12(22);
+var TestedObject123_ = TestedObject12.constructor(22);
+var TestedObject1234_ = new TestedObject12.constructor(22);
+
+var TestedObject12_new_ = new Test12(22);
+var TestedObject123_new_ = TestedObject12_new_.constructor(22);
+var TestedObject1234_new_ = new TestedObject12_new_.constructor(22);
 
 var Test = function (params){
     var init = { copy: 1, close: 2 };
     
     this.copy = params || init.copy;
 }
+
+
 
 var Test2 = function (params) {
     var init = { copy: 1, close: 2 };
