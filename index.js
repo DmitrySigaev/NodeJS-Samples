@@ -517,8 +517,8 @@ Render = ren.renderer(indigo);
 Bingo = bin.bingo(indigo);
 console.log('[' + __filename + ']' + "Bingo.version:" + Bingo.version());
 
-m = indigo.iterateSDFile("./mols.sdf");
-console.log("molobject: " + m.id);////ind._lib.indigoSaveMolfileToFile(m.id, "aaa.mol");
+//m = indigo.iterateSDFile("./mols.sdf");
+//console.log("molobject: " + m.id);////ind._lib.indigoSaveMolfileToFile(m.id, "aaa.mol");
 
 
 require('./chem');
