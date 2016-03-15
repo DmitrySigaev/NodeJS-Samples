@@ -29,6 +29,31 @@ console.log('[' + __filename + ']' + ": starting");
 exports.done = false;
 /* start of file <- */
 
+var countRegExpEntry = function (re, str) {
+	var count = 0;
+	var count2 = 0;
+	var count3 = 0;
+	var index1 = str.search(re);
+	var index2 = str.search(re); //don't use glogal flag
+	
+	while (re.test(str)) {
+		count++;
+	}
+	if (re.test(str)) {
+		count2++;
+		while ((myArray = re.exec(str)) !== null) {
+			count2++;
+		}
+		str.replace(re, function (match) { count3++; });
+	}
+	return count;
+}
+
+
+/* declaration of modules  */
+var assert = require('assert');
+assert.equal(4, countRegExpEntry(/@1/g,'1@12@1 ` ~@1 02 @1@2'));
+
 
 var array = function (arrayLike) {
     var a = [];
